@@ -43,6 +43,18 @@
     @media(max-width:950px){.hrow{grid-template-columns:110px 1fr 62px}.insight-strip{grid-template-columns:1fr}.table-wrap{max-height:none}}
     @media(max-width:950px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.controls{position:static;margin-top:18px}main{padding:18px}.slide{padding:24px;min-height:auto}.grid.cols-2,.grid.cols-3,.grid.cols-4,.two-col,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.chart{height:260px;gap:10px}.title{font-size:42px}}
     @media print{body{background:white}.app{display:block}aside{display:none}main{padding:0;max-width:none}.slide{page-break-after:always;box-shadow:none;border:0;border-radius:0;min-height:100vh}.print-note{display:block}}
+
+    .navlink{display:flex;align-items:center;gap:9px}
+    .drag-handle{flex:0 0 auto;color:var(--muted);font-size:13px;line-height:1;cursor:grab;letter-spacing:-1px}
+    .navlink-label{flex:1;text-align:left}
+    .navlink.dragging{opacity:.35;background:var(--blue2)}
+    .nav-hint{font-size:11px;color:var(--muted);margin:2px 0 14px;padding:0 2px}
+
+    .acoes-edit-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 4px}
+    .acoes-edit-bar .btn{padding:10px 16px}
+    .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
+    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
   </style>
 </head>
 <body>
@@ -50,9 +62,11 @@
 <aside>
 <div class="brand"><div class="logo">VR</div><div><h1>Ciclo Setembro</h1><p>2025 vs 2026</p></div></div>
 <nav id="nav"></nav>
+<p class="nav-hint">Arraste ⠿ para reordenar os cards do menu</p>
 <div class="controls">
 <button class="btn" onclick="toggleTheme()">Alternar tema</button>
 <button class="btn" onclick="window.print()">Exportar / imprimir</button>
+<button class="btn" onclick="resetNavOrder()">Restaurar ordem do menu</button>
 </div>
 </aside>
 <main>
@@ -377,24 +391,31 @@
 </section>
 <section class="slide" data-title="Ações" id="acoes">
 <div class="eyebrow">Próximas ações</div>
-<h2 class="section-title">Testar, medir e implementar o canal que mais gera receita.</h2>
-<p class="subtitle">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
+<h2 class="section-title edit-text">Testar, medir e implementar o canal que mais gera receita.</h2>
+<p class="subtitle edit-text">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
+<div class="acoes-edit-bar">
+<button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
+<button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
+<button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
+<span class="acoes-edit-status" id="acoesEditStatus"></span>
+</div>
+<p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
 <div class="grid cols-2" style="margin-top:24px">
 <div class="card">
-<h3>1. Landing page de venda</h3>
-<p class="lead" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
+<h3 class="edit-text">1. Landing page de venda</h3>
+<p class="lead edit-text" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
 </div>
 <div class="card">
-<h3>2. Campanhas Meta para conversão</h3>
-<p class="lead" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
+<h3 class="edit-text">2. Campanhas Meta para conversão</h3>
+<p class="lead edit-text" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
 </div>
 <div class="card">
-<h3>3. Regra de decisão</h3>
-<p class="lead" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
+<h3 class="edit-text">3. Regra de decisão</h3>
+<p class="lead edit-text" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
 </div>
 <div class="card">
-<h3>4. Aumentar ticket do Interno</h3>
-<p class="lead" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
+<h3 class="edit-text">4. Aumentar ticket do Interno</h3>
+<p class="lead edit-text" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
 </div>
 </div>
 <div class="grid cols-2" style="margin-top:20px">
@@ -403,9 +424,9 @@
 <table class="compact">
 <thead><tr><th>Rota</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
 <tbody>
-<tr><td>PayPal</td><td>Conversão direta e abandono</td><td class="num">Escalar se gerar receita</td></tr>
-<tr><td>Stripe/cartão</td><td>Aceitação de cartão e fricção</td><td class="num">Comparar com PayPal</td></tr>
-<tr><td>Interno</td><td>Receita recuperada e ticket</td><td class="num">Escalar se aumentar valor</td></tr>
+<tr><td class="edit-text">PayPal</td><td class="edit-text">Conversão direta e abandono</td><td class="num edit-text">Escalar se gerar receita</td></tr>
+<tr><td class="edit-text">Stripe/cartão</td><td class="edit-text">Aceitação de cartão e fricção</td><td class="num edit-text">Comparar com PayPal</td></tr>
+<tr><td class="edit-text">Interno</td><td class="edit-text">Receita recuperada e ticket</td><td class="num edit-text">Escalar se aumentar valor</td></tr>
 </tbody>
 </table>
 </div>
@@ -414,24 +435,89 @@
 <table class="compact">
 <thead><tr><th>Produto</th><th>Papel no canal</th><th class="num">Prioridade</th></tr></thead>
 <tbody>
-<tr><td>Doors Off 30</td><td>Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num">Alta</td></tr>
-<tr><td>Doors Off 45</td><td>Upsell para maior receita por PAX e experiência mais completa.</td><td class="num">Média/Alta</td></tr>
-<tr><td>Doors On 30</td><td>Alternativa para público que busca conforto, família e menor barreira.</td><td class="num">Média</td></tr>
-<tr><td>Extras</td><td>Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num">Alta</td></tr>
+<tr><td class="edit-text">Doors Off 30</td><td class="edit-text">Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num edit-text">Alta</td></tr>
+<tr><td class="edit-text">Doors Off 45</td><td class="edit-text">Upsell para maior receita por PAX e experiência mais completa.</td><td class="num edit-text">Média/Alta</td></tr>
+<tr><td class="edit-text">Doors On 30</td><td class="edit-text">Alternativa para público que busca conforto, família e menor barreira.</td><td class="num edit-text">Média</td></tr>
+<tr><td class="edit-text">Extras</td><td class="edit-text">Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num edit-text">Alta</td></tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="callout" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
+<div class="callout edit-text" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
 </section>
 </main>
 </div>
 <script>
-const sections=[...document.querySelectorAll('.slide')];
+const mainEl=document.querySelector('main');
+let sections=[...document.querySelectorAll('.slide')];
 const nav=document.getElementById('nav');
-sections.forEach(s=>{const b=document.createElement('button');b.className='navlink';b.textContent=s.dataset.title;b.onclick=()=>s.scrollIntoView({behavior:'smooth'});nav.appendChild(b);});
-const navLinks=[...document.querySelectorAll('.navlink')];
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));let idx=sections.indexOf(e.target);if(navLinks[idx])navLinks[idx].classList.add('active');}})},{threshold:.55});sections.forEach(s=>obs.observe(s));
+let navLinks=[];
+let obs;
+const NAV_ORDER_KEY='navOrder_v1';
+
+function applyStoredOrder(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(NAV_ORDER_KEY));
+    if(Array.isArray(saved)&&saved.length===sections.length&&saved.every(id=>sections.some(s=>s.id===id))){
+      sections=saved.map(id=>document.getElementById(id));
+    }
+  }catch(e){}
+  sections.forEach(s=>mainEl.appendChild(s));
+}
+function saveOrder(){localStorage.setItem(NAV_ORDER_KEY,JSON.stringify(sections.map(s=>s.id)))}
+function resetNavOrder(){
+  if(!confirm('Restaurar a ordem original do menu?')) return;
+  localStorage.removeItem(NAV_ORDER_KEY);
+  location.reload();
+}
+function getDragAfterElement(container,y){
+  const els=[...container.querySelectorAll('.navlink:not(.dragging)')];
+  return els.reduce((closest,child)=>{
+    const box=child.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+    if(offset<0&&offset>closest.offset) return {offset,element:child};
+    return closest;
+  },{offset:-Infinity}).element;
+}
+function reobserve(){
+  if(obs) obs.disconnect();
+  obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const idx=sections.findIndex(s=>s.id===e.target.id);if(navLinks[idx])navLinks[idx].classList.add('active');}})},{threshold:.55});
+  sections.forEach(s=>obs.observe(s));
+}
+function buildNav(){
+  nav.innerHTML='';
+  navLinks=[];
+  sections.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='navlink';
+    b.draggable=true;
+    b.dataset.sectionId=s.id;
+    b.innerHTML=`<span class="drag-handle">⠿</span><span class="navlink-label">${s.dataset.title}</span>`;
+    b.addEventListener('click',()=>{if(!b.classList.contains('dragging'))s.scrollIntoView({behavior:'smooth'})});
+    b.addEventListener('dragstart',()=>{b.classList.add('dragging')});
+    b.addEventListener('dragend',()=>{
+      b.classList.remove('dragging');
+      const newOrder=[...nav.querySelectorAll('.navlink')].map(x=>x.dataset.sectionId);
+      sections=newOrder.map(id=>document.getElementById(id));
+      sections.forEach(s2=>mainEl.appendChild(s2));
+      saveOrder();
+      reobserve();
+    });
+    nav.appendChild(b);
+    navLinks.push(b);
+  });
+}
+nav.addEventListener('dragover',e=>{
+  e.preventDefault();
+  const draggingEl=nav.querySelector('.navlink.dragging');
+  if(!draggingEl) return;
+  const after=getDragAfterElement(nav,e.clientY);
+  if(after==null) nav.appendChild(draggingEl);
+  else nav.insertBefore(draggingEl,after);
+});
+applyStoredOrder();
+buildNav();
+reobserve();
 function toggleTheme(){document.body.classList.toggle('dark')}
 function brl(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
 function makeBars(el,data,max){el.innerHTML='';max=max||Math.max(...data.map(d=>d.value));data.forEach(d=>{const w=document.createElement('div');w.className='barwrap';w.innerHTML=`<div class="barvalue">${d.display||d.value}</div><div class="bar ${d.cls||''}" style="height:${Math.max(6,d.value/max*78)}%"></div><div class="barlabel">${d.label}</div>`;el.appendChild(w);});}
@@ -468,6 +554,41 @@ scopeLabels['2026ytd']='2026 acumulado';setupScope('paymentScope',['2025full','2
 document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
 renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
 document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
+
+(function(){
+  const STORAGE_PREFIX='acoesEdit_v1_';
+  const editables=[...document.querySelectorAll('#acoes .edit-text')];
+  editables.forEach((el,i)=>{
+    const key=STORAGE_PREFIX+i;
+    el.dataset.ek=key;
+    const saved=localStorage.getItem(key);
+    if(saved!==null) el.innerHTML=saved;
+  });
+  const editBtn=document.getElementById('acoesEditBtn');
+  const saveBtn=document.getElementById('acoesSaveBtn');
+  const resetBtn=document.getElementById('acoesResetBtn');
+  const status=document.getElementById('acoesEditStatus');
+  let editing=false;
+  function setEditing(on){
+    editing=on;
+    editables.forEach(el=>el.contentEditable=on?'true':'false');
+    editBtn.textContent=on?'Parar edição':'Editar textos';
+    saveBtn.style.display=on?'inline-flex':'none';
+    resetBtn.style.display=on?'inline-flex':'none';
+    if(!on) status.textContent='';
+  }
+  editBtn.onclick=()=>setEditing(!editing);
+  saveBtn.onclick=()=>{
+    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
+    status.textContent='Alterações salvas neste navegador.';
+    setTimeout(()=>{status.textContent=''},3000);
+  };
+  resetBtn.onclick=()=>{
+    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
+    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
+    location.reload();
+  };
+})();
 </script>
 </body>
 </html>
