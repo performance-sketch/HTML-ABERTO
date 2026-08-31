@@ -42,6 +42,12 @@
     @media(max-width:950px){.hrow{grid-template-columns:110px 1fr 62px}.insight-strip{grid-template-columns:1fr}.table-wrap{max-height:none}}
     @media(max-width:950px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.controls{position:static;margin-top:18px}main{padding:18px}.slide{padding:24px;min-height:auto}.grid.cols-2,.grid.cols-3,.grid.cols-4,.two-col,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.chart{height:260px;gap:10px}.title{font-size:42px}}
     @media print{body{background:white}.app{display:block}aside{display:none}main{padding:0;max-width:none}.slide{page-break-after:always;box-shadow:none;border:0;border-radius:0;min-height:100vh}.print-note{display:block}}
+
+    .acoes-edit-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 4px}
+    .acoes-edit-bar .btn{padding:10px 16px}
+    .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
+    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
   </style>
 </head>
 <body>
@@ -305,25 +311,33 @@
 
     <section class="slide" id="acoes" data-title="Ações">
       <div class="eyebrow">Próximas ações</div>
-      <h2 class="section-title">Testar, medir e implementar o canal que mais gera receita.</h2>
-      <p class="subtitle">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
+      <h2 class="section-title edit-text">Testar, medir e implementar o canal que mais gera receita.</h2>
+      <p class="subtitle edit-text">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
+
+      <div class="acoes-edit-bar">
+        <button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
+        <button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
+        <button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
+        <span class="acoes-edit-status" id="acoesEditStatus"></span>
+      </div>
+      <p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
 
       <div class="grid cols-2" style="margin-top:24px">
         <div class="card">
-          <h3>1. Landing page de venda</h3>
-          <p class="lead" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
+          <h3 class="edit-text">1. Landing page de venda</h3>
+          <p class="lead edit-text" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
         </div>
         <div class="card">
-          <h3>2. Campanhas Meta para conversão</h3>
-          <p class="lead" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
+          <h3 class="edit-text">2. Campanhas Meta para conversão</h3>
+          <p class="lead edit-text" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
         </div>
         <div class="card">
-          <h3>3. Regra de decisão</h3>
-          <p class="lead" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
+          <h3 class="edit-text">3. Regra de decisão</h3>
+          <p class="lead edit-text" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
         </div>
         <div class="card">
-          <h3>4. Aumentar ticket do Interno</h3>
-          <p class="lead" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
+          <h3 class="edit-text">4. Aumentar ticket do Interno</h3>
+          <p class="lead edit-text" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
         </div>
       </div>
 
@@ -333,9 +347,9 @@
           <table class="compact">
             <thead><tr><th>Rota</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
             <tbody>
-              <tr><td>PayPal</td><td>Conversão direta e abandono</td><td class="num">Escalar se gerar receita</td></tr>
-              <tr><td>Stripe/cartão</td><td>Aceitação de cartão e fricção</td><td class="num">Comparar com PayPal</td></tr>
-              <tr><td>Interno</td><td>Receita recuperada e ticket</td><td class="num">Escalar se aumentar valor</td></tr>
+              <tr><td class="edit-text">PayPal</td><td class="edit-text">Conversão direta e abandono</td><td class="num edit-text">Escalar se gerar receita</td></tr>
+              <tr><td class="edit-text">Stripe/cartão</td><td class="edit-text">Aceitação de cartão e fricção</td><td class="num edit-text">Comparar com PayPal</td></tr>
+              <tr><td class="edit-text">Interno</td><td class="edit-text">Receita recuperada e ticket</td><td class="num edit-text">Escalar se aumentar valor</td></tr>
             </tbody>
           </table>
         </div>
@@ -344,16 +358,16 @@
           <table class="compact">
             <thead><tr><th>Produto</th><th>Papel no canal</th><th class="num">Prioridade</th></tr></thead>
             <tbody>
-              <tr><td>Doors Off 30</td><td>Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num">Alta</td></tr>
-              <tr><td>Doors Off 45</td><td>Upsell para maior receita por PAX e experiência mais completa.</td><td class="num">Média/Alta</td></tr>
-              <tr><td>Doors On 30</td><td>Alternativa para público que busca conforto, família e menor barreira.</td><td class="num">Média</td></tr>
-              <tr><td>Extras</td><td>Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num">Alta</td></tr>
+              <tr><td class="edit-text">Doors Off 30</td><td class="edit-text">Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num edit-text">Alta</td></tr>
+              <tr><td class="edit-text">Doors Off 45</td><td class="edit-text">Upsell para maior receita por PAX e experiência mais completa.</td><td class="num edit-text">Média/Alta</td></tr>
+              <tr><td class="edit-text">Doors On 30</td><td class="edit-text">Alternativa para público que busca conforto, família e menor barreira.</td><td class="num edit-text">Média</td></tr>
+              <tr><td class="edit-text">Extras</td><td class="edit-text">Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num edit-text">Alta</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="callout" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
+      <div class="callout edit-text" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
     </section>
   </main>
 </div>
@@ -398,6 +412,41 @@ scopeLabels['2026ytd']='2026 acumulado';setupScope('paymentScope',['2025full','2
 document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
 renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
 document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
+
+(function(){
+  const STORAGE_PREFIX='acoesEdit_v1_';
+  const editables=[...document.querySelectorAll('#acoes .edit-text')];
+  editables.forEach((el,i)=>{
+    const key=STORAGE_PREFIX+i;
+    el.dataset.ek=key;
+    const saved=localStorage.getItem(key);
+    if(saved!==null) el.innerHTML=saved;
+  });
+  const editBtn=document.getElementById('acoesEditBtn');
+  const saveBtn=document.getElementById('acoesSaveBtn');
+  const resetBtn=document.getElementById('acoesResetBtn');
+  const status=document.getElementById('acoesEditStatus');
+  let editing=false;
+  function setEditing(on){
+    editing=on;
+    editables.forEach(el=>el.contentEditable=on?'true':'false');
+    editBtn.textContent=on?'Parar edição':'Editar textos';
+    saveBtn.style.display=on?'inline-flex':'none';
+    resetBtn.style.display=on?'inline-flex':'none';
+    if(!on) status.textContent='';
+  }
+  editBtn.onclick=()=>setEditing(!editing);
+  saveBtn.onclick=()=>{
+    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
+    status.textContent='Alterações salvas neste navegador.';
+    setTimeout(()=>{status.textContent=''},3000);
+  };
+  resetBtn.onclick=()=>{
+    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
+    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
+    location.reload();
+  };
+})();
 </script>
 </body>
 </html>
