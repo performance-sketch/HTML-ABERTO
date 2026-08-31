@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vertical Rio | Ciclo Setembro 25 vs 26</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vertical Rio | Ciclo Setembro 25 vs 26</title>
+<style>
     :root{
       --bg:#f6f8fb; --surface:#ffffff; --ink:#101828; --muted:#667085; --line:#e5e7eb;
       --blue:#2563eb; --blue2:#dbeafe; --green:#16a34a; --red:#dc2626; --amber:#d97706;
@@ -42,334 +43,388 @@
     @media(max-width:950px){.hrow{grid-template-columns:110px 1fr 62px}.insight-strip{grid-template-columns:1fr}.table-wrap{max-height:none}}
     @media(max-width:950px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.controls{position:static;margin-top:18px}main{padding:18px}.slide{padding:24px;min-height:auto}.grid.cols-2,.grid.cols-3,.grid.cols-4,.two-col,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.chart{height:260px;gap:10px}.title{font-size:42px}}
     @media print{body{background:white}.app{display:block}aside{display:none}main{padding:0;max-width:none}.slide{page-break-after:always;box-shadow:none;border:0;border-radius:0;min-height:100vh}.print-note{display:block}}
-
-    .acoes-edit-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 4px}
-    .acoes-edit-bar .btn{padding:10px 16px}
-    .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-    .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
-    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
   </style>
 </head>
 <body>
 <div class="app">
-  <aside>
-    <div class="brand"><div class="logo">VR</div><div><h1>Ciclo Setembro</h1><p>2025 vs 2026</p></div></div>
-    <nav id="nav"></nav>
-    <div class="controls">
-      <button class="btn" onclick="toggleTheme()">Alternar tema</button>
-      <button class="btn" onclick="window.print()">Exportar / imprimir</button>
-    </div>
-  </aside>
-  <main>
-    <section class="slide" id="capa" data-title="Capa">
-      <div class="eyebrow">Vertical Rio | Growth & Performance</div>
-      <h1 class="title">Ciclo de Setembro: 2025 vs 2026</h1>
-      <p class="subtitle">Apresentação executiva sobre performance proporcional, canais, extras, PAX, abandono de checkout, migração para Interno e oportunidade GetYourGuide.</p>
-      <div style="margin-top:26px">
-        <span class="pill blue">Ciclo: 26/08 a 26/09</span>
-        <span class="pill">Booking separado de fulfilment</span>
-        <span class="pill">Free of Charge fora de receita paga</span>
-      </div>
-      <div class="footerline"><span>Base analisada: arquivos CSV + relatório gerado</span><span>Atualizado em 31/08/2026</span></div>
-    </section>
-
-    <section class="slide" id="resumo" data-title="Resumo">
-      <div class="eyebrow">Resumo executivo</div>
-      <h2 class="section-title">2026 está melhor economicamente, mas mais dependente do Interno.</h2>
-      <p class="lead">A comparação proporcional mostra crescimento em receita, PAX e extras. Porém, o Online perdeu volume de reservas e parte dessa demanda está sendo recuperada pelo time Interno.</p>
-      <div class="grid cols-4">
-        <div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">45</div><div class="delta pos">+7,1% vs 2025</div></div>
-        <div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">101</div><div class="delta pos">+38,4% vs 2025</div></div>
-        <div class="card"><div class="kpi-label">Receita paga</div><div class="kpi">R$ 150k</div><div class="delta pos">+31,7% vs 2025</div></div>
-        <div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 14,3k</div><div class="delta pos">+39,7% vs 2025</div></div>
-      </div>
-      <div class="callout" style="margin-top:22px">O ponto de atenção não é a demanda total. É a perda de força do canal Online e a transferência de parte da jornada digital para atendimento humano.</div>
-    </section>
-
-    <section class="slide" id="metodo" data-title="Método">
-      <div class="eyebrow">Leitura correta dos dados</div>
-      <h2 class="section-title">Booking e fulfilment foram analisados separadamente.</h2>
-      <div class="grid cols-3">
-        <div class="card"><div class="kpi-label">Ciclo Setembro/25</div><div class="kpi" style="font-size:28px">26/08/25<br>26/09/25</div><p class="note">Usado como ciclo completo para comparação histórica.</p></div>
-        <div class="card"><div class="kpi-label">Ciclo Setembro/26</div><div class="kpi" style="font-size:28px">26/08/26<br>26/09/26</div><p class="note">Base parcial de bookings até 30/08 no horário de Brasília.</p></div>
-        <div class="card"><div class="kpi-label">Regra financeira</div><div class="kpi" style="font-size:28px">Paid only</div><p class="note">Free of Charge separado e excluído de receita e ticket médio pago.</p></div>
-      </div>
-      <div class="callout" style="margin-top:22px">A comparação proporcional usa o mesmo ponto do calendário para evitar comparar 2026 parcial com 2025 completo.</div>
-    </section>
-
-    <section class="slide" id="ciclo25" data-title="Ciclo 25">
-      <div class="eyebrow">Ciclo completo de Setembro/25</div>
-      <h2 class="section-title">O Online carregava o volume, com ticket parecido ao Interno.</h2>
-      <div class="grid cols-4">
-        <div class="card"><div class="kpi-label">Pedidos criados</div><div class="kpi">778</div></div>
-        <div class="card"><div class="kpi-label">Confirmados</div><div class="kpi">346</div></div>
-        <div class="card"><div class="kpi-label">Abandoned cart</div><div class="kpi">414</div></div>
-        <div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">336</div></div>
-      </div>
-      <div class="grid cols-3" style="margin-top:18px">
-        <div class="card"><div class="kpi-label">Receita bruta paga</div><div class="kpi">R$ 983k</div></div>
-        <div class="card"><div class="kpi-label">Ticket médio pago</div><div class="kpi">R$ 2.926</div></div>
-        <div class="card"><div class="kpi-label">PAX / booking</div><div class="kpi">1,89</div></div>
-      </div>
-      <p class="note">Free of Charge: 10 bookings / 18 PAX / R$ 27,2k separados da análise paga.</p>
-    </section>
-
-    <section class="slide" id="proporcional" data-title="Proporcional">
-      <div class="eyebrow">Comparação proporcional</div>
-      <h2 class="section-title">Menos dependência de volume, mais valor por reserva.</h2>
-      <div class="toggle" id="metricToggle"></div>
-      <div class="two-col">
-        <div class="chart" id="metricChart"></div>
-        <div>
-          <div class="card"><div class="kpi-label" id="metricLabel">Indicador</div><div class="big-number" id="metricDelta">+31,7%</div><p class="lead" id="metricText" style="font-size:18px;margin:10px 0 0"></p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" id="canais" data-title="Canais">
-      <div class="eyebrow">Online vs Interno</div>
-      <h2 class="section-title">O Online caiu; o Interno compensou.</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Bookings pagos proporcionais</h3>
-          <div class="chart" id="channelChart"></div>
-        </div>
-        <div>
-          <table>
-            <thead><tr><th>Canal</th><th class="num">2025</th><th class="num">2026</th><th class="num">Var.</th></tr></thead>
-            <tbody>
-              <tr><td>Online</td><td class="num">34</td><td class="num">22</td><td class="num neg">-35,3%</td></tr>
-              <tr><td>Interno</td><td class="num">8</td><td class="num">21</td><td class="num pos">+162,5%</td></tr>
-            </tbody>
-          </table>
-          <div class="callout">A demanda não desapareceu: uma parte relevante mudou de canal.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" id="ticket" data-title="Ticket">
-      <div class="eyebrow">Ticket médio por canal</div>
-      <h2 class="section-title">O ticket Online subiu, mas com menos reservas.</h2>
-      <div class="grid cols-2">
-        <div class="card"><div class="kpi-label">Ticket Online 2026</div><div class="big-number" style="font-size:58px">R$ 3.639</div><div class="delta pos">+37,0% vs 2025 proporcional</div><p class="note">O Online vende menos bookings, porém os que entram têm valor maior.</p></div>
-        <div class="card"><div class="kpi-label">Ticket Interno 2026</div><div class="big-number" style="font-size:58px">R$ 3.022</div><div class="delta pos">+1,3% vs 2025 proporcional</div><p class="note">O Interno cresceu mais em volume e PAX do que em ticket.</p></div>
-      </div>
-      <div class="callout" style="margin-top:22px">A alavanca do Interno é conversão e recuperação; a alavanca do Online é volume qualificado + redução de fricção no checkout.</div>
-    </section>
-
-    <section class="slide" id="pax" data-title="PAX/Booking">
-      <div class="eyebrow">Composição por tamanho da reserva</div>
-      <h2 class="section-title">2026 tem menos reserva solo e mais grupos.</h2>
-      <div class="grid cols-2">
-        <div class="card"><h3>Ciclo completo 2025</h3><div class="chart" id="pax2025"></div></div>
-        <div class="card"><h3>2026 até agora</h3><div class="chart" id="pax2026"></div></div>
-      </div>
-      <p class="lead" style="font-size:18px;margin-top:20px">O PAX por booking subiu de 1,74 para 2,24 na comparação proporcional: +29,1%.</p>
-    </section>
-
-
-    <section class="slide" id="publico" data-title="Público">
-      <div class="eyebrow">Público por telefone</div>
-      <h2 class="section-title">Quem está agendando o ciclo de setembro?</h2>
-      <p class="lead">Origem provável inferida pelo DDI do telefone do cliente. Use os botões para alternar o ciclo completo de 2025, o mesmo ponto do ciclo e 2026 atual.</p>
-      <div class="data-toolbar" id="audienceScope"></div>
-      <div class="grid cols-4">
-        <div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi" id="audBookings">-</div></div>
-        <div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi" id="audPax">-</div></div>
-        <div class="card"><div class="kpi-label">DDI identificado</div><div class="kpi" id="audIdent">-</div></div>
-        <div class="card"><div class="kpi-label">Mediana antecedência</div><div class="kpi" id="audMedian">-</div></div>
-      </div>
-      <div class="grid cols-2" style="margin-top:18px">
-        <div class="card"><h3>Top países por PAX</h3><div class="hbars" id="countryBars"></div></div>
-        <div class="card"><h3>Detalhamento por país</h3><div class="table-wrap"><table class="compact"><thead><tr><th>País / DDI</th><th class="num">Bookings</th><th class="num">PAX</th><th class="num">% PAX</th><th class="num">Lead médio</th><th class="num">4+ dias</th></tr></thead><tbody id="countryTable"></tbody></table></div></div>
-      </div>
-      <p class="note" style="margin-top:16px">DDI é uma proxy da origem do telefone, não uma confirmação de nacionalidade ou residência. Números +55 aparecem como Brasil; isso pode incluir turistas usando número local.</p>
-    </section>
-
-    <section class="slide" id="antecedencia" data-title="PAX + Antecedência">
-      <div class="eyebrow">PAX e janela de compra</div>
-      <h2 class="section-title">Quando o cliente agenda antes de voar?</h2>
-      <p class="lead">Booking date versus fulfilment date no horário do Rio. A faixa “1 dia” inclui compra no mesmo dia e com 1 dia de antecedência.</p>
-      <div class="data-toolbar" id="leadScope"></div>
-      <div class="toggle" id="leadMetric"><button class="active" data-metric="bookings">Bookings</button><button data-metric="pax">PAX</button></div>
-      <div class="grid cols-2">
-        <div class="card"><div class="chart" id="leadChart"></div></div>
-        <div class="card">
-          <div class="kpi-label">Antecedência média</div><div class="big-number" style="font-size:62px" id="leadAvg">-</div>
-          <p class="lead" style="font-size:18px">A média pode ser puxada por reservas muito antecipadas. Por isso, a mediana é mostrada junto.</p>
-          <div class="insight-strip">
-            <div class="insight"><strong id="leadMedian">-</strong><span>mediana de antecedência</span></div>
-            <div class="insight"><strong id="leadLastMinute">-</strong><span>bookings em até 1 dia</span></div>
-            <div class="insight"><strong id="leadAdvance">-</strong><span>bookings com 4+ dias</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="callout" id="leadCallout" style="margin-top:22px">-</div>
-    </section>
-
-    <section class="slide" id="pagamentos" data-title="Pagamentos">
-      <div class="eyebrow">Formas de pagamento</div>
-      <h2 class="section-title">PayPal continua dominante, mas 2026 está mais diversificado.</h2>
-      <p class="lead">Percentual sobre bookings confirmados pagos. Promo Code, Free e Refund são tratados como complementos; quando há dois meios reais na mesma reserva, classificamos como “Misto”.</p>
-      <div class="data-toolbar" id="paymentScope"></div>
-      <div class="two-col">
-        <div class="card">
-          <div class="kpi-label">Base analisada</div><div class="kpi" id="payTotal">-</div><p class="note">bookings confirmados pagos</p>
-          <div class="sharebar" id="paymentShare"></div>
-          <div class="legend" id="paymentLegend"></div>
-        </div>
-        <div class="card">
-          <div class="kpi-label">PayPal</div><div class="big-number" style="font-size:72px" id="paypalPct">-</div>
-          <div class="insight-strip" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-            <div class="insight"><strong id="cardPct">-</strong><span>Cartão</span></div>
-            <div class="insight"><strong id="transferPct">-</strong><span>Transferência</span></div>
-          </div>
-          <p class="lead" id="paymentInsight" style="font-size:18px;margin-top:18px">-</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" id="extras" data-title="Extras">
-      <div class="eyebrow">Extras</div>
-      <h2 class="section-title">Extras crescem mais que bookings e reforçam monetização.</h2>
-      <div class="two-col">
-        <div class="grid cols-2">
-          <div class="card"><div class="kpi-label">Extras 2025 prop.</div><div class="kpi">R$ 10.220</div></div>
-          <div class="card"><div class="kpi-label">Extras 2026</div><div class="kpi">R$ 14.280</div><div class="delta pos">+39,7%</div></div>
-          <div class="card"><div class="kpi-label">Extra / booking 2025</div><div class="kpi">R$ 243</div></div>
-          <div class="card"><div class="kpi-label">Extra / booking 2026</div><div class="kpi">R$ 317</div></div>
-        </div>
-        <div class="card"><div class="kpi-label">Projeção se mantiver +39,7%</div><div class="big-number" style="font-size:62px">R$ 123k</div><p class="lead" style="font-size:18px">Contra R$ 88,3k no ciclo completo de 2025. O potencial incremental seria de aproximadamente R$ 35k.</p></div>
-      </div>
-    </section>
-
-    <section class="slide" id="funil" data-title="Funil">
-      <div class="eyebrow">Abandono Online -> Interno</div>
-      <h2 class="section-title">No recorte de setembro, a migração para Interno aumentou 4,7x.</h2>
-      <div class="flow">
-        <div class="flowbox"><span class="kpi-label">Abandono Online 2026</span><strong>24</strong><span>usuários</span></div>
-        <div class="arrow">→</div>
-        <div class="flowbox"><span class="kpi-label">Fecharam Interno</span><strong>4</strong><span>16,7%</span></div>
-        <div class="arrow">→</div>
-        <div class="flowbox"><span class="kpi-label">Valor recuperado</span><strong style="font-size:30px">R$ 8,7k</strong><span>6 PAX</span></div>
-      </div>
-      <div class="callout" style="margin-top:24px">Em 2025, apenas 3,6% dos usuários que abandonaram Online foram para o Interno. Em 2026, esse número foi para 16,7%.</div>
-    </section>
-
-    <section class="slide" id="ano" data-title="Ano">
-      <div class="eyebrow">Visão anual 2026</div>
-      <h2 class="section-title">12,9% dos abandonadores Online fecharam pelo Interno no ano.</h2>
-      <div class="two-col">
-        <div class="card">
-          <div class="big-number">12,9%</div>
-          <p class="lead" style="font-size:19px;margin-top:12px">194 de 1.507 usuários identificáveis que abandonaram o carrinho Online acabaram convertendo pelo Interno.</p>
-          <span class="pill blue">404 PAX</span><span class="pill blue">R$ 601,9k em bookings</span><span class="pill">166 usuários em até 24h</span>
-        </div>
-        <div class="card">
-          <h3>Destino após abandono Online</h3>
-          <div class="chart" id="annualChart"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" id="perda" data-title="Cenários">
-      <div class="eyebrow">Perda potencial e recuperação</div>
-      <h2 class="section-title">Cenário interativo de recuperação do checkout.</h2>
-      <div class="two-col">
-        <div class="card">
-          <div class="kpi-label">Usuários sem fechamento no recorte</div><div class="kpi">11 usuários</div>
-          <p class="lead" style="font-size:18px">Intenção de compra observada: R$ 29.310 / 21 PAX. Ajuste a taxa de recuperação para estimar oportunidade anualizada.</p>
-          <input class="range" type="range" min="10" max="60" step="5" value="30" id="recovery" oninput="updateScenario()" />
-          <p class="note">Taxa de recuperação: <strong id="recoveryRate">30%</strong></p>
-        </div>
-        <div class="card"><div class="kpi-label">Potencial anualizado estimado</div><div class="scenario" id="scenarioValue">R$ 626k</div><p class="note">Estimativa de tamanho de oportunidade, não previsão garantida de receita.</p></div>
-      </div>
-    </section>
-
-    <section class="slide" id="fulfilment" data-title="Fulfilment">
-      <div class="eyebrow">Carteira de fulfilment</div>
-      <h2 class="section-title">A carteira futura de Setembro/26 está saudável.</h2>
-      <div class="grid cols-4">
-        <div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">127</div><div class="delta neu">igual a 2025</div></div>
-        <div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">263</div><div class="delta pos">+6,5%</div></div>
-        <div class="card"><div class="kpi-label">Receita</div><div class="kpi">R$ 412k</div><div class="delta pos">+7,3%</div></div>
-        <div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 48k</div><div class="delta pos">+43,9%</div></div>
-      </div>
-      <div class="callout" style="margin-top:24px">O problema do Online não aparece com a mesma intensidade no fulfilment porque Interno, grupos maiores, ticket e extras estão compensando.</div>
-    </section>
-
-    <section class="slide" id="gyg" data-title="GetYourGuide">
-      <div class="eyebrow">Oportunidade GetYourGuide</div>
-      <h2 class="section-title">GYG começa a aparecer como canal incremental.</h2>
-      <div class="grid cols-3">
-        <div class="card"><div class="kpi-label">2025</div><div class="kpi">1 order</div><p class="note">Cancelado no ciclo analisado.</p></div>
-        <div class="card"><div class="kpi-label">Bookings 2026</div><div class="kpi">2 confirmados</div><p class="note">4 PAX / R$ 6,8k / R$ 480 em extras.</p></div>
-        <div class="card"><div class="kpi-label">Fulfilment 2026</div><div class="kpi">4 confirmados</div><p class="note">7 PAX / R$ 12k / R$ 960 em extras.</p></div>
-      </div>
-      <div class="callout" style="margin-top:24px">Testar Doors Off 30 como produto de aquisição, com inventário estratégico para last minute e demanda internacional antecipada.</div>
-    </section>
-
-    <section class="slide" id="acoes" data-title="Ações">
-      <div class="eyebrow">Próximas ações</div>
-      <h2 class="section-title edit-text">Testar, medir e implementar o canal que mais gera receita.</h2>
-      <p class="subtitle edit-text">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
-
-      <div class="acoes-edit-bar">
-        <button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
-        <button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
-        <button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
-        <span class="acoes-edit-status" id="acoesEditStatus"></span>
-      </div>
-      <p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
-
-      <div class="grid cols-2" style="margin-top:24px">
-        <div class="card">
-          <h3 class="edit-text">1. Landing page de venda</h3>
-          <p class="lead edit-text" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
-        </div>
-        <div class="card">
-          <h3 class="edit-text">2. Campanhas Meta para conversão</h3>
-          <p class="lead edit-text" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
-        </div>
-        <div class="card">
-          <h3 class="edit-text">3. Regra de decisão</h3>
-          <p class="lead edit-text" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
-        </div>
-        <div class="card">
-          <h3 class="edit-text">4. Aumentar ticket do Interno</h3>
-          <p class="lead edit-text" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
-        </div>
-      </div>
-
-      <div class="grid cols-2" style="margin-top:20px">
-        <div class="card">
-          <h3>Experimento sugerido</h3>
-          <table class="compact">
-            <thead><tr><th>Rota</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
-            <tbody>
-              <tr><td class="edit-text">PayPal</td><td class="edit-text">Conversão direta e abandono</td><td class="num edit-text">Escalar se gerar receita</td></tr>
-              <tr><td class="edit-text">Stripe/cartão</td><td class="edit-text">Aceitação de cartão e fricção</td><td class="num edit-text">Comparar com PayPal</td></tr>
-              <tr><td class="edit-text">Interno</td><td class="edit-text">Receita recuperada e ticket</td><td class="num edit-text">Escalar se aumentar valor</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card">
-          <h3>Melhores produtos para GetYourGuide</h3>
-          <table class="compact">
-            <thead><tr><th>Produto</th><th>Papel no canal</th><th class="num">Prioridade</th></tr></thead>
-            <tbody>
-              <tr><td class="edit-text">Doors Off 30</td><td class="edit-text">Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num edit-text">Alta</td></tr>
-              <tr><td class="edit-text">Doors Off 45</td><td class="edit-text">Upsell para maior receita por PAX e experiência mais completa.</td><td class="num edit-text">Média/Alta</td></tr>
-              <tr><td class="edit-text">Doors On 30</td><td class="edit-text">Alternativa para público que busca conforto, família e menor barreira.</td><td class="num edit-text">Média</td></tr>
-              <tr><td class="edit-text">Extras</td><td class="edit-text">Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num edit-text">Alta</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="callout edit-text" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
-    </section>
-  </main>
+<aside>
+<div class="brand"><div class="logo">VR</div><div><h1>Ciclo Setembro</h1><p>2025 vs 2026</p></div></div>
+<nav id="nav"></nav>
+<div class="controls">
+<button class="btn" onclick="toggleTheme()">Alternar tema</button>
+<button class="btn" onclick="window.print()">Exportar / imprimir</button>
+</div>
+</aside>
+<main>
+<section class="slide" data-title="Capa" id="capa">
+<div class="eyebrow">Vertical Rio | Growth &amp; Performance</div>
+<h1 class="title">Ciclo de Setembro: 2025 vs 2026</h1>
+<p class="subtitle">Apresentação executiva sobre performance proporcional, canais, extras, PAX, abandono de checkout, migração para Interno e oportunidade GetYourGuide.</p>
+<div style="margin-top:26px">
+<span class="pill blue">Ciclo: 26/08 a 26/09</span>
+<span class="pill">Booking separado de fulfilment</span>
+<span class="pill">Free of Charge fora de receita paga</span>
+</div>
+<div class="footerline"><span>Base analisada: arquivos CSV + relatório gerado</span><span>Atualizado em 31/08/2026</span></div>
+</section>
+<section class="slide" data-title="Resumo" id="resumo">
+<div class="eyebrow">Resumo executivo</div>
+<h2 class="section-title">2026 está melhor economicamente, mas mais dependente do Interno.</h2>
+<p class="lead">A comparação proporcional mostra crescimento em receita, PAX e extras. Porém, o Online perdeu volume de reservas e parte dessa demanda está sendo recuperada pelo time Interno.</p>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">45</div><div class="delta pos">+7,1% vs 2025</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">101</div><div class="delta pos">+38,4% vs 2025</div></div>
+<div class="card"><div class="kpi-label">Receita paga</div><div class="kpi">R$ 150k</div><div class="delta pos">+31,7% vs 2025</div></div>
+<div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 14,3k</div><div class="delta pos">+39,7% vs 2025</div></div>
+</div>
+<div class="callout" style="margin-top:22px">O ponto de atenção não é a demanda total. É a perda de força do canal Online e a transferência de parte da jornada digital para atendimento humano.</div>
+</section>
+<section class="slide" data-title="Método" id="metodo">
+<div class="eyebrow">Leitura correta dos dados</div>
+<h2 class="section-title">Booking e fulfilment foram analisados separadamente.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">Ciclo Setembro/25</div><div class="kpi" style="font-size:28px">26/08/25<br/>26/09/25</div><p class="note">Usado como ciclo completo para comparação histórica.</p></div>
+<div class="card"><div class="kpi-label">Ciclo Setembro/26</div><div class="kpi" style="font-size:28px">26/08/26<br/>26/09/26</div><p class="note">Base parcial de bookings até 30/08 no horário de Brasília.</p></div>
+<div class="card"><div class="kpi-label">Regra financeira</div><div class="kpi" style="font-size:28px">Paid only</div><p class="note">Free of Charge separado e excluído de receita e ticket médio pago.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">A comparação proporcional usa o mesmo ponto do calendário para evitar comparar 2026 parcial com 2025 completo.</div>
+</section>
+<section class="slide" data-title="Ciclo 25" id="ciclo25">
+<div class="eyebrow">Ciclo completo de Setembro/25</div>
+<h2 class="section-title">O Online carregava o volume, com ticket parecido ao Interno.</h2>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Pedidos criados</div><div class="kpi">778</div></div>
+<div class="card"><div class="kpi-label">Confirmados</div><div class="kpi">346</div></div>
+<div class="card"><div class="kpi-label">Abandoned cart</div><div class="kpi">414</div></div>
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">336</div></div>
+</div>
+<div class="grid cols-3" style="margin-top:18px">
+<div class="card"><div class="kpi-label">Receita bruta paga</div><div class="kpi">R$ 983k</div></div>
+<div class="card"><div class="kpi-label">Ticket médio pago</div><div class="kpi">R$ 2.926</div></div>
+<div class="card"><div class="kpi-label">PAX / booking</div><div class="kpi">1,89</div></div>
+</div>
+<p class="note">Free of Charge: 10 bookings / 18 PAX / R$ 27,2k separados da análise paga.</p>
+</section>
+<section class="slide" data-title="Proporcional" id="proporcional">
+<div class="eyebrow">Comparação proporcional</div>
+<h2 class="section-title">Menos dependência de volume, mais valor por reserva.</h2>
+<div class="toggle" id="metricToggle"></div>
+<div class="two-col">
+<div class="chart" id="metricChart"></div>
+<div>
+<div class="card"><div class="kpi-label" id="metricLabel">Indicador</div><div class="big-number" id="metricDelta">+31,7%</div><p class="lead" id="metricText" style="font-size:18px;margin:10px 0 0"></p></div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Canais" id="canais">
+<div class="eyebrow">Online vs Interno</div>
+<h2 class="section-title">O Online caiu; o Interno compensou.</h2>
+<div class="grid cols-2">
+<div class="card">
+<h3>Bookings pagos proporcionais</h3>
+<div class="chart" id="channelChart"></div>
+</div>
+<div>
+<table>
+<thead><tr><th>Canal</th><th class="num">2025</th><th class="num">2026</th><th class="num">Var.</th></tr></thead>
+<tbody>
+<tr><td>Online</td><td class="num">34</td><td class="num">22</td><td class="num neg">-35,3%</td></tr>
+<tr><td>Interno</td><td class="num">8</td><td class="num">21</td><td class="num pos">+162,5%</td></tr>
+</tbody>
+</table>
+<div class="callout">A demanda não desapareceu: uma parte relevante mudou de canal.</div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Ticket" id="ticket">
+<div class="eyebrow">Ticket médio por canal</div>
+<h2 class="section-title">O ticket Online subiu, mas com menos reservas.</h2>
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Ticket Online 2026</div><div class="big-number" style="font-size:58px">R$ 3.639</div><div class="delta pos">+37,0% vs 2025 proporcional</div><p class="note">O Online vende menos bookings, porém os que entram têm valor maior.</p></div>
+<div class="card"><div class="kpi-label">Ticket Interno 2026</div><div class="big-number" style="font-size:58px">R$ 3.022</div><div class="delta pos">+1,3% vs 2025 proporcional</div><p class="note">O Interno cresceu mais em volume e PAX do que em ticket.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">A alavanca do Interno é conversão e recuperação; a alavanca do Online é volume qualificado + redução de fricção no checkout.</div>
+</section>
+<section class="slide" data-title="PAX/Booking" id="pax">
+<div class="eyebrow">Composição por tamanho da reserva</div>
+<h2 class="section-title">2026 tem menos reserva solo e mais grupos.</h2>
+<div class="grid cols-2">
+<div class="card"><h3>Ciclo completo 2025</h3><div class="chart" id="pax2025"></div></div>
+<div class="card"><h3>2026 até agora</h3><div class="chart" id="pax2026"></div></div>
+</div>
+<p class="lead" style="font-size:18px;margin-top:20px">O PAX por booking subiu de 1,74 para 2,24 na comparação proporcional: +29,1%.</p>
+</section>
+<section class="slide" data-title="Público" id="publico">
+<div class="eyebrow">Público por telefone</div>
+<h2 class="section-title">Quem está agendando o ciclo de setembro?</h2>
+<p class="lead">Origem provável inferida pelo DDI do telefone do cliente. Use os botões para alternar o ciclo completo de 2025, o mesmo ponto do ciclo e 2026 atual.</p>
+<div class="data-toolbar" id="audienceScope"></div>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi" id="audBookings">-</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi" id="audPax">-</div></div>
+<div class="card"><div class="kpi-label">DDI identificado</div><div class="kpi" id="audIdent">-</div></div>
+<div class="card"><div class="kpi-label">Mediana antecedência</div><div class="kpi" id="audMedian">-</div></div>
+</div>
+<div class="grid cols-2" style="margin-top:18px">
+<div class="card"><h3>Top países por PAX</h3><div class="hbars" id="countryBars"></div></div>
+<div class="card"><h3>Detalhamento por país</h3><div class="table-wrap"><table class="compact"><thead><tr><th>País / DDI</th><th class="num">Bookings</th><th class="num">PAX</th><th class="num">% PAX</th><th class="num">Lead médio</th><th class="num">4+ dias</th></tr></thead><tbody id="countryTable"></tbody></table></div></div>
+</div>
+<p class="note" style="margin-top:16px">DDI é uma proxy da origem do telefone, não uma confirmação de nacionalidade ou residência. Números +55 aparecem como Brasil; isso pode incluir turistas usando número local.</p>
+</section>
+<section class="slide" data-title="PAX + Antecedência" id="antecedencia">
+<div class="eyebrow">PAX e janela de compra</div>
+<h2 class="section-title">Quando o cliente agenda antes de voar?</h2>
+<p class="lead">Booking date versus fulfilment date no horário do Rio. A faixa “1 dia” inclui compra no mesmo dia e com 1 dia de antecedência.</p>
+<div class="data-toolbar" id="leadScope"></div>
+<div class="toggle" id="leadMetric"><button class="active" data-metric="bookings">Bookings</button><button data-metric="pax">PAX</button></div>
+<div class="grid cols-2">
+<div class="card"><div class="chart" id="leadChart"></div></div>
+<div class="card">
+<div class="kpi-label">Antecedência média</div><div class="big-number" id="leadAvg" style="font-size:62px">-</div>
+<p class="lead" style="font-size:18px">A média pode ser puxada por reservas muito antecipadas. Por isso, a mediana é mostrada junto.</p>
+<div class="insight-strip">
+<div class="insight"><strong id="leadMedian">-</strong><span>mediana de antecedência</span></div>
+<div class="insight"><strong id="leadLastMinute">-</strong><span>bookings em até 1 dia</span></div>
+<div class="insight"><strong id="leadAdvance">-</strong><span>bookings com 4+ dias</span></div>
+</div>
+</div>
+</div>
+<div class="callout" id="leadCallout" style="margin-top:22px">-</div>
+</section>
+<section class="slide" data-title="Pagamentos" id="pagamentos">
+<div class="eyebrow">Formas de pagamento</div>
+<h2 class="section-title">PayPal continua dominante, mas 2026 está mais diversificado.</h2>
+<p class="lead">Percentual sobre bookings confirmados pagos. Promo Code, Free e Refund são tratados como complementos; quando há dois meios reais na mesma reserva, classificamos como “Misto”.</p>
+<div class="data-toolbar" id="paymentScope"></div>
+<div class="two-col">
+<div class="card">
+<div class="kpi-label">Base analisada</div><div class="kpi" id="payTotal">-</div><p class="note">bookings confirmados pagos</p>
+<div class="sharebar" id="paymentShare"></div>
+<div class="legend" id="paymentLegend"></div>
+</div>
+<div class="card">
+<div class="kpi-label">PayPal</div><div class="big-number" id="paypalPct" style="font-size:72px">-</div>
+<div class="insight-strip" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+<div class="insight"><strong id="cardPct">-</strong><span>Cartão</span></div>
+<div class="insight"><strong id="transferPct">-</strong><span>Transferência</span></div>
+</div>
+<p class="lead" id="paymentInsight" style="font-size:18px;margin-top:18px">-</p>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Extras" id="extras">
+<div class="eyebrow">Extras</div>
+<h2 class="section-title">Extras crescem mais que bookings e reforçam monetização.</h2>
+<div class="two-col">
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Extras 2025 prop.</div><div class="kpi">R$ 10.220</div></div>
+<div class="card"><div class="kpi-label">Extras 2026</div><div class="kpi">R$ 14.280</div><div class="delta pos">+39,7%</div></div>
+<div class="card"><div class="kpi-label">Extra / booking 2025</div><div class="kpi">R$ 243</div></div>
+<div class="card"><div class="kpi-label">Extra / booking 2026</div><div class="kpi">R$ 317</div></div>
+</div>
+<div class="card"><div class="kpi-label">Projeção se mantiver +39,7%</div><div class="big-number" style="font-size:62px">R$ 123k</div><p class="lead" style="font-size:18px">Contra R$ 88,3k no ciclo completo de 2025. O potencial incremental seria de aproximadamente R$ 35k.</p></div>
+</div>
+</section>
+<section class="slide" data-title="Funil" id="funil">
+<div class="eyebrow">Abandono Online -&gt; Interno</div>
+<h2 class="section-title">No recorte de setembro, a migração para Interno aumentou 4,7x.</h2>
+<div class="flow">
+<div class="flowbox"><span class="kpi-label">Abandono Online 2026</span><strong>24</strong><span>usuários</span></div>
+<div class="arrow">→</div>
+<div class="flowbox"><span class="kpi-label">Fecharam Interno</span><strong>4</strong><span>16,7%</span></div>
+<div class="arrow">→</div>
+<div class="flowbox"><span class="kpi-label">Valor recuperado</span><strong style="font-size:30px">R$ 8,7k</strong><span>6 PAX</span></div>
+</div>
+<div class="callout" style="margin-top:24px">Em 2025, apenas 3,6% dos usuários que abandonaram Online foram para o Interno. Em 2026, esse número foi para 16,7%.</div>
+</section>
+<section class="slide" data-title="Funil anual" id="ano">
+<div class="eyebrow">Funil anual 2026 - tentativa Online</div>
+<h2 class="section-title">51,7% dos usuários que abandonaram o Online acabaram confirmando.</h2>
+<p class="subtitle">Base: 1.508 usuários identificáveis com pelo menos um Abandoned Cart Online entre 01/01 e 31/08/2026. O cruzamento utiliza nome normalizado, por isso deve ser interpretado como uma estimativa operacional do comportamento do funil.</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Usuários que abandonaram</div><div class="kpi">1.508</div><p class="note">2.562 carrinhos abandonados no total.</p></div>
+<div class="card"><div class="kpi-label">Viraram confirmados</div><div class="kpi">780</div><div class="delta pos">51,7%</div><p class="note">783 bookings confirmados após o abandono.</p></div>
+<div class="card"><div class="kpi-label">Não voltaram</div><div class="kpi">728</div><div class="delta neg">48,3%</div><p class="note">Potenciais bookings não recuperados.</p></div>
+<div class="card"><div class="kpi-label">Valor dos últimos carrinhos não recuperados</div><div class="kpi" style="font-size:34px">R$ 2,07 mi</div><p class="note">1.368 PAX de intenção observada. Não equivale a receita garantida.</p></div>
+</div>
+<div class="two-col" style="margin-top:20px">
+<div class="card">
+<h3>Para onde foi quem abandonou?</h3>
+<div class="chart" id="annualChart"></div>
+<div class="grid cols-3" style="margin-top:16px">
+<div><div class="kpi-label">Conseguiu Online</div><div class="kpi" style="font-size:34px">38,9%</div><p class="note">586 usuários</p></div>
+<div><div class="kpi-label">Foi para Interno</div><div class="kpi" style="font-size:34px">12,9%</div><p class="note">194 usuários</p></div>
+<div><div class="kpi-label">Não confirmou</div><div class="kpi" style="font-size:34px">48,3%</div><p class="note">728 usuários</p></div>
+</div>
+</div>
+<div class="card">
+<h3>Repetição antes da conversão</h3>
+<div class="grid cols-2">
+<div><div class="kpi-label">Fizeram 2+ tentativas de abandono</div><div class="big-number" style="font-size:48px">631</div><div class="delta neu">41,8% da coorte</div></div>
+<div><div class="kpi-label">2+ tentativas e depois confirmaram</div><div class="big-number" style="font-size:48px">318</div><div class="delta pos">21,1% da coorte</div></div>
+</div>
+<div class="callout" style="margin-top:18px">Entre os 780 usuários recuperados, <strong>40,8%</strong> precisaram de duas ou mais tentativas Online antes de virar confirmado. Isso sugere fricção relevante na jornada, mesmo quando a venda acaba acontecendo.</div>
+</div>
+</div>
+<div class="callout" style="margin-top:20px"><strong>Resumo:</strong> de cada 100 usuários que abandonam o Online, aproximadamente <strong>39 conseguem concluir Online</strong>, <strong>13 migram para o Interno</strong> e <strong>48 não apresentam confirmação posterior identificada</strong>. O total recuperado é de <strong>52 em cada 100</strong>.</div>
+</section>
+<section class="slide" data-title="Funil sem duplicados" id="ano-sem-duplicados">
+<div class="eyebrow">Funil anual 2026 - nomes únicos</div>
+<h2 class="section-title">Removendo nomes duplicados, 1.508 pessoas únicas abandonaram o Online.</h2>
+<p class="subtitle">Base limpa por nome normalizado: cada pessoa entra uma única vez, mesmo que tenha criado dois ou mais carrinhos. A leitura reduz a distorção de tentativas repetidas e mostra a recuperação real por pessoa.</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Carrinhos abandonados Online</div><div class="kpi">2.562</div><p class="note">Registros brutos antes de remover repetição de nomes.</p></div>
+<div class="card"><div class="kpi-label">Registros duplicados removidos</div><div class="kpi">1.054</div><div class="delta neu">41,1% dos carrinhos</div><p class="note">Diferença entre carrinhos totais e pessoas únicas.</p></div>
+<div class="card"><div class="kpi-label">Pessoas únicas</div><div class="kpi">1.508</div><p class="note">Base usada para os percentuais limpos.</p></div>
+<div class="card"><div class="kpi-label">Confirmaram depois</div><div class="kpi">780</div><div class="delta pos">51,7%</div><p class="note">Equivalente a 783 bookings confirmados após abandono.</p></div>
+</div>
+<div class="two-col" style="margin-top:20px">
+<div class="card">
+<h3>Destino após abandonar</h3>
+<div class="chart" id="annualUniqueChart"></div>
+<div class="grid cols-3" style="margin-top:16px">
+<div><div class="kpi-label">Conseguiu Online</div><div class="kpi" style="font-size:34px">38,9%</div><p class="note">586 pessoas</p></div>
+<div><div class="kpi-label">Foi para Interno</div><div class="kpi" style="font-size:34px">12,9%</div><p class="note">194 pessoas</p></div>
+<div><div class="kpi-label">Não voltou</div><div class="kpi" style="font-size:34px">48,3%</div><p class="note">728 pessoas</p></div>
+</div>
+</div>
+<div class="card">
+<h3>Repetição e perda potencial</h3>
+<table class="compact">
+<thead><tr><th>Métrica sem duplicar nomes</th><th class="num">Volume</th><th class="num">%</th></tr></thead>
+<tbody>
+<tr><td>Pessoas com 2+ tentativas de abandono</td><td class="num">631</td><td class="num">41,8%</td></tr>
+<tr><td>2+ tentativas antes de virar confirmado</td><td class="num">318</td><td class="num">21,1%</td></tr>
+<tr><td>Total de pessoas recuperadas</td><td class="num">780</td><td class="num">51,7%</td></tr>
+<tr><td>Bookings potencialmente perdidos</td><td class="num">728</td><td class="num">48,3%</td></tr>
+<tr><td>PAX dos últimos carrinhos não recuperados</td><td class="num">1.368</td><td class="num">1,88 PAX/booking</td></tr>
+<tr><td>Ticket médio dos abandonados não recuperados</td><td class="num">R$ 2.842</td><td class="num">por último carrinho</td></tr>
+<tr><td>Valor dos últimos carrinhos não recuperados</td><td class="num">R$ 2,07 mi</td><td class="num">intenção observada</td></tr>
+</tbody>
+</table>
+<div class="callout" style="margin-top:18px;font-size:18px"><strong>Leitura:</strong> ao remover duplicidade de nomes, a taxa limpa de recuperação fica em <strong>51,7%</strong>. O Interno absorve <strong>12,9%</strong> dos abandonadores, enquanto o Online recupera <strong>38,9%</strong>.</div>
+</div>
+</div>
+<div class="footerline"><span>Metodologia: deduplicação por customer_first_last_name normalizado.</span><span>Observação: homônimos podem gerar pequena margem de erro.</span></div>
+</section>
+<section class="slide" data-title="Perda estimada" id="perda-ticket">
+<div class="eyebrow">Quanto estamos deixando na mesa</div>
+<h2 class="section-title">Os não recuperados têm 1,88 PAX por booking e sinalizam uma oportunidade de R$ 2,44 mi.</h2>
+<p class="subtitle">Base sem nomes duplicados: 728 pessoas que abandonaram o Online e não tiveram confirmação posterior identificada. O valor abaixo é uma estimativa de oportunidade por pagamento/checkout, não uma previsão garantida de receita.</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Pessoas não recuperadas</div><div class="kpi">728</div><p class="note">Cada nome entra uma única vez.</p></div>
+<div class="card"><div class="kpi-label">PAX de intenção</div><div class="kpi">1.368</div><p class="note">Último carrinho observado dessas pessoas.</p></div>
+<div class="card"><div class="kpi-label">PAX / booking perdido</div><div class="kpi">1,88</div><p class="note">Mostra que a perda não é só de reservas individuais.</p></div>
+<div class="card"><div class="kpi-label">Ticket médio abandonado</div><div class="kpi">R$ 2.842</div><p class="note">Valor médio do último carrinho não recuperado.</p></div>
+</div>
+<div class="two-col" style="margin-top:22px">
+<div class="card">
+<h3>Intenção observada vs. ticket médio real</h3>
+<table class="compact">
+<thead><tr><th>Métrica</th><th class="num">Cálculo</th><th class="num">Valor</th></tr></thead>
+<tbody>
+<tr><td>Valor registrado nos últimos carrinhos</td><td class="num">728 x R$ 2.842</td><td class="num">R$ 2,07 mi</td></tr>
+<tr><td>Ticket médio pago 2026</td><td class="num">bookings confirmados pagos</td><td class="num">R$ 3.346</td></tr>
+<tr><td>Oportunidade usando ticket médio real</td><td class="num">728 x R$ 3.346</td><td class="num">R$ 2,44 mi</td></tr>
+<tr><td>Diferença entre cenário real e carrinho</td><td class="num">R$ 2,44 mi - R$ 2,07 mi</td><td class="num">+R$ 367 mil</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Leitura de Growth</h3>
+<div class="insight-strip" style="grid-template-columns:1fr;gap:12px">
+<div class="insight"><strong>R$ 2,07 mi</strong><span>É a intenção explícita vista nos últimos carrinhos dos usuários que não voltaram.</span></div>
+<div class="insight"><strong>R$ 2,44 mi</strong><span>É a estimativa se essas 728 pessoas tivessem convertido no ticket médio pago real de 2026.</span></div>
+<div class="insight"><strong>Prioridade: pagamento</strong><span>Como parte desses usuários tentou comprar e não concluiu, vale testar PayPal vs Stripe/cartão vs fechamento Interno assistido.</span></div>
+</div>
+</div>
+</div>
+<div class="callout" style="margin-top:24px"><strong>Resumo:</strong> se tratarmos cada não recuperado como um booking potencial, estamos olhando para algo entre <strong>R$ 2,07 mi</strong> de intenção observada e <strong>R$ 2,44 mi</strong> de oportunidade pelo ticket médio real. Esse é o tamanho da mesa para priorizar checkout, pagamento e recuperação rápida pelo Interno.</div>
+</section>
+<section class="slide" data-title="Cenários" id="perda">
+<div class="eyebrow">Perda potencial e recuperação</div>
+<h2 class="section-title">Cenário interativo de recuperação do checkout.</h2>
+<div class="two-col">
+<div class="card">
+<div class="kpi-label">Usuários sem fechamento no recorte</div><div class="kpi">11 usuários</div>
+<p class="lead" style="font-size:18px">Intenção de compra observada: R$ 29.310 / 21 PAX. Ajuste a taxa de recuperação para estimar oportunidade anualizada.</p>
+<input class="range" id="recovery" max="60" min="10" oninput="updateScenario()" step="5" type="range" value="30"/>
+<p class="note">Taxa de recuperação: <strong id="recoveryRate">30%</strong></p>
+</div>
+<div class="card"><div class="kpi-label">Potencial anualizado estimado</div><div class="scenario" id="scenarioValue">R$ 626k</div><p class="note">Estimativa de tamanho de oportunidade, não previsão garantida de receita.</p></div>
+</div>
+</section>
+<section class="slide" data-title="Fulfilment" id="fulfilment">
+<div class="eyebrow">Carteira de fulfilment</div>
+<h2 class="section-title">A carteira futura de Setembro/26 está saudável.</h2>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">127</div><div class="delta neu">igual a 2025</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">263</div><div class="delta pos">+6,5%</div></div>
+<div class="card"><div class="kpi-label">Receita</div><div class="kpi">R$ 412k</div><div class="delta pos">+7,3%</div></div>
+<div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 48k</div><div class="delta pos">+43,9%</div></div>
+</div>
+<div class="callout" style="margin-top:24px">O problema do Online não aparece com a mesma intensidade no fulfilment porque Interno, grupos maiores, ticket e extras estão compensando.</div>
+</section>
+<section class="slide" data-title="GetYourGuide" id="gyg">
+<div class="eyebrow">Oportunidade GetYourGuide</div>
+<h2 class="section-title">GYG começa a aparecer como canal incremental.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">2025</div><div class="kpi">1 order</div><p class="note">Cancelado no ciclo analisado.</p></div>
+<div class="card"><div class="kpi-label">Bookings 2026</div><div class="kpi">2 confirmados</div><p class="note">4 PAX / R$ 6,8k / R$ 480 em extras.</p></div>
+<div class="card"><div class="kpi-label">Fulfilment 2026</div><div class="kpi">4 confirmados</div><p class="note">7 PAX / R$ 12k / R$ 960 em extras.</p></div>
+</div>
+<div class="callout" style="margin-top:24px">Testar Doors Off 30 como produto de aquisição, com inventário estratégico para last minute e demanda internacional antecipada.</div>
+</section>
+<section class="slide" data-title="Ações" id="acoes">
+<div class="eyebrow">Próximas ações</div>
+<h2 class="section-title">Testar, medir e implementar o canal que mais gera receita.</h2>
+<p class="subtitle">A recomendação é criar um experimento controlado para descobrir onde a demanda converte melhor: checkout direto com PayPal, checkout direto com Stripe ou atendimento Interno.</p>
+<div class="grid cols-2" style="margin-top:24px">
+<div class="card">
+<h3>1. Landing page de venda</h3>
+<p class="lead" style="font-size:18px">Criar uma landing page focada em conversão com três caminhos claros: <strong>PayPal</strong>, <strong>Stripe/cartão</strong> e <strong>falar com o Interno</strong>. O objetivo é medir qual rota gera mais receita com a menor fricção.</p>
+</div>
+<div class="card">
+<h3>2. Campanhas Meta para conversão</h3>
+<p class="lead" style="font-size:18px">Rodar campanhas no Meta levando tráfego para essa landing page. Com o mesmo orçamento, comparar qual caminho gera mais receita e mais PAX em janelas de <strong>7 dias</strong> e <strong>14 dias</strong>.</p>
+</div>
+<div class="card">
+<h3>3. Regra de decisão</h3>
+<p class="lead" style="font-size:18px">Após 7D e 14D, pausar o que não trouxe receita suficiente e escalar o que funcionou. O teste deve olhar não só conversão, mas <strong>receita líquida, ticket médio, PAX por booking e abandono</strong>.</p>
+</div>
+<div class="card">
+<h3>4. Aumentar ticket do Interno</h3>
+<p class="lead" style="font-size:18px">Transformar o atendimento em uma máquina de upsell: oferecer upgrade para Doors Off 45, horários premium, Shoe-Selfie, GoPro, vídeo 360 e pacotes para 2+ PAX. O Interno já recupera demanda digital; agora precisa capturar mais valor por reserva.</p>
+</div>
+</div>
+<div class="grid cols-2" style="margin-top:20px">
+<div class="card">
+<h3>Experimento sugerido</h3>
+<table class="compact">
+<thead><tr><th>Rota</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
+<tbody>
+<tr><td>PayPal</td><td>Conversão direta e abandono</td><td class="num">Escalar se gerar receita</td></tr>
+<tr><td>Stripe/cartão</td><td>Aceitação de cartão e fricção</td><td class="num">Comparar com PayPal</td></tr>
+<tr><td>Interno</td><td>Receita recuperada e ticket</td><td class="num">Escalar se aumentar valor</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Melhores produtos para GetYourGuide</h3>
+<table class="compact">
+<thead><tr><th>Produto</th><th>Papel no canal</th><th class="num">Prioridade</th></tr></thead>
+<tbody>
+<tr><td>Doors Off 30</td><td>Produto de entrada, mais fácil de vender e ideal para last minute.</td><td class="num">Alta</td></tr>
+<tr><td>Doors Off 45</td><td>Upsell para maior receita por PAX e experiência mais completa.</td><td class="num">Média/Alta</td></tr>
+<tr><td>Doors On 30</td><td>Alternativa para público que busca conforto, família e menor barreira.</td><td class="num">Média</td></tr>
+<tr><td>Extras</td><td>Shoe-Selfie, GoPro e 360 para elevar ticket sem depender de mais bookings.</td><td class="num">Alta</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout" style="margin-top:24px">Resumo prático: usar a landing page como laboratório de conversão. Manter o mesmo orçamento, comparar PayPal vs Stripe vs Interno em 7D e 14D, pausar o que não performar e implementar o canal vencedor.</div>
+</section>
+</main>
 </div>
 <script>
 const sections=[...document.querySelectorAll('.slide')];
@@ -392,7 +447,8 @@ showMetric('revenue');
 makeBars(document.getElementById('channelChart'),[{label:'Online 25',value:34},{label:'Online 26',value:22,cls:'bad'},{label:'Interno 25',value:8},{label:'Interno 26',value:21,cls:'alt'}]);
 makeBars(document.getElementById('pax2025'),[{label:'1 PAX',value:125},{label:'2 PAX',value:164,cls:'alt'},{label:'3 PAX',value:24},{label:'4+ PAX',value:23}]);
 makeBars(document.getElementById('pax2026'),[{label:'1 PAX',value:9},{label:'2 PAX',value:26,cls:'alt'},{label:'3 PAX',value:4},{label:'4+ PAX',value:6,cls:'alt'}]);
-makeBars(document.getElementById('annualChart'),[{label:'Fechou Online',value:588,display:'39,0%',cls:'alt'},{label:'Fechou Interno',value:194,display:'12,9%'},{label:'Sem compra',value:725,display:'48,1%',cls:'bad'}],725);
+makeBars(document.getElementById('annualChart'),[{label:'Fechou Online',value:586,display:'38,9%',cls:'alt'},{label:'Fechou Interno',value:194,display:'12,9%'},{label:'Sem compra',value:728,display:'48,3%',cls:'bad'}],728);
+makeBars(document.getElementById('annualUniqueChart'),[{label:'Fechou Online',value:586,display:'38,9%',cls:'alt'},{label:'Fechou Interno',value:194,display:'12,9%'},{label:'Nao voltou',value:728,display:'48,3%',cls:'bad'}],728);
 function updateScenario(){const rate=+document.getElementById('recovery').value;document.getElementById('recoveryRate').textContent=rate+'%';const base=2086666.7;document.getElementById('scenarioValue').textContent=brl(base*rate/100);}
 updateScenario();
 
@@ -412,41 +468,6 @@ scopeLabels['2026ytd']='2026 acumulado';setupScope('paymentScope',['2025full','2
 document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
 renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
 document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
-
-(function(){
-  const STORAGE_PREFIX='acoesEdit_v1_';
-  const editables=[...document.querySelectorAll('#acoes .edit-text')];
-  editables.forEach((el,i)=>{
-    const key=STORAGE_PREFIX+i;
-    el.dataset.ek=key;
-    const saved=localStorage.getItem(key);
-    if(saved!==null) el.innerHTML=saved;
-  });
-  const editBtn=document.getElementById('acoesEditBtn');
-  const saveBtn=document.getElementById('acoesSaveBtn');
-  const resetBtn=document.getElementById('acoesResetBtn');
-  const status=document.getElementById('acoesEditStatus');
-  let editing=false;
-  function setEditing(on){
-    editing=on;
-    editables.forEach(el=>el.contentEditable=on?'true':'false');
-    editBtn.textContent=on?'Parar edição':'Editar textos';
-    saveBtn.style.display=on?'inline-flex':'none';
-    resetBtn.style.display=on?'inline-flex':'none';
-    if(!on) status.textContent='';
-  }
-  editBtn.onclick=()=>setEditing(!editing);
-  saveBtn.onclick=()=>{
-    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
-    status.textContent='Alterações salvas neste navegador.';
-    setTimeout(()=>{status.textContent=''},3000);
-  };
-  resetBtn.onclick=()=>{
-    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
-    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
-    location.reload();
-  };
-})();
 </script>
 </body>
 </html>
