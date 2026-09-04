@@ -9,7 +9,7 @@
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:radial-gradient(circle at 80% 0%,rgba(80,227,194,.08),transparent 26%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 button,input,select{font:inherit} .wrap{max-width:1480px;margin:auto;padding:24px} .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:24px;align-items:end;padding:26px 0 20px}
 .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800} h1{font-size:clamp(30px,5vw,58px);line-height:1.02;margin:10px 0 14px;max-width:900px;letter-spacing:-.035em} .sub{color:var(--muted);max-width:850px;line-height:1.55;font-size:16px} .hero-note{border:1px solid var(--line);background:linear-gradient(135deg,rgba(80,227,194,.07),rgba(104,167,255,.04));padding:18px;border-radius:18px} .hero-note strong{display:block;font-size:15px;margin-bottom:6px} .hero-note p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-.filters{position:sticky;top:0;z-index:20;background:rgba(7,16,21,.93);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0} .filter-grid{display:grid;grid-template-columns:1.15fr .8fr .9fr 1.2fr 1.1fr .95fr auto;gap:10px;align-items:end} label{display:block;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px} select,input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px 11px;outline:none;min-height:42px} select:focus,input:focus{border-color:var(--accent)} .reset{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:11px;padding:10px 14px;cursor:pointer;min-height:42px} .reset:hover{border-color:var(--accent);color:var(--accent)}
+.filters{position:sticky;top:0;z-index:20;background:rgba(7,16,21,.93);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0} .filter-grid{display:grid;grid-template-columns:1.15fr .8fr .9fr 1.2fr 1.1fr .95fr auto;gap:10px;align-items:end} label{display:block;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px} select,input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px 11px;outline:none;min-height:42px} select:focus,input:focus{border-color:var(--accent)} .reset{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:11px;padding:10px 14px;cursor:pointer;min-height:42px} .reset:hover{border-color:var(--accent);color:var(--accent)} .msel{position:relative} .mselbtn{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px 11px;outline:none;min-height:42px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis} .mselbtn:after{content:'▾';color:var(--muted);flex:none} .mselbtn:hover,.mselbtn[aria-expanded="true"]{border-color:var(--accent)} .mselpanel{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--panel2);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:10px;z-index:30;max-height:340px;flex-direction:column;gap:8px} .mselpanel:not([hidden]){display:flex} .mselpanel input[type=text]{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:8px 10px;outline:none;min-height:auto} .mselactions{display:flex;gap:8px} .mselactions button{flex:1;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:9px;padding:6px 8px;cursor:pointer;font-size:12px;font-weight:700} .mselactions button:hover{border-color:var(--accent);color:var(--accent)} .msellist{overflow:auto;display:flex;flex-direction:column;gap:2px} .mopt{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;font-size:13px;cursor:pointer} .mopt:hover{background:rgba(80,227,194,.08)} .mopt input[type=checkbox]{width:auto;min-height:auto;background:none;border:none;padding:0;margin:0;accent-color:var(--accent)}
 .tabbar{display:flex;gap:8px;flex-wrap:wrap;padding:20px 0 12px} .tabbtn{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:700} .tabbtn.active{background:var(--accent);border-color:var(--accent);color:#06110e} .tab{display:none} .tab.active{display:block} .statusline{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 18px} .chip{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:6px 9px;border-radius:999px}
 .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px} .kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0} .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800} .kpi .val{font-size:clamp(22px,2.5vw,35px);font-weight:850;letter-spacing:-.03em;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .kpi .aux{font-size:12px;color:var(--muted);margin-top:5px;min-height:18px} .up{color:var(--ok)!important} .down{color:var(--danger)!important}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px} .grid31{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-bottom:14px} .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow);min-width:0} .cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px} .card h2{font-size:16px;margin:0} .card p{font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.45} .chart{height:410px;min-width:0} .chart.small{height:360px} .chart.tall{height:520px}
@@ -3918,7 +3918,7 @@ return Plotly;
       <div><label>Período</label><select id="mode"><option value="comparable">Jan–Jul comparável</option><option value="available">Base completa disponível</option></select></div>
       <div><label>Ano</label><select id="year"><option value="all">Todos</option></select></div>
       <div><label>Mês</label><select id="month"><option value="all">Todos</option></select></div>
-      <div><label>País de origem</label><input id="country" list="countries" placeholder="Todos — digite para buscar" autocomplete="off"><datalist id="countries"></datalist></div>
+      <div class="msel" id="countryFilter"><label>País de origem</label><button type="button" class="mselbtn" id="countryBtn" aria-haspopup="listbox" aria-expanded="false">Todos</button><div class="mselpanel" id="countryPanel" hidden><input type="text" id="countrySearch" placeholder="Buscar país..." autocomplete="off"><div class="mselactions"><button type="button" id="countryAllBtn">Selecionar todos</button><button type="button" id="countryClearBtn">Limpar</button></div><div class="msellist" id="countryList" role="listbox" aria-multiselectable="true"></div></div></div>
       <div><label>Estado de entrada</label><input id="state" list="states" placeholder="Todos — digite para buscar" autocomplete="off"><datalist id="states"></datalist></div>
       <div><label>Via de acesso</label><select id="via"><option value="all">Todas</option></select></div>
       <button class="reset" id="reset" type="button">Limpar filtros</button>
@@ -3982,12 +3982,39 @@ const MONTHS=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Ago
 const fmt=new Intl.NumberFormat('pt-BR');
 const pct=new Intl.NumberFormat('pt-BR',{style:'percent',maximumFractionDigits:1});
 const $=id=>document.getElementById(id);
-const controls={mode:$('mode'),year:$('year'),month:$('month'),country:$('country'),state:$('state'),via:$('via')};
+const controls={mode:$('mode'),year:$('year'),month:$('month'),state:$('state'),via:$('via')};
 META.years.forEach(y=>controls.year.insertAdjacentHTML('beforeend',`<option value="${y}">${y}</option>`));
 MONTHS.forEach((m,i)=>controls.month.insertAdjacentHTML('beforeend',`<option value="${i+1}">${m}</option>`));
 META.vias.forEach(v=>controls.via.insertAdjacentHTML('beforeend',`<option value="${v}">${v}</option>`));
-META.countries.forEach(v=>$('countries').insertAdjacentHTML('beforeend',`<option value="${escapeHtml(v)}"></option>`));
 META.states.forEach(v=>$('states').insertAdjacentHTML('beforeend',`<option value="${escapeHtml(v)}"></option>`));
+const selectedCountries=new Set();
+const countryBtn=$('countryBtn'),countryPanel=$('countryPanel'),countrySearch=$('countrySearch'),countryListEl=$('countryList');
+function renderCountryList(filter=''){
+  const q=norm(filter);
+  const opts=META.countries.filter(c=>!q||norm(c).includes(q));
+  countryListEl.innerHTML=opts.length?opts.map(c=>`<label class="mopt"><input type="checkbox" value="${escapeHtml(c)}" ${selectedCountries.has(c)?'checked':''}>${escapeHtml(c)}</label>`).join(''):'<div class="empty" style="padding:14px">Nenhum país encontrado.</div>';
+}
+function updateCountryBtn(){
+  const n=selectedCountries.size;
+  countryBtn.textContent=n===0?'Todos':n===1?[...selectedCountries][0]:`${n} países selecionados`;
+}
+countryBtn.addEventListener('click',()=>{
+  const willOpen=countryPanel.hidden;
+  countryPanel.hidden=!willOpen;
+  countryBtn.setAttribute('aria-expanded',String(willOpen));
+  if(willOpen){countrySearch.value='';renderCountryList();countrySearch.focus();}
+});
+countrySearch.addEventListener('input',()=>renderCountryList(countrySearch.value));
+countryListEl.addEventListener('change',e=>{
+  const cb=e.target; if(cb.tagName!=='INPUT')return;
+  if(cb.checked)selectedCountries.add(cb.value);else selectedCountries.delete(cb.value);
+  updateCountryBtn();render();
+});
+$('countryAllBtn').addEventListener('click',()=>{META.countries.forEach(c=>selectedCountries.add(c));renderCountryList(countrySearch.value);updateCountryBtn();render();});
+$('countryClearBtn').addEventListener('click',()=>{selectedCountries.clear();renderCountryList(countrySearch.value);updateCountryBtn();render();});
+document.addEventListener('click',e=>{if(!countryPanel.hidden&&!document.getElementById('countryFilter').contains(e.target)){countryPanel.hidden=true;countryBtn.setAttribute('aria-expanded','false');}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!countryPanel.hidden){countryPanel.hidden=true;countryBtn.setAttribute('aria-expanded','false');}});
+renderCountryList();updateCountryBtn();
 $('qa').textContent=`Validação: ${fmt.format(META.summary.rows_source)} linhas de origem consolidadas em ${fmt.format(META.summary.rows_dashboard)} combinações com chegadas > 0.`;
 
 function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -3997,8 +4024,8 @@ function basePredicate(r, ignoreYear=false){
   if(controls.mode.value==='comparable' && m==='all' && r.mn>7) return false;
   if(!ignoreYear && controls.year.value!=='all' && r.y!==+controls.year.value) return false;
   if(m!=='all' && r.mn!==+m) return false;
-  const cq=norm(controls.country.value), sq=norm(controls.state.value);
-  if(cq && !norm(r.c).includes(cq)) return false;
+  const sq=norm(controls.state.value);
+  if(selectedCountries.size && !selectedCountries.has(r.c)) return false;
   if(sq && !norm(r.s).includes(sq)) return false;
   if(controls.via.value!=='all' && r.v!==controls.via.value) return false;
   return true;
@@ -4024,7 +4051,7 @@ function status(){
   const arr=[];arr.push(controls.mode.value==='comparable'&&controls.month.value==='all'?'Jan–Jul comparável':'Base disponível');
   if(controls.year.value!=='all')arr.push(`Ano: ${controls.year.value}`);
   if(controls.month.value!=='all')arr.push(`Mês: ${MONTHS[+controls.month.value-1]}`);
-  if(controls.country.value.trim())arr.push(`País contém: “${controls.country.value.trim()}”`);
+  if(selectedCountries.size){const list=[...selectedCountries];arr.push(list.length<=3?`País: ${list.join(', ')}`:`${list.length} países selecionados`);}
   if(controls.state.value.trim())arr.push(`UF contém: “${controls.state.value.trim()}”`);
   if(controls.via.value!=='all')arr.push(`Via: ${controls.via.value}`);
   $('statusline').innerHTML=arr.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join('');
@@ -4074,7 +4101,7 @@ function render(){
  const rows=filtered();status();renderKpis(rows);renderAnnual(rows);renderVia(rows);renderMonthly(rows);barRanking('countryChart',rows,'c');barRanking('stateChart',rows,'s');$('countryInsights').innerHTML=insightHTML(rows,'c',{top3:'Os três maiores mercados',count:'países'});$('stateInsights').innerHTML=insightHTML(rows,'s',{top3:'As três maiores portas de entrada',count:'UFs'});renderHeatmap(rows);renderRoutes(rows);
 }
 Object.values(controls).forEach(el=>el.addEventListener(el.tagName==='INPUT'?'input':'change',render));
-$('reset').addEventListener('click',()=>{controls.mode.value='comparable';controls.year.value='all';controls.month.value='all';controls.country.value='';controls.state.value='';controls.via.value='all';render()});
+$('reset').addEventListener('click',()=>{controls.mode.value='comparable';controls.year.value='all';controls.month.value='all';selectedCountries.clear();countrySearch.value='';renderCountryList();updateCountryBtn();controls.state.value='';controls.via.value='all';render()});
 document.querySelectorAll('.tabbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');$(btn.dataset.tab).classList.add('active');setTimeout(()=>document.querySelectorAll(`#${btn.dataset.tab} .chart`).forEach(c=>Plotly.Plots.resize(c)),30)}));
 $('download').addEventListener('click',()=>{const rows=filtered();const h=['ano','mes','pais','estado','via','chegadas'];const lines=[h.join(';'),...rows.map(r=>[r.y,r.m,r.c,r.s,r.v,r.a].map(x=>`"${String(x).replace(/"/g,'""')}"`).join(';'))];const blob=new Blob(['﻿'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chegadas_filtradas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
 render();
