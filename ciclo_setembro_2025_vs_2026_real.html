@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vertical Rio | Ciclo Setembro 25 vs 26 (dados reais)</title>
+<style>
+    :root{
+      --bg:#f6f8fb; --surface:#ffffff; --ink:#101828; --muted:#667085; --line:#e5e7eb;
+      --blue:#2563eb; --blue2:#dbeafe; --green:#16a34a; --red:#dc2626; --amber:#d97706;
+      --dark:#0f172a; --soft:#f1f5f9; --shadow:0 18px 45px rgba(15,23,42,.08);
+      --radius:26px; --radius-sm:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(135deg,#f8fafc 0%,#eef4ff 100%);color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;}
+    body.dark{--bg:#0b1220;--surface:#101827;--ink:#f8fafc;--muted:#a7b0c0;--line:#223047;--soft:#172033;--blue2:#162a50;background:linear-gradient(135deg,#070b12 0%,#101827 100%)}
+    .app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;padding:28px 20px;border-right:1px solid var(--line);background:rgba(255,255,255,.72);backdrop-filter: blur(14px);z-index:10;display:flex;flex-direction:column}
+    body.dark aside{background:rgba(16,24,39,.72)}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}
+    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),#0ea5e9);display:grid;place-items:center;color:white;font-weight:900;letter-spacing:-1px;box-shadow:var(--shadow)}
+    .brand h1{font-size:15px;margin:0;line-height:1.15}.brand p{font-size:12px;margin:4px 0 0;color:var(--muted)}
+    nav{display:grid;gap:8px;overflow:auto;min-height:0;padding-right:4px;scrollbar-width:thin}.navlink{border:0;text-align:left;width:100%;padding:12px 14px;border-radius:14px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer;transition:.2s}
+    .navlink:hover,.navlink.active{background:var(--blue2);color:var(--blue)}
+    .controls{display:grid;gap:10px;margin-top:16px;flex:0 0 auto}.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+    main{padding:34px;max-width:1240px;width:100%;margin:0 auto}.slide{min-height:calc(100vh - 68px);padding:34px;margin-bottom:26px;background:rgba(255,255,255,.76);border:1px solid rgba(226,232,240,.9);border-radius:34px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;scroll-margin-top:24px}
+    body.dark .slide{background:rgba(16,24,39,.76);border-color:#223047}
+    .eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:900;margin-bottom:12px}.title{font-size:clamp(36px,5vw,68px);line-height:.96;letter-spacing:-.055em;margin:0 0 18px}.subtitle{font-size:clamp(18px,2vw,24px);color:var(--muted);max-width:930px;line-height:1.45;margin:0}.section-title{font-size:36px;letter-spacing:-.035em;margin:0 0 12px}.lead{font-size:20px;color:var(--muted);line-height:1.55;max-width:980px;margin:0 0 24px}.grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.kpi-label{color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.kpi{font-size:34px;font-weight:950;letter-spacing:-.04em;margin:8px 0}.delta{font-size:14px;font-weight:900}.pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--blue)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--soft);font-size:13px;font-weight:800;color:var(--muted);margin:4px 4px 4px 0}.pill.blue{background:var(--blue2);color:var(--blue)}
+    table{width:100%;border-collapse:separate;border-spacing:0 8px}th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;padding:0 12px}td{background:var(--surface);padding:14px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:750}td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px}td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.num{text-align:right;white-space:nowrap}.callout{border-left:6px solid var(--blue);background:linear-gradient(90deg,var(--blue2),transparent);border-radius:18px;padding:18px 20px;font-size:20px;font-weight:850;line-height:1.35}.note{font-size:14px;color:var(--muted);line-height:1.45}
+    .chart{height:330px;display:flex;align-items:end;gap:22px;padding:22px;border-radius:22px;background:linear-gradient(180deg,var(--soft),transparent);border:1px solid var(--line)}.barwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px}.bar{width:100%;max-width:80px;border-radius:14px 14px 5px 5px;background:linear-gradient(180deg,#60a5fa,var(--blue));min-height:8px;position:relative}.bar.alt{background:linear-gradient(180deg,#34d399,#16a34a)}.bar.bad{background:linear-gradient(180deg,#f87171,#dc2626)}.barvalue{font-weight:950;font-size:15px}.barlabel{text-align:center;color:var(--muted);font-size:13px;font-weight:800;min-height:34px}.toggle{display:inline-flex;gap:4px;background:var(--soft);padding:5px;border-radius:999px;border:1px solid var(--line);margin:6px 0 20px}.toggle button{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}.toggle button.active{background:var(--surface);color:var(--blue);box-shadow:0 6px 18px rgba(15,23,42,.08)}
+    .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center}.flowbox{text-align:center;padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}.flowbox strong{display:block;font-size:38px;letter-spacing:-.04em}.arrow{font-size:34px;color:var(--blue);font-weight:900}.big-number{font-size:82px;letter-spacing:-.07em;font-weight:950;line-height:.9}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}.range{width:100%;accent-color:var(--blue)}.scenario{font-size:46px;font-weight:950;letter-spacing:-.05em}.footerline{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:700}.print-note{display:none}
+
+    .data-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 22px}.data-toolbar button{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer}.data-toolbar button.active{background:var(--blue2);color:var(--blue);border-color:transparent}
+    .hbars{display:grid;gap:13px}.hrow{display:grid;grid-template-columns:150px 1fr 72px;gap:12px;align-items:center}.hlabel{font-size:13px;font-weight:850;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.htrack{height:13px;background:var(--soft);border-radius:999px;overflow:hidden}.hfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#60a5fa,var(--blue))}.hval{text-align:right;font-size:13px;font-weight:950}
+    .table-wrap{overflow:auto;max-height:390px;padding-right:4px}.compact td{padding:10px 11px;font-size:13px}.compact th{font-size:11px;position:sticky;top:0;background:var(--surface);z-index:1;padding:9px 11px}.compact .country{font-weight:900}.softline{height:1px;background:var(--line);margin:20px 0}
+    .sharebar{display:flex;height:26px;border-radius:999px;overflow:hidden;background:var(--soft);border:1px solid var(--line);margin:12px 0 20px}.shareseg{height:100%;min-width:2px}.shareseg:nth-child(1){background:#2563eb}.shareseg:nth-child(2){background:#0ea5e9}.shareseg:nth-child(3){background:#16a34a}.shareseg:nth-child(4){background:#d97706}.shareseg:nth-child(5){background:#7c3aed}.shareseg:nth-child(6){background:#64748b}.shareseg:nth-child(7){background:#dc2626}
+    .legend{display:grid;gap:9px}.legend-row{display:grid;grid-template-columns:12px 1fr auto;gap:9px;align-items:center;font-size:14px}.dot{width:10px;height:10px;border-radius:50%}.legend-row:nth-child(1) .dot{background:#2563eb}.legend-row:nth-child(2) .dot{background:#0ea5e9}.legend-row:nth-child(3) .dot{background:#16a34a}.legend-row:nth-child(4) .dot{background:#d97706}.legend-row:nth-child(5) .dot{background:#7c3aed}.legend-row:nth-child(6) .dot{background:#64748b}.legend-row:nth-child(7) .dot{background:#dc2626}
+    .insight-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.insight{padding:16px 18px;border-radius:18px;background:var(--soft);border:1px solid var(--line)}.insight strong{display:block;font-size:24px;letter-spacing:-.03em;margin-bottom:5px}.insight span{font-size:13px;color:var(--muted);font-weight:750;line-height:1.35}
+    @media(max-width:950px){.hrow{grid-template-columns:110px 1fr 62px}.insight-strip{grid-template-columns:1fr}.table-wrap{max-height:none}}
+    @media(max-width:950px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.controls{position:static;margin-top:18px}main{padding:18px}.slide{padding:24px;min-height:auto}.grid.cols-2,.grid.cols-3,.grid.cols-4,.two-col,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.chart{height:260px;gap:10px}.title{font-size:42px}}
+    @media print{body{background:white}.app{display:block}aside{display:none}main{padding:0;max-width:none}.slide{page-break-after:always;box-shadow:none;border:0;border-radius:0;min-height:100vh}.print-note{display:block}}
+
+    .navlink{display:flex;align-items:center;gap:9px}
+    .drag-handle{flex:0 0 auto;color:var(--muted);font-size:13px;line-height:1;cursor:grab;letter-spacing:-1px}
+    .navlink-label{flex:1;text-align:left}
+    .navlink.dragging{opacity:.35;background:var(--blue2)}
+    .nav-hint{font-size:11px;color:var(--muted);margin:2px 0 14px;padding:0 2px}
+
+    .acoes-edit-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 4px}
+    .acoes-edit-bar .btn{padding:10px 16px}
+    .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
+    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
+  </style>
+</head>
+<body>
+<div class="app">
+<aside>
+<div class="brand"><div class="logo">VR</div><div><h1>Ciclo Setembro</h1><p>2025 vs 2026 (dados reais)</p></div></div>
+<nav id="nav"></nav>
+<p class="nav-hint">Arraste ⠿ para reordenar os cards do menu</p>
+<div class="controls">
+<button class="btn" onclick="toggleTheme()">Alternar tema</button>
+<button class="btn" onclick="window.print()">Exportar / imprimir</button>
+<button class="btn" onclick="resetNavOrder()">Restaurar ordem do menu</button>
+</div>
+</aside>
+<main>
+<section class="slide" data-title="Capa" id="capa">
+<div class="eyebrow">Vertical Rio | Growth &amp; Performance</div>
+<h1 class="title">Ciclo de Setembro: 2025 vs 2026</h1>
+<p class="subtitle">Comparação de reservas pagas via API Rezdy entre 26/08–25/09/2025 (ciclo completo) e 26/08–21/09/2026 (ciclo em andamento).</p>
+<div style="margin-top:26px">
+<span class="pill blue">Ciclo: 26/08 a 25/09</span>
+<span class="pill">2026 parcial — faltam 4 dias para fechar o ciclo</span>
+<span class="pill">Booking pago = confirmado + totalPaid &gt; 0</span>
+</div>
+<div class="footerline"><span>Base analisada: API Rezdy (bookings)</span><span>Atualizado em 21/09/2026</span></div>
+</section>
+<section class="slide" data-title="Resumo" id="resumo">
+<div class="eyebrow">Resumo executivo</div>
+<h2 class="section-title">O Online segue perdendo força; Interno e GetYourGuide amenizam parte da queda.</h2>
+<p class="lead">Na comparação proporcional (mesma janela de calendário, 26/08 a 21/09), bookings, PAX e receita pagos de 2026 ficaram abaixo de 2025. A queda do canal Online (-51,0% em bookings) é parcialmente compensada pelo crescimento do Interno (+52,4%) e pela entrada do GetYourGuide como canal novo — mas o ciclo de 2026 ainda está aberto, faltam 4 dias para fechar a janela completa.</p>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">239</div><div class="delta neg">-18,2% vs 2025 (mesmo ponto)</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">478</div><div class="delta neg">-12,0% vs 2025 (mesmo ponto)</div></div>
+<div class="card"><div class="kpi-label">Receita paga</div><div class="kpi">R$ 771k</div><div class="delta neg">-8,8% vs 2025 (mesmo ponto)</div></div>
+<div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 73,5k</div><div class="delta neg">-6,5% vs 2025 (mesmo ponto)</div></div>
+</div>
+<div class="callout" style="margin-top:22px">O ponto de atenção segue sendo a perda de força do canal Online (-51,0% em bookings pagos vs o mesmo intervalo de 2025). O Interno (+52,4%) e o GetYourGuide (canal novo, 9 bookings / R$ 34,9k) amortecem parte da queda, mas ainda não fecham a conta. Como o ciclo de 2026 segue aberto até 25/09, uma fração desses números ainda pode mudar.</div>
+</section>
+<section class="slide" data-title="Método" id="metodo">
+<div class="eyebrow">Leitura correta dos dados</div>
+<h2 class="section-title">Como os dados foram analisados.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">Período A completo</div><div class="kpi" style="font-size:28px">26/08/25<br/>25/09/25</div><p class="note">Ciclo completo (31 dias), usado como referência histórica.</p></div>
+<div class="card"><div class="kpi-label">Período B (2026, parcial)</div><div class="kpi" style="font-size:28px">26/08/26<br/>21/09/26</div><p class="note">Dados até hoje — 27 de 31 dias do ciclo já coletados via API Rezdy.</p></div>
+<div class="card"><div class="kpi-label">Regra financeira</div><div class="kpi" style="font-size:28px">Confirmado + pago</div><p class="note">Bookings pagos = status confirmado/processing com totalPaid &gt; 0. Abandoned cart e cancelados ficam de fora.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">A comparação proporcional usa a mesma janela de 27 dias (26/08 a 21/09) nos dois anos, para não comparar 2026 parcial com 2025 completo. O slide "Período Base" mostra o ciclo de 2025 completo (31 dias) como referência histórica.</div>
+</section>
+<section class="slide" data-title="Período Base" id="periodobase">
+<div class="eyebrow">Ciclo completo de Setembro/25</div>
+<h2 class="section-title">Referência histórica: o ciclo completo de 2025.</h2>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Pedidos criados</div><div class="kpi">730</div></div>
+<div class="card"><div class="kpi-label">Confirmados</div><div class="kpi">329</div></div>
+<div class="card"><div class="kpi-label">Abandoned cart</div><div class="kpi">383</div></div>
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">329</div></div>
+</div>
+<div class="grid cols-3" style="margin-top:18px">
+<div class="card"><div class="kpi-label">Receita bruta paga</div><div class="kpi">R$ 959k</div></div>
+<div class="card"><div class="kpi-label">Ticket médio pago</div><div class="kpi">R$ 2.915</div></div>
+<div class="card"><div class="kpi-label">PAX / booking</div><div class="kpi">1,88</div></div>
+</div>
+<p class="note">Ciclo completo 26/08/25 a 25/09/25 (31 dias). Nenhum booking Free of Charge identificado no período.</p>
+</section>
+<section class="slide" data-title="Proporcional" id="proporcional">
+<div class="eyebrow">Comparação proporcional (26/08 a 21/09)</div>
+<h2 class="section-title">Menos volume em 2026, mas ticket médio mais alto.</h2>
+<div class="toggle" id="metricToggle"></div>
+<div class="two-col">
+<div class="chart" id="metricChart"></div>
+<div>
+<div class="card"><div class="kpi-label" id="metricLabel">Indicador</div><div class="big-number" id="metricDelta">-8,8%</div><p class="lead" id="metricText" style="font-size:18px;margin:10px 0 0"></p></div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Canais" id="canais">
+<div class="eyebrow">Online vs Interno vs GetYourGuide</div>
+<h2 class="section-title">O Online caiu forte; Interno e GYG compensaram só em parte.</h2>
+<div class="grid cols-2">
+<div class="card">
+<h3>Bookings pagos proporcionais (26/08-21/09)</h3>
+<div class="chart" id="channelChart"></div>
+</div>
+<div>
+<table>
+<thead><tr><th>Canal</th><th class="num">2025</th><th class="num">2026</th><th class="num">Var.</th></tr></thead>
+<tbody>
+<tr><td>Online</td><td class="num">208</td><td class="num">102</td><td class="num neg">-51,0%</td></tr>
+<tr><td>Interno</td><td class="num">84</td><td class="num">128</td><td class="num pos">+52,4%</td></tr>
+<tr><td>GetYourGuide</td><td class="num">0</td><td class="num">9</td><td class="num neu">canal novo</td></tr>
+</tbody>
+</table>
+<div class="callout">O Interno cresceu 52,4% em bookings e o GetYourGuide surgiu como canal novo (9 bookings, R$ 34,9k), mas a queda do Online (-106 bookings) ainda pesa mais que os ganhos somados (+53 bookings).</div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Ticket" id="ticket">
+<div class="eyebrow">Ticket médio por canal</div>
+<h2 class="section-title">O ticket subiu nos três canais, mesmo com menos volume.</h2>
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Ticket Online 2026</div><div class="big-number" style="font-size:58px">R$ 3.173</div><div class="delta pos">+8,1% vs 2025 proporcional</div><p class="note">O Online vende bem menos bookings, mas os que entram têm valor maior.</p></div>
+<div class="card"><div class="kpi-label">Ticket Interno 2026</div><div class="big-number" style="font-size:58px">R$ 3.221</div><div class="delta pos">+15,3% vs 2025 proporcional</div><p class="note">O Interno cresceu em volume, PAX e também em ticket médio.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">O GetYourGuide estreou com o maior ticket médio dos três canais: R$ 3.881 — acima do Online (R$ 3.173) e do Interno (R$ 3.221).</div>
+</section>
+<section class="slide" data-title="PAX/Booking" id="pax">
+<div class="eyebrow">Composição por tamanho da reserva</div>
+<h2 class="section-title">2026 tem menos reserva solo e mais grupos.</h2>
+<div class="grid cols-2">
+<div class="card"><h3>Ciclo completo 2025</h3><div class="chart" id="pax2025"></div></div>
+<div class="card"><h3>2026 até agora</h3><div class="chart" id="pax2026"></div></div>
+</div>
+<p class="lead" style="font-size:18px;margin-top:20px">O PAX por booking subiu de 1,88 (ciclo completo 2025) para 2,00 (2026 até agora): +6,3%.</p>
+</section>
+<section class="slide" data-title="Público" id="publico">
+<div class="eyebrow">Público por país</div>
+<h2 class="section-title">Quem está agendando o ciclo de setembro?</h2>
+<p class="lead">País de origem informado pelo cliente na reserva (campo de país da Rezdy). Use os botões para alternar o ciclo completo de 2025, o mesmo ponto do ciclo e 2026 atual.</p>
+<div class="data-toolbar" id="audienceScope"></div>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi" id="audBookings">-</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi" id="audPax">-</div></div>
+<div class="card"><div class="kpi-label">País identificado</div><div class="kpi" id="audIdent">-</div></div>
+<div class="card"><div class="kpi-label">Mediana antecedência</div><div class="kpi" id="audMedian">-</div></div>
+</div>
+<div class="grid cols-2" style="margin-top:18px">
+<div class="card"><h3>Top países por PAX</h3><div class="hbars" id="countryBars"></div></div>
+<div class="card"><h3>Detalhamento por país</h3><div class="table-wrap"><table class="compact"><thead><tr><th>País</th><th class="num">Bookings</th><th class="num">PAX</th><th class="num">% PAX</th><th class="num">Lead médio</th><th class="num">4+ dias</th></tr></thead><tbody id="countryTable"></tbody></table></div></div>
+</div>
+<p class="note" style="margin-top:16px">País vem do campo de país informado pelo cliente na reserva (Rezdy), não é uma confirmação de nacionalidade. Bookings sem país preenchido não entram na tabela, mas contam no total de bookings pagos — essa parcela cresceu de ~9% (2025 completo) para ~23% (2026 atual).</p>
+</section>
+<section class="slide" data-title="PAX + Antecedência" id="antecedencia">
+<div class="eyebrow">PAX e janela de compra</div>
+<h2 class="section-title">Quando o cliente agenda antes de voar?</h2>
+<p class="lead">Booking date versus horário de voo (fulfilment), em UTC. A faixa "1 dia" inclui compra no mesmo dia e com 1 dia de antecedência.</p>
+<div class="data-toolbar" id="leadScope"></div>
+<div class="toggle" id="leadMetric"><button class="active" data-metric="bookings">Bookings</button><button data-metric="pax">PAX</button></div>
+<div class="grid cols-2">
+<div class="card"><div class="chart" id="leadChart"></div></div>
+<div class="card">
+<div class="kpi-label">Antecedência média</div><div class="big-number" id="leadAvg" style="font-size:62px">-</div>
+<p class="lead" style="font-size:18px">A média pode ser puxada por reservas muito antecipadas. Por isso, a mediana é mostrada junto.</p>
+<div class="insight-strip">
+<div class="insight"><strong id="leadMedian">-</strong><span>mediana de antecedência</span></div>
+<div class="insight"><strong id="leadLastMinute">-</strong><span>bookings em até 1 dia</span></div>
+<div class="insight"><strong id="leadAdvance">-</strong><span>bookings com 4+ dias</span></div>
+</div>
+</div>
+</div>
+<div class="callout" id="leadCallout" style="margin-top:22px">-</div>
+</section>
+<section class="slide" data-title="Pagamentos" id="pagamentos">
+<div class="eyebrow">Formas de pagamento</div>
+<h2 class="section-title">PayPal perdeu espaço para cartão em 2026.</h2>
+<p class="lead">Percentual sobre bookings confirmados pagos. Quando há dois meios reais na mesma reserva, classificamos como "Misto".</p>
+<div class="data-toolbar" id="paymentScope"></div>
+<div class="two-col">
+<div class="card">
+<div class="kpi-label">Base analisada</div><div class="kpi" id="payTotal">-</div><p class="note">bookings confirmados pagos</p>
+<div class="sharebar" id="paymentShare"></div>
+<div class="legend" id="paymentLegend"></div>
+</div>
+<div class="card">
+<div class="kpi-label">Método principal</div><div class="big-number" id="paypalPct" style="font-size:72px">-</div>
+<div class="insight-strip" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+<div class="insight"><strong id="cardPct">-</strong><span>Cartão</span></div>
+<div class="insight"><strong id="transferPct">-</strong><span>Transferência</span></div>
+</div>
+<p class="lead" id="paymentInsight" style="font-size:18px;margin-top:18px">-</p>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Extras" id="extras">
+<div class="eyebrow">Extras</div>
+<h2 class="section-title">Extras caem menos que bookings, mas o mix melhora por reserva.</h2>
+<div class="two-col">
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Extras 2025 prop.</div><div class="kpi">R$ 78,6k</div></div>
+<div class="card"><div class="kpi-label">Extras 2026</div><div class="kpi">R$ 73,5k</div><div class="delta neg">-6,5%</div></div>
+<div class="card"><div class="kpi-label">Extra / booking 2025</div><div class="kpi">R$ 269</div></div>
+<div class="card"><div class="kpi-label">Extra / booking 2026</div><div class="kpi">R$ 308</div><div class="delta pos">+14,3%</div></div>
+</div>
+<div class="card"><div class="kpi-label">Projeção linear para o ciclo completo (31 dias)</div><div class="big-number" style="font-size:62px">R$ 84,4k</div><p class="lead" style="font-size:18px">Contra R$ 87,6k no ciclo completo de 2025 (-3,6%). Projeção simples com base na média diária dos 27 dias já observados em 2026 — não é garantia de receita.</p></div>
+</div>
+</section>
+<section class="slide" data-title="GetYourGuide" id="gyg">
+<div class="eyebrow">Oportunidade GetYourGuide</div>
+<h2 class="section-title">GYG estreia como canal novo, com o maior ticket médio.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">2025 (completo e proporcional)</div><div class="kpi">0 bookings</div><p class="note">Nenhuma reserva paga identificada no canal neste intervalo em 2025.</p></div>
+<div class="card"><div class="kpi-label">Bookings 2026</div><div class="kpi">9 confirmados</div><p class="note">23 PAX / R$ 34,9k / ticket médio R$ 3.881</p></div>
+<div class="card"><div class="kpi-label">Ticket médio GYG</div><div class="kpi">R$ 3.881</div><p class="note">Acima do Online (R$ 3.173) e do Interno (R$ 3.221) no mesmo período.</p></div>
+</div>
+<div class="callout" style="margin-top:24px">GetYourGuide apareceu como canal novo em 2026 e já entrega o maior ticket médio dos três canais. Vale considerar aumentar a visibilidade do produto na plataforma e monitorar se o volume escala nos próximos ciclos.</div>
+</section>
+<section class="slide" data-title="Ações" id="acoes">
+<div class="eyebrow">Próximas ações</div>
+<h2 class="section-title edit-text">Recuperar o Online, escalar o Interno e testar o GetYourGuide.</h2>
+<p class="subtitle edit-text">Com o Online caindo 51,0% em bookings e o Interno crescendo 52,4%, a prioridade é entender a causa da queda do Online e decidir quanto investir em cada canal — incluindo o GetYourGuide, que estreou com o maior ticket médio.</p>
+<div class="acoes-edit-bar">
+<button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
+<button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
+<button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
+<span class="acoes-edit-status" id="acoesEditStatus"></span>
+</div>
+<p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
+<div class="grid cols-2" style="margin-top:24px">
+<div class="card">
+<h3 class="edit-text">1. Investigar a queda do Online (-51%)</h3>
+<p class="lead edit-text" style="font-size:18px">Checar preço, disponibilidade de horários, concorrência e fricção no checkout do canal Online. A queda de 106 bookings é o maior fator negativo do ciclo.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">2. Escalar o Interno</h3>
+<p class="lead edit-text" style="font-size:18px">O Interno cresceu 52,4% em bookings, 68,2% em PAX e 15,3% em ticket médio. Priorizar atendimento assistido e capacidade da equipe para sustentar esse ritmo.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">3. Aumentar a visibilidade no GetYourGuide</h3>
+<p class="lead edit-text" style="font-size:18px">GYG entregou o maior ticket médio (R$ 3.881) já nas primeiras 9 reservas. Testar mais inventário e melhor posicionamento na plataforma para ver se o volume escala.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">4. Manter o crescimento de extras por booking</h3>
+<p class="lead edit-text" style="font-size:18px">Extras por booking subiram 14,3% mesmo com queda no total. Continuar oferecendo upsell (Shoe-Selfie, GoPro, vídeo 360) em todos os canais.</p>
+</div>
+</div>
+<div class="grid cols-2" style="margin-top:20px">
+<div class="card">
+<h3>Experimento sugerido</h3>
+<table class="compact">
+<thead><tr><th>Canal</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
+<tbody>
+<tr><td class="edit-text">Online</td><td class="edit-text">Causa da queda: preço, disponibilidade, checkout</td><td class="num edit-text">Corrigir gargalo identificado</td></tr>
+<tr><td class="edit-text">Interno</td><td class="edit-text">Capacidade de atendimento vs. demanda</td><td class="num edit-text">Escalar equipe se sustentar o ritmo</td></tr>
+<tr><td class="edit-text">GetYourGuide</td><td class="edit-text">Volume e ticket médio nos próximos ciclos</td><td class="num edit-text">Aumentar inventário se confirmar tendência</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Leitura por canal</h3>
+<table class="compact">
+<thead><tr><th>Canal</th><th>Ticket médio 2026</th><th class="num">Var. vs 2025</th></tr></thead>
+<tbody>
+<tr><td class="edit-text">Online</td><td class="edit-text">R$ 3.173</td><td class="num edit-text">+8,1%</td></tr>
+<tr><td class="edit-text">Interno</td><td class="edit-text">R$ 3.221</td><td class="num edit-text">+15,3%</td></tr>
+<tr><td class="edit-text">GetYourGuide</td><td class="edit-text">R$ 3.881</td><td class="num edit-text">canal novo</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout edit-text" style="margin-top:24px">Resumo prático: o ciclo de setembro/26 tem menos volume que 2025, mas ticket médio mais alto em todos os canais. A prioridade é entender e reverter a queda do Online, sustentar o crescimento do Interno e decidir se vale investir mais no GetYourGuide.</div>
+</section>
+</main>
+</div>
+<script>
+const mainEl=document.querySelector('main');
+let sections=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+let navLinks=[];
+let obs;
+const NAV_ORDER_KEY='navOrder_v1_real';
+
+function applyStoredOrder(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(NAV_ORDER_KEY));
+    if(Array.isArray(saved)&&saved.length===sections.length&&saved.every(id=>sections.some(s=>s.id===id))){
+      sections=saved.map(id=>document.getElementById(id));
+    }
+  }catch(e){}
+  sections.forEach(s=>mainEl.appendChild(s));
+}
+function saveOrder(){localStorage.setItem(NAV_ORDER_KEY,JSON.stringify(sections.map(s=>s.id)))}
+function resetNavOrder(){
+  if(!confirm('Restaurar a ordem original do menu?')) return;
+  localStorage.removeItem(NAV_ORDER_KEY);
+  location.reload();
+}
+function getDragAfterElement(container,y){
+  const els=[...container.querySelectorAll('.navlink:not(.dragging)')];
+  return els.reduce((closest,child)=>{
+    const box=child.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+    if(offset<0&&offset>closest.offset) return {offset,element:child};
+    return closest;
+  },{offset:-Infinity}).element;
+}
+function reobserve(){
+  if(obs) obs.disconnect();
+  obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const idx=sections.findIndex(s=>s.id===e.target.id);if(navLinks[idx])navLinks[idx].classList.add('active');}})},{threshold:.55});
+  sections.forEach(s=>obs.observe(s));
+}
+function buildNav(){
+  nav.innerHTML='';
+  navLinks=[];
+  sections.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='navlink';
+    b.draggable=true;
+    b.dataset.sectionId=s.id;
+    b.innerHTML=`<span class="drag-handle">⠿</span><span class="navlink-label">${s.dataset.title}</span>`;
+    b.addEventListener('click',()=>{if(!b.classList.contains('dragging'))s.scrollIntoView({behavior:'smooth'})});
+    b.addEventListener('dragstart',()=>{b.classList.add('dragging')});
+    b.addEventListener('dragend',()=>{
+      b.classList.remove('dragging');
+      const newOrder=[...nav.querySelectorAll('.navlink')].map(x=>x.dataset.sectionId);
+      sections=newOrder.map(id=>document.getElementById(id));
+      sections.forEach(s2=>mainEl.appendChild(s2));
+      saveOrder();
+      reobserve();
+    });
+    nav.appendChild(b);
+    navLinks.push(b);
+  });
+}
+nav.addEventListener('dragover',e=>{
+  e.preventDefault();
+  const draggingEl=nav.querySelector('.navlink.dragging');
+  if(!draggingEl) return;
+  const after=getDragAfterElement(nav,e.clientY);
+  if(after==null) nav.appendChild(draggingEl);
+  else nav.insertBefore(draggingEl,after);
+});
+applyStoredOrder();
+buildNav();
+reobserve();
+function toggleTheme(){document.body.classList.toggle('dark')}
+function brl(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function makeBars(el,data,max){el.innerHTML='';max=max||Math.max(...data.map(d=>d.value),1);data.forEach(d=>{const w=document.createElement('div');w.className='barwrap';w.innerHTML=`<div class="barvalue">${d.display||d.value}</div><div class="bar ${d.cls||''}" style="height:${Math.max(6,d.value/max*78)}%"></div><div class="barlabel">${d.label}</div>`;el.appendChild(w);});}
+const metrics={
+  bookings:{label:'Bookings pagos',d:'-18,2%',text:'Volume proporcional caiu vs o mesmo ponto do ciclo em 2025, puxado pela queda do Online.',data:[{label:'2025',value:292},{label:'2026',value:239,cls:'bad'}]},
+  pax:{label:'PAX pagos',d:'-12,0%',text:'PAX caiu menos que bookings: as reservas que entraram são maiores.',data:[{label:'2025',value:543},{label:'2026',value:478,cls:'bad'}]},
+  revenue:{label:'Receita paga',d:'-8,8%',text:'Receita caiu menos que bookings graças ao ticket médio mais alto nos canais.',data:[{label:'2025',value:845286,display:'R$ 845k'},{label:'2026',value:770873,display:'R$ 771k',cls:'bad'}]},
+  extras:{label:'Extras',d:'-6,5%',text:'Extras caíram menos que bookings; por reserva, o valor de extras subiu 14,3%.',data:[{label:'2025',value:78590,display:'R$ 78,6k'},{label:'2026',value:73510,display:'R$ 73,5k',cls:'bad'}]}
+};
+const mt=document.getElementById('metricToggle');Object.keys(metrics).forEach((k,i)=>{let b=document.createElement('button');b.textContent=metrics[k].label;b.onclick=()=>showMetric(k);if(i===0)b.className='active';mt.appendChild(b)});
+function showMetric(k){[...mt.children].forEach(x=>x.classList.remove('active'));[...mt.children][Object.keys(metrics).indexOf(k)].classList.add('active');let m=metrics[k];document.getElementById('metricLabel').textContent=m.label;document.getElementById('metricDelta').textContent=m.d;document.getElementById('metricText').textContent=m.text;makeBars(document.getElementById('metricChart'),m.data);}
+showMetric('revenue');
+makeBars(document.getElementById('channelChart'),[{label:'Online 25',value:208},{label:'Online 26',value:102,cls:'bad'},{label:'Interno 25',value:84},{label:'Interno 26',value:128,cls:'alt'},{label:'GYG 26',value:9,cls:'alt'}]);
+makeBars(document.getElementById('pax2025'),[{label:'1 PAX',value:119},{label:'2 PAX',value:166,cls:'alt'},{label:'3 PAX',value:23},{label:'4+ PAX',value:21}]);
+makeBars(document.getElementById('pax2026'),[{label:'1 PAX',value:83},{label:'2 PAX',value:114,cls:'alt'},{label:'3 PAX',value:22},{label:'4+ PAX',value:20,cls:'alt'}]);
+
+const EXT_DATA={"audience":{"2025full":{"total_bookings":329,"total_pax":619,"identified_bookings":298,"identified_pct":90.5775,"avg_days":17.1586,"median_days":3.0158,"buckets":{"4+ dias":{"bookings":163,"pax":317},"2 dias":{"bookings":50,"pax":86},"3 dias":{"bookings":29,"pax":57},"1 dia":{"bookings":83,"pax":152}},"countries":[{"country":"Brasil","bookings":42,"pax":74,"share_pax":11.9548,"avg_days":11.59,"median_days":2.05,"share_4plus":38.0952},{"country":"Estados Unidos","bookings":37,"pax":71,"share_pax":11.4701,"avg_days":20.28,"median_days":5.57,"share_4plus":62.1622},{"country":"Nao identificado","bookings":31,"pax":53,"share_pax":8.5622,"avg_days":13.46,"median_days":1.77,"share_4plus":45.1613},{"country":"Franca","bookings":22,"pax":42,"share_pax":6.7851,"avg_days":19.19,"median_days":2.02,"share_4plus":36.3636},{"country":"Reino Unido","bookings":22,"pax":44,"share_pax":7.1082,"avg_days":10.81,"median_days":2.23,"share_4plus":45.4545},{"country":"Colombia","bookings":17,"pax":29,"share_pax":4.685,"avg_days":7.88,"median_days":2.89,"share_4plus":47.0588},{"country":"Paises Baixos","bookings":14,"pax":25,"share_pax":4.0388,"avg_days":4.17,"median_days":1.26,"share_4plus":28.5714},{"country":"Espanha","bookings":14,"pax":26,"share_pax":4.2003,"avg_days":14.01,"median_days":4.88,"share_4plus":57.1429},{"country":"Mexico","bookings":13,"pax":33,"share_pax":5.3312,"avg_days":9.22,"median_days":7.6,"share_4plus":53.8462},{"country":"Canada","bookings":11,"pax":27,"share_pax":4.3619,"avg_days":25.39,"median_days":3.55,"share_4plus":54.5455},{"country":"Alemanha","bookings":10,"pax":19,"share_pax":3.0695,"avg_days":9.91,"median_days":3.38,"share_4plus":60.0},{"country":"Chile","bookings":10,"pax":16,"share_pax":2.5848,"avg_days":15.94,"median_days":2.87,"share_4plus":50.0},{"country":"Emirados Arabes","bookings":10,"pax":13,"share_pax":2.1002,"avg_days":1.45,"median_days":0.94,"share_4plus":10.0},{"country":"Italia","bookings":8,"pax":15,"share_pax":2.4233,"avg_days":33.61,"median_days":1.28,"share_4plus":37.5},{"country":"Portugal","bookings":7,"pax":13,"share_pax":2.1002,"avg_days":30.17,"median_days":4.94,"share_4plus":100.0},{"country":"Australia","bookings":6,"pax":12,"share_pax":1.9386,"avg_days":55.19,"median_days":27.67,"share_4plus":50.0},{"country":"Polonia","bookings":6,"pax":12,"share_pax":1.9386,"avg_days":34.35,"median_days":2.95,"share_4plus":50.0},{"country":"Equador","bookings":5,"pax":11,"share_pax":1.7771,"avg_days":13.52,"median_days":10.87,"share_4plus":80.0},{"country":"Peru","bookings":5,"pax":6,"share_pax":0.9693,"avg_days":17.22,"median_days":20.15,"share_4plus":80.0},{"country":"Suica","bookings":4,"pax":9,"share_pax":1.454,"avg_days":14.46,"median_days":7.86,"share_4plus":100.0},{"country":"Irlanda","bookings":4,"pax":9,"share_pax":1.454,"avg_days":63.09,"median_days":63.26,"share_4plus":100.0},{"country":"Argentina","bookings":3,"pax":5,"share_pax":0.8078,"avg_days":16.2,"median_days":1.16,"share_4plus":33.3333},{"country":"Austria","bookings":3,"pax":5,"share_pax":0.8078,"avg_days":30.58,"median_days":2.02,"share_4plus":33.3333},{"country":"Costa Rica","bookings":2,"pax":5,"share_pax":0.8078,"avg_days":0.13,"median_days":0.13,"share_4plus":0.0},{"country":"Guatemala","bookings":2,"pax":2,"share_pax":0.3231,"avg_days":3.96,"median_days":3.96,"share_4plus":50.0},{"country":"Romenia","bookings":2,"pax":4,"share_pax":0.6462,"avg_days":53.7,"median_days":53.7,"share_4plus":50.0},{"country":"Hong Kong","bookings":2,"pax":2,"share_pax":0.3231,"avg_days":77.82,"median_days":77.82,"share_4plus":50.0},{"country":"Nova Zelandia","bookings":2,"pax":3,"share_pax":0.4847,"avg_days":42.16,"median_days":42.16,"share_4plus":100.0},{"country":"Belgica","bookings":2,"pax":4,"share_pax":0.6462,"avg_days":1.85,"median_days":1.85,"share_4plus":0.0},{"country":"GP","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":99.53,"median_days":99.53,"share_4plus":100.0},{"country":"Russia","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":23.17,"median_days":23.17,"share_4plus":100.0},{"country":"Tchequia","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":0.2,"median_days":0.2,"share_4plus":0.0},{"country":"Japao","bookings":1,"pax":6,"share_pax":0.9693,"avg_days":38.8,"median_days":38.8,"share_4plus":100.0},{"country":"Israel","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":20.66,"median_days":20.66,"share_4plus":100.0},{"country":"Honduras","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":31.43,"median_days":31.43,"share_4plus":100.0},{"country":"Albania","bookings":1,"pax":3,"share_pax":0.4847,"avg_days":3.29,"median_days":3.29,"share_4plus":100.0},{"country":"Suecia","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":7.65,"median_days":7.65,"share_4plus":100.0},{"country":"Nicaragua","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":1.89,"median_days":1.89,"share_4plus":0.0},{"country":"Argelia","bookings":1,"pax":1,"share_pax":0.1616,"avg_days":1.13,"median_days":1.13,"share_4plus":0.0},{"country":"Costa do Marfim","bookings":1,"pax":3,"share_pax":0.4847,"avg_days":2.24,"median_days":2.24,"share_4plus":0.0},{"country":"Catar","bookings":1,"pax":1,"share_pax":0.1616,"avg_days":2.81,"median_days":2.81,"share_4plus":0.0},{"country":"Porto Rico","bookings":1,"pax":2,"share_pax":0.3231,"avg_days":19.21,"median_days":19.21,"share_4plus":100.0}]},"2025prop":{"total_bookings":292,"total_pax":543,"identified_bookings":263,"identified_pct":90.0685,"avg_days":17.8023,"median_days":2.8913,"buckets":{"4+ dias":{"bookings":141,"pax":271},"1 dia":{"bookings":77,"pax":144},"2 dias":{"bookings":48,"pax":84},"3 dias":{"bookings":22,"pax":37}},"countries":[{"country":"Brasil","bookings":38,"pax":63,"share_pax":11.6022,"avg_days":11.96,"median_days":2.05,"share_4plus":39.4737},{"country":"Estados Unidos","bookings":35,"pax":65,"share_pax":11.9705,"avg_days":21.05,"median_days":5.57,"share_4plus":60.0},{"country":"Nao identificado","bookings":29,"pax":50,"share_pax":9.2081,"avg_days":10.83,"median_days":1.17,"share_4plus":44.8276},{"country":"Franca","bookings":21,"pax":41,"share_pax":7.5506,"avg_days":20.01,"median_days":2.02,"share_4plus":38.0952},{"country":"Reino Unido","bookings":19,"pax":40,"share_pax":7.3665,"avg_days":10.66,"median_days":1.93,"share_4plus":42.1053},{"country":"Colombia","bookings":15,"pax":25,"share_pax":4.6041,"avg_days":7.87,"median_days":2.55,"share_4plus":40.0},{"country":"Mexico","bookings":11,"pax":28,"share_pax":5.1565,"avg_days":10.02,"median_days":7.98,"share_4plus":54.5455},{"country":"Espanha","bookings":11,"pax":20,"share_pax":3.6832,"avg_days":13.68,"median_days":4.0,"share_4plus":54.5455},{"country":"Paises Baixos","bookings":10,"pax":19,"share_pax":3.4991,"avg_days":4.8,"median_days":1.26,"share_4plus":30.0},{"country":"Emirados Arabes","bookings":10,"pax":13,"share_pax":2.3941,"avg_days":1.45,"median_days":0.94,"share_4plus":10.0},{"country":"Canada","bookings":9,"pax":15,"share_pax":2.7624,"avg_days":30.33,"median_days":3.55,"share_4plus":55.5556},{"country":"Chile","bookings":9,"pax":15,"share_pax":2.7624,"avg_days":17.7,"median_days":3.9,"share_4plus":55.5556},{"country":"Italia","bookings":8,"pax":15,"share_pax":2.7624,"avg_days":33.61,"median_days":1.28,"share_4plus":37.5},{"country":"Alemanha","bookings":8,"pax":16,"share_pax":2.9466,"avg_days":11.29,"median_days":2.35,"share_4plus":50.0},{"country":"Portugal","bookings":6,"pax":11,"share_pax":2.0258,"avg_days":34.59,"median_days":6.01,"share_4plus":100.0},{"country":"Australia","bookings":6,"pax":12,"share_pax":2.2099,"avg_days":55.19,"median_days":27.67,"share_4plus":50.0},{"country":"Polonia","bookings":6,"pax":12,"share_pax":2.2099,"avg_days":34.35,"median_days":2.95,"share_4plus":50.0},{"country":"Peru","bookings":5,"pax":6,"share_pax":1.105,"avg_days":17.22,"median_days":20.15,"share_4plus":80.0},{"country":"Irlanda","bookings":4,"pax":9,"share_pax":1.6575,"avg_days":63.09,"median_days":63.26,"share_4plus":100.0},{"country":"Argentina","bookings":3,"pax":5,"share_pax":0.9208,"avg_days":16.2,"median_days":1.16,"share_4plus":33.3333},{"country":"Austria","bookings":3,"pax":5,"share_pax":0.9208,"avg_days":30.58,"median_days":2.02,"share_4plus":33.3333},{"country":"Suica","bookings":3,"pax":6,"share_pax":1.105,"avg_days":16.9,"median_days":8.6,"share_4plus":100.0},{"country":"Romenia","bookings":2,"pax":4,"share_pax":0.7366,"avg_days":53.7,"median_days":53.7,"share_4plus":50.0},{"country":"Hong Kong","bookings":2,"pax":2,"share_pax":0.3683,"avg_days":77.82,"median_days":77.82,"share_4plus":50.0},{"country":"Nova Zelandia","bookings":2,"pax":3,"share_pax":0.5525,"avg_days":42.16,"median_days":42.16,"share_4plus":100.0},{"country":"Belgica","bookings":2,"pax":4,"share_pax":0.7366,"avg_days":1.85,"median_days":1.85,"share_4plus":0.0},{"country":"Equador","bookings":2,"pax":8,"share_pax":1.4733,"avg_days":17.47,"median_days":17.47,"share_4plus":50.0},{"country":"Tchequia","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":0.2,"median_days":0.2,"share_4plus":0.0},{"country":"Japao","bookings":1,"pax":6,"share_pax":1.105,"avg_days":38.8,"median_days":38.8,"share_4plus":100.0},{"country":"Costa Rica","bookings":1,"pax":4,"share_pax":0.7366,"avg_days":0.08,"median_days":0.08,"share_4plus":0.0},{"country":"Israel","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":20.66,"median_days":20.66,"share_4plus":100.0},{"country":"Honduras","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":31.43,"median_days":31.43,"share_4plus":100.0},{"country":"Albania","bookings":1,"pax":3,"share_pax":0.5525,"avg_days":3.29,"median_days":3.29,"share_4plus":100.0},{"country":"Guatemala","bookings":1,"pax":1,"share_pax":0.1842,"avg_days":6.02,"median_days":6.02,"share_4plus":100.0},{"country":"Suecia","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":7.65,"median_days":7.65,"share_4plus":100.0},{"country":"Nicaragua","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":1.89,"median_days":1.89,"share_4plus":0.0},{"country":"Argelia","bookings":1,"pax":1,"share_pax":0.1842,"avg_days":1.13,"median_days":1.13,"share_4plus":0.0},{"country":"Costa do Marfim","bookings":1,"pax":3,"share_pax":0.5525,"avg_days":2.24,"median_days":2.24,"share_4plus":0.0},{"country":"Catar","bookings":1,"pax":1,"share_pax":0.1842,"avg_days":2.81,"median_days":2.81,"share_4plus":0.0},{"country":"Porto Rico","bookings":1,"pax":2,"share_pax":0.3683,"avg_days":19.21,"median_days":19.21,"share_4plus":100.0}]},"2026current":{"total_bookings":239,"total_pax":478,"identified_bookings":181,"identified_pct":75.7322,"avg_days":18.6246,"median_days":2.2529,"buckets":{"4+ dias":{"bookings":111,"pax":234},"2 dias":{"bookings":32,"pax":59},"1 dia":{"bookings":81,"pax":157},"3 dias":{"bookings":14,"pax":27}},"countries":[{"country":"Nao identificado","bookings":58,"pax":111,"share_pax":23.2218,"avg_days":23.67,"median_days":1.67,"share_4plus":43.1034},{"country":"Estados Unidos","bookings":25,"pax":58,"share_pax":12.1339,"avg_days":19.19,"median_days":4.82,"share_4plus":60.0},{"country":"Brasil","bookings":24,"pax":52,"share_pax":10.8787,"avg_days":9.12,"median_days":1.16,"share_4plus":29.1667},{"country":"Paises Baixos","bookings":15,"pax":30,"share_pax":6.2762,"avg_days":11.67,"median_days":2.24,"share_4plus":46.6667},{"country":"Espanha","bookings":12,"pax":30,"share_pax":6.2762,"avg_days":11.57,"median_days":1.81,"share_4plus":41.6667},{"country":"Reino Unido","bookings":11,"pax":17,"share_pax":3.5565,"avg_days":22.26,"median_days":2.73,"share_4plus":45.4545},{"country":"Franca","bookings":10,"pax":17,"share_pax":3.5565,"avg_days":4.04,"median_days":0.89,"share_4plus":30.0},{"country":"Alemanha","bookings":8,"pax":13,"share_pax":2.7197,"avg_days":10.82,"median_days":1.68,"share_4plus":37.5},{"country":"Mexico","bookings":8,"pax":17,"share_pax":3.5565,"avg_days":12.37,"median_days":2.19,"share_4plus":37.5},{"country":"Australia","bookings":6,"pax":13,"share_pax":2.7197,"avg_days":71.35,"median_days":58.56,"share_4plus":100.0},{"country":"Italia","bookings":5,"pax":9,"share_pax":1.8828,"avg_days":1.76,"median_days":1.67,"share_4plus":20.0},{"country":"Emirados Arabes","bookings":5,"pax":7,"share_pax":1.4644,"avg_days":2.8,"median_days":1.06,"share_4plus":20.0},{"country":"Canada","bookings":5,"pax":7,"share_pax":1.4644,"avg_days":18.2,"median_days":4.62,"share_4plus":60.0},{"country":"China","bookings":4,"pax":8,"share_pax":1.6736,"avg_days":3.6,"median_days":0.58,"share_4plus":25.0},{"country":"Colombia","bookings":4,"pax":8,"share_pax":1.6736,"avg_days":12.99,"median_days":8.69,"share_4plus":75.0},{"country":"Peru","bookings":3,"pax":4,"share_pax":0.8368,"avg_days":6.68,"median_days":7.34,"share_4plus":66.6667},{"country":"Portugal","bookings":3,"pax":7,"share_pax":1.4644,"avg_days":71.17,"median_days":104.09,"share_4plus":66.6667},{"country":"Polonia","bookings":2,"pax":4,"share_pax":0.8368,"avg_days":29.02,"median_days":29.02,"share_4plus":100.0},{"country":"Malta","bookings":2,"pax":3,"share_pax":0.6276,"avg_days":55.76,"median_days":55.76,"share_4plus":50.0},{"country":"Singapura","bookings":2,"pax":3,"share_pax":0.6276,"avg_days":132.56,"median_days":132.56,"share_4plus":100.0},{"country":"Suica","bookings":2,"pax":3,"share_pax":0.6276,"avg_days":2.59,"median_days":2.59,"share_4plus":50.0},{"country":"Africa do Sul","bookings":2,"pax":4,"share_pax":0.8368,"avg_days":4.2,"median_days":4.2,"share_4plus":50.0},{"country":"RS","bookings":2,"pax":6,"share_pax":1.2552,"avg_days":1.69,"median_days":1.69,"share_4plus":0.0},{"country":"Chile","bookings":2,"pax":4,"share_pax":0.8368,"avg_days":12.05,"median_days":12.05,"share_4plus":50.0},{"country":"Austria","bookings":2,"pax":4,"share_pax":0.8368,"avg_days":1.82,"median_days":1.82,"share_4plus":50.0},{"country":"Russia","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":10.92,"median_days":10.92,"share_4plus":100.0},{"country":"JM","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":42.54,"median_days":42.54,"share_4plus":100.0},{"country":"Grecia","bookings":1,"pax":8,"share_pax":1.6736,"avg_days":45.06,"median_days":45.06,"share_4plus":100.0},{"country":"Romenia","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":0.95,"median_days":0.95,"share_4plus":0.0},{"country":"Costa Rica","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":10.79,"median_days":10.79,"share_4plus":100.0},{"country":"GP","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":3.02,"median_days":3.02,"share_4plus":100.0},{"country":"AZ","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":7.89,"median_days":7.89,"share_4plus":100.0},{"country":"Quenia","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":6.79,"median_days":6.79,"share_4plus":100.0},{"country":"SI","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":1.12,"median_days":1.12,"share_4plus":0.0},{"country":"KY","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":0.54,"median_days":0.54,"share_4plus":0.0},{"country":"Belgica","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":3.49,"median_days":3.49,"share_4plus":100.0},{"country":"Macedonia do Norte","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":0.14,"median_days":0.14,"share_4plus":0.0},{"country":"Equador","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":15.01,"median_days":15.01,"share_4plus":100.0},{"country":"Ruanda","bookings":1,"pax":1,"share_pax":0.2092,"avg_days":0.07,"median_days":0.07,"share_4plus":0.0},{"country":"Belize","bookings":1,"pax":4,"share_pax":0.8368,"avg_days":0.95,"median_days":0.95,"share_4plus":0.0},{"country":"Catar","bookings":1,"pax":5,"share_pax":1.046,"avg_days":128.14,"median_days":128.14,"share_4plus":100.0},{"country":"Marrocos","bookings":1,"pax":2,"share_pax":0.4184,"avg_days":1.89,"median_days":1.89,"share_4plus":0.0}]}},"payments":{"2025full":{"total":329,"methods":[{"method":"PayPal","bookings":203,"pct":61.7021},{"method":"Misto","bookings":88,"pct":26.7477},{"method":"Cartao","bookings":21,"pct":6.383},{"method":"Transferencia","bookings":8,"pct":2.4316},{"method":"Free","bookings":8,"pct":2.4316},{"method":"Dinheiro","bookings":1,"pct":0.304}]},"2025prop":{"total":292,"methods":[{"method":"PayPal","bookings":179,"pct":61.3014},{"method":"Misto","bookings":77,"pct":26.3699},{"method":"Cartao","bookings":19,"pct":6.5068},{"method":"Transferencia","bookings":8,"pct":2.7397},{"method":"Free","bookings":8,"pct":2.7397},{"method":"Dinheiro","bookings":1,"pct":0.3425}]},"2026current":{"total":239,"methods":[{"method":"Cartao","bookings":89,"pct":37.2385},{"method":"Misto","bookings":75,"pct":31.3808},{"method":"PayPal","bookings":55,"pct":23.0126},{"method":"Outros","bookings":7,"pct":2.9289},{"method":"Free","bookings":7,"pct":2.9289},{"method":"Transferencia","bookings":6,"pct":2.5105}]}}};
+const scopeLabels={'2025full':'2025 completo','2025prop':'2025 mesmo ponto','2026current':'2026 atual'};
+let audienceKey='2026current', leadKey='2026current', leadMetric='bookings', paymentKey='2026current';
+function pct(v){return (Math.round(v*10)/10).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'}
+function daysText(v){return (Math.round(v*10)/10).toLocaleString('pt-BR')+' dias'}
+function setupScope(elId, keys, active, handler){const el=document.getElementById(elId);el.innerHTML='';keys.forEach(k=>{const b=document.createElement('button');b.textContent=scopeLabels[k]||k;if(k===active)b.className='active';b.onclick=()=>{[...el.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');handler(k)};el.appendChild(b)})}
+function renderAudience(k){audienceKey=k;const a=EXT_DATA.audience[k];document.getElementById('audBookings').textContent=a.total_bookings.toLocaleString('pt-BR');document.getElementById('audPax').textContent=a.total_pax.toLocaleString('pt-BR');document.getElementById('audIdent').textContent=pct(a.identified_pct);document.getElementById('audMedian').textContent=daysText(a.median_days);const top=a.countries.filter(x=>x.country!=='Nao identificado').slice(0,8);const max=Math.max(...top.map(x=>x.pax),1);document.getElementById('countryBars').innerHTML=top.map(x=>`<div class="hrow"><div class="hlabel" title="${x.country}">${x.country}</div><div class="htrack"><div class="hfill" style="width:${x.pax/max*100}%"></div></div><div class="hval">${x.pax} PAX</div></div>`).join('');document.getElementById('countryTable').innerHTML=a.countries.slice(0,18).map(x=>`<tr><td class="country">${x.country}</td><td class="num">${x.bookings}</td><td class="num">${x.pax}</td><td class="num">${pct(x.share_pax)}</td><td class="num">${daysText(x.avg_days)}</td><td class="num">${pct(x.share_4plus)}</td></tr>`).join('')}
+function renderLead(k){leadKey=k;const a=EXT_DATA.audience[k];const arr=['1 dia','2 dias','3 dias','4+ dias'].map((label,i)=>({label,value:a.buckets[label][leadMetric],cls:i===3?'alt':''}));makeBars(document.getElementById('leadChart'),arr);document.getElementById('leadAvg').textContent=daysText(a.avg_days);document.getElementById('leadMedian').textContent=daysText(a.median_days);const lm=a.buckets['1 dia'].bookings/a.total_bookings*100;const adv=a.buckets['4+ dias'].bookings/a.total_bookings*100;document.getElementById('leadLastMinute').textContent=pct(lm);document.getElementById('leadAdvance').textContent=pct(adv);let text='';if(k==='2026current'){const old=EXT_DATA.audience['2025prop'];const oldLm=old.buckets['1 dia'].bookings/old.total_bookings*100;const oldAdv=old.buckets['4+ dias'].bookings/old.total_bookings*100;text=`No mesmo ponto do ciclo, compras em até 1 dia passaram de ${pct(oldLm)} em 2025 para ${pct(lm)} em 2026. Já as compras com 4+ dias foram de ${pct(oldAdv)} para ${pct(adv)}.`}else{text=`Neste recorte, ${pct(lm)} dos bookings pagos foram feitos em até 1 dia e ${pct(adv)} com 4+ dias de antecedência.`}document.getElementById('leadCallout').textContent=text}
+function getMethod(p,method){return p.methods.find(x=>x.method===method)||{bookings:0,pct:0}}
+function renderPayments(k){paymentKey=k;const p=EXT_DATA.payments[k];document.getElementById('payTotal').textContent=p.total.toLocaleString('pt-BR');document.getElementById('paymentShare').innerHTML=p.methods.map(x=>`<div class="shareseg" title="${x.method}: ${pct(x.pct)}" style="width:${x.pct}%"></div>`).join('');document.getElementById('paymentLegend').innerHTML=p.methods.map(x=>`<div class="legend-row"><span class="dot"></span><span>${x.method}</span><strong>${pct(x.pct)} · ${x.bookings}</strong></div>`).join('');const pp=getMethod(p,'PayPal'),cc=getMethod(p,'Cartao'),tr=getMethod(p,'Transferencia');document.getElementById('paypalPct').textContent=pct(pp.pct);document.getElementById('cardPct').textContent=pct(cc.pct);document.getElementById('transferPct').textContent=pct(tr.pct);let insight='';if(k==='2026current'){const old=EXT_DATA.payments['2025prop'];insight=`No mesmo ponto de 2025, PayPal tinha ${pct(getMethod(old,'PayPal').pct)} e cartão ${pct(getMethod(old,'Cartao').pct)}. Em 2026, cartão já supera o PayPal como principal método.`}else{insight='Distribuição por método principal entre bookings confirmados pagos no recorte selecionado.'}document.getElementById('paymentInsight').textContent=insight}
+setupScope('audienceScope',['2025full','2025prop','2026current'],audienceKey,k=>renderAudience(k));
+setupScope('leadScope',['2025full','2025prop','2026current'],leadKey,k=>renderLead(k));
+setupScope('paymentScope',['2025full','2025prop','2026current'],paymentKey,k=>renderPayments(k));
+document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
+renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
+document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
+
+(function(){
+  const STORAGE_PREFIX='acoesEdit_real_v1_';
+  const editables=[...document.querySelectorAll('#acoes .edit-text')];
+  editables.forEach((el,i)=>{
+    const key=STORAGE_PREFIX+i;
+    el.dataset.ek=key;
+    const saved=localStorage.getItem(key);
+    if(saved!==null) el.innerHTML=saved;
+  });
+  const editBtn=document.getElementById('acoesEditBtn');
+  const saveBtn=document.getElementById('acoesSaveBtn');
+  const resetBtn=document.getElementById('acoesResetBtn');
+  const status=document.getElementById('acoesEditStatus');
+  let editing=false;
+  function setEditing(on){
+    editing=on;
+    editables.forEach(el=>el.contentEditable=on?'true':'false');
+    editBtn.textContent=on?'Parar edição':'Editar textos';
+    saveBtn.style.display=on?'inline-flex':'none';
+    resetBtn.style.display=on?'inline-flex':'none';
+    if(!on) status.textContent='';
+  }
+  editBtn.onclick=()=>setEditing(!editing);
+  saveBtn.onclick=()=>{
+    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
+    status.textContent='Alterações salvas neste navegador.';
+    setTimeout(()=>{status.textContent=''},3000);
+  };
+  resetBtn.onclick=()=>{
+    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
+    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
+    location.reload();
+  };
+})();
+</script>
+</body>
+</html>
