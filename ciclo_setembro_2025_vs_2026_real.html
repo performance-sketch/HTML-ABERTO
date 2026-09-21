@@ -54,7 +54,9 @@
     .acoes-edit-bar .btn{padding:10px 16px}
     .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
     .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
-    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
+    .slide[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:8px;cursor:text}
+    .slide[contenteditable="true"]:hover{outline-color:var(--green)}
+    #pageEditStatus{font-size:12px;color:var(--green);font-weight:800;display:block;margin-top:2px}
   </style>
 </head>
 <body>
@@ -67,6 +69,10 @@
 <button class="btn" onclick="toggleTheme()">Alternar tema</button>
 <button class="btn" onclick="window.print()">Exportar / imprimir</button>
 <button class="btn" onclick="resetNavOrder()">Restaurar ordem do menu</button>
+<button class="btn primary" id="pageEditBtn" onclick="toggleEdit()" style="background:var(--blue);color:#fff;border-color:var(--blue)">Editar página</button>
+<button class="btn" id="pageSaveBtn" onclick="saveEdits()" style="display:none">Salvar alterações</button>
+<button class="btn" id="pageResetBtn" onclick="resetEdits()" style="display:none">Restaurar textos originais</button>
+<span id="pageEditStatus"></span>
 </div>
 </aside>
 <main>
@@ -80,6 +86,7 @@
 <span class="pill">Booking pago = confirmado + totalPaid &gt; 0</span>
 </div>
 <div class="footerline"><span>Base analisada: API Rezdy (bookings)</span><span>Atualizado em 21/09/2026</span></div>
+<p class="note" style="margin-top:14px">Clique em <strong>"Editar página"</strong> na barra lateral para editar qualquer texto desta apresentação (título, números, tabelas, textos). As alterações ficam salvas só neste navegador.</p>
 </section>
 <section class="slide" data-title="Resumo" id="resumo">
 <div class="eyebrow">Resumo executivo</div>
@@ -252,31 +259,24 @@
 </section>
 <section class="slide" data-title="Ações" id="acoes">
 <div class="eyebrow">Próximas ações</div>
-<h2 class="section-title edit-text">Recuperar o Online, escalar o Interno e testar o GetYourGuide.</h2>
-<p class="subtitle edit-text">Com o Online caindo 51,0% em bookings e o Interno crescendo 52,4%, a prioridade é entender a causa da queda do Online e decidir quanto investir em cada canal — incluindo o GetYourGuide, que estreou com o maior ticket médio.</p>
-<div class="acoes-edit-bar">
-<button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
-<button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
-<button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
-<span class="acoes-edit-status" id="acoesEditStatus"></span>
-</div>
-<p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
+<h2 class="section-title">Recuperar o Online, escalar o Interno e testar o GetYourGuide.</h2>
+<p class="subtitle">Com o Online caindo 51,0% em bookings e o Interno crescendo 52,4%, a prioridade é entender a causa da queda do Online e decidir quanto investir em cada canal — incluindo o GetYourGuide, que estreou com o maior ticket médio.</p>
 <div class="grid cols-2" style="margin-top:24px">
 <div class="card">
-<h3 class="edit-text">1. Investigar a queda do Online (-51%)</h3>
-<p class="lead edit-text" style="font-size:18px">Checar preço, disponibilidade de horários, concorrência e fricção no checkout do canal Online. A queda de 106 bookings é o maior fator negativo do ciclo.</p>
+<h3>1. Investigar a queda do Online (-51%)</h3>
+<p class="lead" style="font-size:18px">Checar preço, disponibilidade de horários, concorrência e fricção no checkout do canal Online. A queda de 106 bookings é o maior fator negativo do ciclo.</p>
 </div>
 <div class="card">
-<h3 class="edit-text">2. Escalar o Interno</h3>
-<p class="lead edit-text" style="font-size:18px">O Interno cresceu 52,4% em bookings, 68,2% em PAX e 15,3% em ticket médio. Priorizar atendimento assistido e capacidade da equipe para sustentar esse ritmo.</p>
+<h3>2. Escalar o Interno</h3>
+<p class="lead" style="font-size:18px">O Interno cresceu 52,4% em bookings, 68,2% em PAX e 15,3% em ticket médio. Priorizar atendimento assistido e capacidade da equipe para sustentar esse ritmo.</p>
 </div>
 <div class="card">
-<h3 class="edit-text">3. Aumentar a visibilidade no GetYourGuide</h3>
-<p class="lead edit-text" style="font-size:18px">GYG entregou o maior ticket médio (R$ 3.881) já nas primeiras 9 reservas. Testar mais inventário e melhor posicionamento na plataforma para ver se o volume escala.</p>
+<h3>3. Aumentar a visibilidade no GetYourGuide</h3>
+<p class="lead" style="font-size:18px">GYG entregou o maior ticket médio (R$ 3.881) já nas primeiras 9 reservas. Testar mais inventário e melhor posicionamento na plataforma para ver se o volume escala.</p>
 </div>
 <div class="card">
-<h3 class="edit-text">4. Manter o crescimento de extras por booking</h3>
-<p class="lead edit-text" style="font-size:18px">Extras por booking subiram 14,3% mesmo com queda no total. Continuar oferecendo upsell (Shoe-Selfie, GoPro, vídeo 360) em todos os canais.</p>
+<h3>4. Manter o crescimento de extras por booking</h3>
+<p class="lead" style="font-size:18px">Extras por booking subiram 14,3% mesmo com queda no total. Continuar oferecendo upsell (Shoe-Selfie, GoPro, vídeo 360) em todos os canais.</p>
 </div>
 </div>
 <div class="grid cols-2" style="margin-top:20px">
@@ -285,9 +285,9 @@
 <table class="compact">
 <thead><tr><th>Canal</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
 <tbody>
-<tr><td class="edit-text">Online</td><td class="edit-text">Causa da queda: preço, disponibilidade, checkout</td><td class="num edit-text">Corrigir gargalo identificado</td></tr>
-<tr><td class="edit-text">Interno</td><td class="edit-text">Capacidade de atendimento vs. demanda</td><td class="num edit-text">Escalar equipe se sustentar o ritmo</td></tr>
-<tr><td class="edit-text">GetYourGuide</td><td class="edit-text">Volume e ticket médio nos próximos ciclos</td><td class="num edit-text">Aumentar inventário se confirmar tendência</td></tr>
+<tr><td>Online</td><td>Causa da queda: preço, disponibilidade, checkout</td><td class="num">Corrigir gargalo identificado</td></tr>
+<tr><td>Interno</td><td>Capacidade de atendimento vs. demanda</td><td class="num">Escalar equipe se sustentar o ritmo</td></tr>
+<tr><td>GetYourGuide</td><td>Volume e ticket médio nos próximos ciclos</td><td class="num">Aumentar inventário se confirmar tendência</td></tr>
 </tbody>
 </table>
 </div>
@@ -296,14 +296,14 @@
 <table class="compact">
 <thead><tr><th>Canal</th><th>Ticket médio 2026</th><th class="num">Var. vs 2025</th></tr></thead>
 <tbody>
-<tr><td class="edit-text">Online</td><td class="edit-text">R$ 3.173</td><td class="num edit-text">+8,1%</td></tr>
-<tr><td class="edit-text">Interno</td><td class="edit-text">R$ 3.221</td><td class="num edit-text">+15,3%</td></tr>
-<tr><td class="edit-text">GetYourGuide</td><td class="edit-text">R$ 3.881</td><td class="num edit-text">canal novo</td></tr>
+<tr><td>Online</td><td>R$ 3.173</td><td class="num">+8,1%</td></tr>
+<tr><td>Interno</td><td>R$ 3.221</td><td class="num">+15,3%</td></tr>
+<tr><td>GetYourGuide</td><td>R$ 3.881</td><td class="num">canal novo</td></tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="callout edit-text" style="margin-top:24px">Resumo prático: o ciclo de setembro/26 tem menos volume que 2025, mas ticket médio mais alto em todos os canais. A prioridade é entender e reverter a queda do Online, sustentar o crescimento do Interno e decidir se vale investir mais no GetYourGuide.</div>
+<div class="callout" style="margin-top:24px">Resumo prático: o ciclo de setembro/26 tem menos volume que 2025, mas ticket médio mais alto em todos os canais. A prioridade é entender e reverter a queda do Online, sustentar o crescimento do Interno e decidir se vale investir mais no GetYourGuide.</div>
 </section>
 </main>
 </div>
@@ -409,42 +409,36 @@ setupScope('leadScope',['2025full','2025prop','2026current'],leadKey,k=>renderLe
 setupScope('paymentScope',['2025full','2025prop','2026current'],paymentKey,k=>renderPayments(k));
 document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
 renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
-document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
+document.addEventListener('keydown',e=>{if(editingPage)return;let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
 
-(function(){
-  const STORAGE_PREFIX='acoesEdit_real_v1_';
-  const editables=[...document.querySelectorAll('#acoes .edit-text')];
-  editables.forEach((el,i)=>{
-    const key=STORAGE_PREFIX+i;
-    el.dataset.ek=key;
-    const saved=localStorage.getItem(key);
-    if(saved!==null) el.innerHTML=saved;
+const PAGE_EDIT_PREFIX='pageEdit_v1_';
+let editingPage=false;
+function toggleEdit(){
+  editingPage=!editingPage;
+  sections.forEach(s=>s.contentEditable=editingPage?'true':'false');
+  document.getElementById('pageEditBtn').textContent=editingPage?'Parar edição':'Editar página';
+  document.getElementById('pageSaveBtn').style.display=editingPage?'inline-flex':'none';
+  document.getElementById('pageResetBtn').style.display=editingPage?'inline-flex':'none';
+  if(!editingPage) document.getElementById('pageEditStatus').textContent='';
+}
+function saveEdits(){
+  sections.forEach(s=>localStorage.setItem(PAGE_EDIT_PREFIX+s.id,s.innerHTML));
+  const st=document.getElementById('pageEditStatus');
+  st.textContent='Alterações salvas neste navegador.';
+  setTimeout(()=>{st.textContent=''},3000);
+}
+function resetEdits(){
+  if(!confirm('Restaurar o texto original de toda a apresentação? As alterações salvas neste navegador serão apagadas.')) return;
+  sections.forEach(s=>localStorage.removeItem(PAGE_EDIT_PREFIX+s.id));
+  location.reload();
+}
+function loadSavedEdits(){
+  sections.forEach(s=>{
+    const saved=localStorage.getItem(PAGE_EDIT_PREFIX+s.id);
+    if(saved!==null) s.innerHTML=saved;
   });
-  const editBtn=document.getElementById('acoesEditBtn');
-  const saveBtn=document.getElementById('acoesSaveBtn');
-  const resetBtn=document.getElementById('acoesResetBtn');
-  const status=document.getElementById('acoesEditStatus');
-  let editing=false;
-  function setEditing(on){
-    editing=on;
-    editables.forEach(el=>el.contentEditable=on?'true':'false');
-    editBtn.textContent=on?'Parar edição':'Editar textos';
-    saveBtn.style.display=on?'inline-flex':'none';
-    resetBtn.style.display=on?'inline-flex':'none';
-    if(!on) status.textContent='';
-  }
-  editBtn.onclick=()=>setEditing(!editing);
-  saveBtn.onclick=()=>{
-    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
-    status.textContent='Alterações salvas neste navegador.';
-    setTimeout(()=>{status.textContent=''},3000);
-  };
-  resetBtn.onclick=()=>{
-    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
-    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
-    location.reload();
-  };
-})();
+}
+loadSavedEdits();
 </script>
 </body>
 </html>
