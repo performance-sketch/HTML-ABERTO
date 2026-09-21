@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vertical Rio | Template de Apresentação</title>
+<style>
+    :root{
+      --bg:#f6f8fb; --surface:#ffffff; --ink:#101828; --muted:#667085; --line:#e5e7eb;
+      --blue:#2563eb; --blue2:#dbeafe; --green:#16a34a; --red:#dc2626; --amber:#d97706;
+      --dark:#0f172a; --soft:#f1f5f9; --shadow:0 18px 45px rgba(15,23,42,.08);
+      --radius:26px; --radius-sm:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(135deg,#f8fafc 0%,#eef4ff 100%);color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;}
+    body.dark{--bg:#0b1220;--surface:#101827;--ink:#f8fafc;--muted:#a7b0c0;--line:#223047;--soft:#172033;--blue2:#162a50;background:linear-gradient(135deg,#070b12 0%,#101827 100%)}
+    .app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+    aside{position:sticky;top:0;height:100vh;padding:28px 20px;border-right:1px solid var(--line);background:rgba(255,255,255,.72);backdrop-filter: blur(14px);z-index:10;display:flex;flex-direction:column}
+    body.dark aside{background:rgba(16,24,39,.72)}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}
+    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),#0ea5e9);display:grid;place-items:center;color:white;font-weight:900;letter-spacing:-1px;box-shadow:var(--shadow)}
+    .brand h1{font-size:15px;margin:0;line-height:1.15}.brand p{font-size:12px;margin:4px 0 0;color:var(--muted)}
+    nav{display:grid;gap:8px;overflow:auto;min-height:0;padding-right:4px;scrollbar-width:thin}.navlink{border:0;text-align:left;width:100%;padding:12px 14px;border-radius:14px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer;transition:.2s}
+    .navlink:hover,.navlink.active{background:var(--blue2);color:var(--blue)}
+    .controls{display:grid;gap:10px;margin-top:16px;flex:0 0 auto}.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+    main{padding:34px;max-width:1240px;width:100%;margin:0 auto}.slide{min-height:calc(100vh - 68px);padding:34px;margin-bottom:26px;background:rgba(255,255,255,.76);border:1px solid rgba(226,232,240,.9);border-radius:34px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;scroll-margin-top:24px}
+    body.dark .slide{background:rgba(16,24,39,.76);border-color:#223047}
+    .eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:900;margin-bottom:12px}.title{font-size:clamp(36px,5vw,68px);line-height:.96;letter-spacing:-.055em;margin:0 0 18px}.subtitle{font-size:clamp(18px,2vw,24px);color:var(--muted);max-width:930px;line-height:1.45;margin:0}.section-title{font-size:36px;letter-spacing:-.035em;margin:0 0 12px}.lead{font-size:20px;color:var(--muted);line-height:1.55;max-width:980px;margin:0 0 24px}.grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.kpi-label{color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.kpi{font-size:34px;font-weight:950;letter-spacing:-.04em;margin:8px 0}.delta{font-size:14px;font-weight:900}.pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--blue)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--soft);font-size:13px;font-weight:800;color:var(--muted);margin:4px 4px 4px 0}.pill.blue{background:var(--blue2);color:var(--blue)}
+    table{width:100%;border-collapse:separate;border-spacing:0 8px}th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;padding:0 12px}td{background:var(--surface);padding:14px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:750}td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px}td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.num{text-align:right;white-space:nowrap}.callout{border-left:6px solid var(--blue);background:linear-gradient(90deg,var(--blue2),transparent);border-radius:18px;padding:18px 20px;font-size:20px;font-weight:850;line-height:1.35}.note{font-size:14px;color:var(--muted);line-height:1.45}
+    .chart{height:330px;display:flex;align-items:end;gap:22px;padding:22px;border-radius:22px;background:linear-gradient(180deg,var(--soft),transparent);border:1px solid var(--line)}.barwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px}.bar{width:100%;max-width:80px;border-radius:14px 14px 5px 5px;background:linear-gradient(180deg,#60a5fa,var(--blue));min-height:8px;position:relative}.bar.alt{background:linear-gradient(180deg,#34d399,#16a34a)}.bar.bad{background:linear-gradient(180deg,#f87171,#dc2626)}.barvalue{font-weight:950;font-size:15px}.barlabel{text-align:center;color:var(--muted);font-size:13px;font-weight:800;min-height:34px}.toggle{display:inline-flex;gap:4px;background:var(--soft);padding:5px;border-radius:999px;border:1px solid var(--line);margin:6px 0 20px}.toggle button{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}.toggle button.active{background:var(--surface);color:var(--blue);box-shadow:0 6px 18px rgba(15,23,42,.08)}
+    .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center}.flowbox{text-align:center;padding:24px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}.flowbox strong{display:block;font-size:38px;letter-spacing:-.04em}.arrow{font-size:34px;color:var(--blue);font-weight:900}.big-number{font-size:82px;letter-spacing:-.07em;font-weight:950;line-height:.9}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}.range{width:100%;accent-color:var(--blue)}.scenario{font-size:46px;font-weight:950;letter-spacing:-.05em}.footerline{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:700}.print-note{display:none}
+
+    .data-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 22px}.data-toolbar button{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer}.data-toolbar button.active{background:var(--blue2);color:var(--blue);border-color:transparent}
+    .hbars{display:grid;gap:13px}.hrow{display:grid;grid-template-columns:150px 1fr 72px;gap:12px;align-items:center}.hlabel{font-size:13px;font-weight:850;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.htrack{height:13px;background:var(--soft);border-radius:999px;overflow:hidden}.hfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#60a5fa,var(--blue))}.hval{text-align:right;font-size:13px;font-weight:950}
+    .table-wrap{overflow:auto;max-height:390px;padding-right:4px}.compact td{padding:10px 11px;font-size:13px}.compact th{font-size:11px;position:sticky;top:0;background:var(--surface);z-index:1;padding:9px 11px}.compact .country{font-weight:900}.softline{height:1px;background:var(--line);margin:20px 0}
+    .sharebar{display:flex;height:26px;border-radius:999px;overflow:hidden;background:var(--soft);border:1px solid var(--line);margin:12px 0 20px}.shareseg{height:100%;min-width:2px}.shareseg:nth-child(1){background:#2563eb}.shareseg:nth-child(2){background:#0ea5e9}.shareseg:nth-child(3){background:#16a34a}.shareseg:nth-child(4){background:#d97706}.shareseg:nth-child(5){background:#7c3aed}.shareseg:nth-child(6){background:#64748b}.shareseg:nth-child(7){background:#dc2626}
+    .legend{display:grid;gap:9px}.legend-row{display:grid;grid-template-columns:12px 1fr auto;gap:9px;align-items:center;font-size:14px}.dot{width:10px;height:10px;border-radius:50%}.legend-row:nth-child(1) .dot{background:#2563eb}.legend-row:nth-child(2) .dot{background:#0ea5e9}.legend-row:nth-child(3) .dot{background:#16a34a}.legend-row:nth-child(4) .dot{background:#d97706}.legend-row:nth-child(5) .dot{background:#7c3aed}.legend-row:nth-child(6) .dot{background:#64748b}.legend-row:nth-child(7) .dot{background:#dc2626}
+    .insight-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.insight{padding:16px 18px;border-radius:18px;background:var(--soft);border:1px solid var(--line)}.insight strong{display:block;font-size:24px;letter-spacing:-.03em;margin-bottom:5px}.insight span{font-size:13px;color:var(--muted);font-weight:750;line-height:1.35}
+    @media(max-width:950px){.hrow{grid-template-columns:110px 1fr 62px}.insight-strip{grid-template-columns:1fr}.table-wrap{max-height:none}}
+    @media(max-width:950px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.controls{position:static;margin-top:18px}main{padding:18px}.slide{padding:24px;min-height:auto}.grid.cols-2,.grid.cols-3,.grid.cols-4,.two-col,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.chart{height:260px;gap:10px}.title{font-size:42px}}
+    @media print{body{background:white}.app{display:block}aside{display:none}main{padding:0;max-width:none}.slide{page-break-after:always;box-shadow:none;border:0;border-radius:0;min-height:100vh}.print-note{display:block}}
+
+    .navlink{display:flex;align-items:center;gap:9px}
+    .drag-handle{flex:0 0 auto;color:var(--muted);font-size:13px;line-height:1;cursor:grab;letter-spacing:-1px}
+    .navlink-label{flex:1;text-align:left}
+    .navlink.dragging{opacity:.35;background:var(--blue2)}
+    .nav-hint{font-size:11px;color:var(--muted);margin:2px 0 14px;padding:0 2px}
+
+    .acoes-edit-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 4px}
+    .acoes-edit-bar .btn{padding:10px 16px}
+    .acoes-edit-bar .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .acoes-edit-status{font-size:13px;color:var(--green);font-weight:800}
+    #acoes .edit-text[contenteditable="true"]{outline:2px dashed var(--blue);outline-offset:5px;border-radius:8px;cursor:text;background:var(--blue2)}
+  </style>
+</head>
+<body>
+<div class="app">
+<aside>
+<div class="brand"><div class="logo">VR</div><div><h1>Nome do Ciclo</h1><p>Período A vs Período B</p></div></div>
+<nav id="nav"></nav>
+<p class="nav-hint">Arraste ⠿ para reordenar os cards do menu</p>
+<div class="controls">
+<button class="btn" onclick="toggleTheme()">Alternar tema</button>
+<button class="btn" onclick="window.print()">Exportar / imprimir</button>
+<button class="btn" onclick="resetNavOrder()">Restaurar ordem do menu</button>
+</div>
+</aside>
+<main>
+<section class="slide" data-title="Capa" id="capa">
+<div class="eyebrow">Vertical Rio | Growth &amp; Performance</div>
+<h1 class="title">Título da Apresentação</h1>
+<p class="subtitle">Descrição curta do que esta apresentação cobre: período analisado, canais, objetivo e principais frentes.</p>
+<div style="margin-top:26px">
+<span class="pill blue">Ciclo: dd/mm a dd/mm</span>
+<span class="pill">Observação 1</span>
+<span class="pill">Observação 2</span>
+</div>
+<div class="footerline"><span>Base analisada: fonte de dados</span><span>Atualizado em dd/mm/aaaa</span></div>
+</section>
+<section class="slide" data-title="Resumo" id="resumo">
+<div class="eyebrow">Resumo executivo</div>
+<h2 class="section-title">Título curto do resumo executivo.</h2>
+<p class="lead">Parágrafo de contexto explicando o principal aprendizado do período, o que puxou o resultado para cima ou para baixo e o que ainda precisa de atenção.</p>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Indicador 1</div><div class="kpi">0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">Indicador 2</div><div class="kpi">0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">Indicador 3</div><div class="kpi">R$ 0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">Indicador 4</div><div class="kpi">R$ 0</div><div class="delta neu">0% vs período anterior</div></div>
+</div>
+<div class="callout" style="margin-top:22px">Ponto de atenção principal do período, com o número que mais chama atenção e o que ele significa para o negócio.</div>
+</section>
+<section class="slide" data-title="Método" id="metodo">
+<div class="eyebrow">Leitura correta dos dados</div>
+<h2 class="section-title">Como os dados foram analisados.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">Período A</div><div class="kpi" style="font-size:28px">dd/mm/aa<br/>dd/mm/aa</div><p class="note">Descrição do período de referência A.</p></div>
+<div class="card"><div class="kpi-label">Período B</div><div class="kpi" style="font-size:28px">dd/mm/aa<br/>dd/mm/aa</div><p class="note">Descrição do período de referência B.</p></div>
+<div class="card"><div class="kpi-label">Regra aplicada</div><div class="kpi" style="font-size:28px">Regra X</div><p class="note">Explicação da regra usada nos cálculos.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">Explicação de por que a comparação é feita dessa forma (ex.: mesma janela de calendário).</div>
+</section>
+<section class="slide" data-title="Período Base" id="periodobase">
+<div class="eyebrow">Período completo de referência</div>
+<h2 class="section-title">Panorama do período base.</h2>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Métrica 1</div><div class="kpi">0</div></div>
+<div class="card"><div class="kpi-label">Métrica 2</div><div class="kpi">0</div></div>
+<div class="card"><div class="kpi-label">Métrica 3</div><div class="kpi">0</div></div>
+<div class="card"><div class="kpi-label">Métrica 4</div><div class="kpi">0</div></div>
+</div>
+<div class="grid cols-3" style="margin-top:18px">
+<div class="card"><div class="kpi-label">Métrica 5</div><div class="kpi">R$ 0</div></div>
+<div class="card"><div class="kpi-label">Métrica 6</div><div class="kpi">R$ 0</div></div>
+<div class="card"><div class="kpi-label">Métrica 7</div><div class="kpi">0</div></div>
+</div>
+<p class="note">Observação sobre exceções ou casos separados da análise principal.</p>
+</section>
+<section class="slide" data-title="Proporcional" id="proporcional">
+<div class="eyebrow">Comparação proporcional</div>
+<h2 class="section-title">Comparação entre períodos no mesmo ponto do calendário.</h2>
+<div class="toggle" id="metricToggle"></div>
+<div class="two-col">
+<div class="chart" id="metricChart"></div>
+<div>
+<div class="card"><div class="kpi-label" id="metricLabel">Indicador</div><div class="big-number" id="metricDelta">0%</div><p class="lead" id="metricText" style="font-size:18px;margin:10px 0 0"></p></div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Canais" id="canais">
+<div class="eyebrow">Canal A vs Canal B</div>
+<h2 class="section-title">Como cada canal performou no período.</h2>
+<div class="grid cols-2">
+<div class="card">
+<h3>Volume proporcional por canal</h3>
+<div class="chart" id="channelChart"></div>
+</div>
+<div>
+<table>
+<thead><tr><th>Canal</th><th class="num">Período A</th><th class="num">Período B</th><th class="num">Var.</th></tr></thead>
+<tbody>
+<tr><td>Canal A</td><td class="num">0</td><td class="num">0</td><td class="num neu">0%</td></tr>
+<tr><td>Canal B</td><td class="num">0</td><td class="num">0</td><td class="num neu">0%</td></tr>
+</tbody>
+</table>
+<div class="callout">Resumo do que mudou entre os canais e o que isso representa.</div>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Ticket" id="ticket">
+<div class="eyebrow">Ticket médio por canal</div>
+<h2 class="section-title">Como o ticket médio evoluiu por canal.</h2>
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Ticket Canal A</div><div class="big-number" style="font-size:58px">R$ 0</div><div class="delta neu">0% vs período anterior</div><p class="note">Observação sobre o Canal A.</p></div>
+<div class="card"><div class="kpi-label">Ticket Canal B</div><div class="big-number" style="font-size:58px">R$ 0</div><div class="delta neu">0% vs período anterior</div><p class="note">Observação sobre o Canal B.</p></div>
+</div>
+<div class="callout" style="margin-top:22px">Leitura sobre as alavancas de cada canal.</div>
+</section>
+<section class="slide" data-title="PAX/Booking" id="pax">
+<div class="eyebrow">Composição por tamanho da reserva</div>
+<h2 class="section-title">Como o tamanho médio das reservas mudou.</h2>
+<div class="grid cols-2">
+<div class="card"><h3>Período A completo</h3><div class="chart" id="pax2025"></div></div>
+<div class="card"><h3>Período B até agora</h3><div class="chart" id="pax2026"></div></div>
+</div>
+<p class="lead" style="font-size:18px;margin-top:20px">Variação do indicador PAX por booking entre os períodos: 0%.</p>
+</section>
+<section class="slide" data-title="Público" id="publico">
+<div class="eyebrow">Público por país</div>
+<h2 class="section-title">Quem está reservando neste período?</h2>
+<p class="lead">País de origem informado pelo cliente na reserva. Use os botões para alternar entre os recortes disponíveis.</p>
+<div class="data-toolbar" id="audienceScope"></div>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi" id="audBookings">-</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi" id="audPax">-</div></div>
+<div class="card"><div class="kpi-label">País identificado</div><div class="kpi" id="audIdent">-</div></div>
+<div class="card"><div class="kpi-label">Mediana antecedência</div><div class="kpi" id="audMedian">-</div></div>
+</div>
+<div class="grid cols-2" style="margin-top:18px">
+<div class="card"><h3>Top países por PAX</h3><div class="hbars" id="countryBars"></div></div>
+<div class="card"><h3>Detalhamento por país</h3><div class="table-wrap"><table class="compact"><thead><tr><th>País</th><th class="num">Bookings</th><th class="num">PAX</th><th class="num">% PAX</th><th class="num">Lead médio</th><th class="num">4+ dias</th></tr></thead><tbody id="countryTable"></tbody></table></div></div>
+</div>
+<p class="note" style="margin-top:16px">Observação sobre a origem do dado de país e possíveis limitações.</p>
+</section>
+<section class="slide" data-title="PAX + Antecedência" id="antecedencia">
+<div class="eyebrow">PAX e janela de compra</div>
+<h2 class="section-title">Quando o cliente reserva com antecedência?</h2>
+<p class="lead">Explicação da métrica de antecedência usada (booking date vs. fulfilment date).</p>
+<div class="data-toolbar" id="leadScope"></div>
+<div class="toggle" id="leadMetric"><button class="active" data-metric="bookings">Bookings</button><button data-metric="pax">PAX</button></div>
+<div class="grid cols-2">
+<div class="card"><div class="chart" id="leadChart"></div></div>
+<div class="card">
+<div class="kpi-label">Antecedência média</div><div class="big-number" id="leadAvg" style="font-size:62px">-</div>
+<p class="lead" style="font-size:18px">Nota sobre a diferença entre média e mediana.</p>
+<div class="insight-strip">
+<div class="insight"><strong id="leadMedian">-</strong><span>mediana de antecedência</span></div>
+<div class="insight"><strong id="leadLastMinute">-</strong><span>bookings em até 1 dia</span></div>
+<div class="insight"><strong id="leadAdvance">-</strong><span>bookings com 4+ dias</span></div>
+</div>
+</div>
+</div>
+<div class="callout" id="leadCallout" style="margin-top:22px">-</div>
+</section>
+<section class="slide" data-title="Pagamentos" id="pagamentos">
+<div class="eyebrow">Formas de pagamento</div>
+<h2 class="section-title">Como o mix de pagamento se comporta.</h2>
+<p class="lead">Percentual sobre bookings confirmados pagos. Explique aqui as regras de classificação usadas.</p>
+<div class="data-toolbar" id="paymentScope"></div>
+<div class="two-col">
+<div class="card">
+<div class="kpi-label">Base analisada</div><div class="kpi" id="payTotal">-</div><p class="note">bookings confirmados pagos</p>
+<div class="sharebar" id="paymentShare"></div>
+<div class="legend" id="paymentLegend"></div>
+</div>
+<div class="card">
+<div class="kpi-label">Método principal</div><div class="big-number" id="paypalPct" style="font-size:72px">-</div>
+<div class="insight-strip" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+<div class="insight"><strong id="cardPct">-</strong><span>Método 2</span></div>
+<div class="insight"><strong id="transferPct">-</strong><span>Método 3</span></div>
+</div>
+<p class="lead" id="paymentInsight" style="font-size:18px;margin-top:18px">-</p>
+</div>
+</div>
+</section>
+<section class="slide" data-title="Extras" id="extras">
+<div class="eyebrow">Extras</div>
+<h2 class="section-title">Como os extras contribuem para a receita.</h2>
+<div class="two-col">
+<div class="grid cols-2">
+<div class="card"><div class="kpi-label">Extras período A</div><div class="kpi">R$ 0</div></div>
+<div class="card"><div class="kpi-label">Extras período B</div><div class="kpi">R$ 0</div><div class="delta neu">0%</div></div>
+<div class="card"><div class="kpi-label">Extra / booking A</div><div class="kpi">R$ 0</div></div>
+<div class="card"><div class="kpi-label">Extra / booking B</div><div class="kpi">R$ 0</div></div>
+</div>
+<div class="card"><div class="kpi-label">Projeção</div><div class="big-number" style="font-size:62px">R$ 0</div><p class="lead" style="font-size:18px">Explicação da projeção e do potencial incremental.</p></div>
+</div>
+</section>
+<section class="slide" data-title="Funil" id="funil">
+<div class="eyebrow">Abandono -&gt; Canal alternativo</div>
+<h2 class="section-title">Como o abandono migrou para outro canal.</h2>
+<div class="flow">
+<div class="flowbox"><span class="kpi-label">Abandono</span><strong>0</strong><span>usuários</span></div>
+<div class="arrow">→</div>
+<div class="flowbox"><span class="kpi-label">Fecharam alternativo</span><strong>0</strong><span>0%</span></div>
+<div class="arrow">→</div>
+<div class="flowbox"><span class="kpi-label">Valor recuperado</span><strong style="font-size:30px">R$ 0</strong><span>0 PAX</span></div>
+</div>
+<div class="callout" style="margin-top:24px">Comparação com o período anterior e nota metodológica sobre a identificação de usuários.</div>
+</section>
+<section class="slide" data-title="Funil anual" id="ano">
+<div class="eyebrow">Funil anual - tentativa canal principal</div>
+<h2 class="section-title">Quantos dos que abandonaram acabaram confirmando.</h2>
+<p class="subtitle">Descrição da base analisada e da metodologia de cruzamento.</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Usuários que abandonaram</div><div class="kpi">0</div><p class="note">Nota sobre o total bruto.</p></div>
+<div class="card"><div class="kpi-label">Viraram confirmados</div><div class="kpi">0</div><div class="delta neu">0%</div><p class="note">Nota sobre a confirmação.</p></div>
+<div class="card"><div class="kpi-label">Não voltaram</div><div class="kpi">0</div><div class="delta neu">0%</div><p class="note">Nota sobre a perda potencial.</p></div>
+<div class="card"><div class="kpi-label">Valor não recuperado</div><div class="kpi" style="font-size:34px">R$ 0</div><p class="note">Nota sobre a intenção observada.</p></div>
+</div>
+<div class="two-col" style="margin-top:20px">
+<div class="card">
+<h3>Para onde foi quem abandonou?</h3>
+<div class="chart" id="annualChart"></div>
+<div class="grid cols-3" style="margin-top:16px">
+<div><div class="kpi-label">Confirmou canal principal</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 usuários</p></div>
+<div><div class="kpi-label">Foi para alternativo</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 usuários</p></div>
+<div><div class="kpi-label">Não confirmou</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 usuários</p></div>
+</div>
+</div>
+<div class="card">
+<h3>Repetição antes da conversão</h3>
+<div class="grid cols-2">
+<div><div class="kpi-label">Fizeram 2+ tentativas</div><div class="big-number" style="font-size:48px">0</div><div class="delta neu">0% da coorte</div></div>
+<div><div class="kpi-label">2+ tentativas e confirmaram</div><div class="big-number" style="font-size:48px">0</div><div class="delta neu">0% da coorte</div></div>
+</div>
+<div class="callout" style="margin-top:18px">Observação sobre fricção na jornada de compra.</div>
+</div>
+</div>
+<div class="callout" style="margin-top:20px"><strong>Resumo:</strong> texto de síntese do funil, com os principais percentuais.</div>
+</section>
+<section class="slide" data-title="Funil sem duplicados" id="ano-sem-duplicados">
+<div class="eyebrow">Funil anual - nomes únicos</div>
+<h2 class="section-title">Funil recalculado removendo duplicidade de nomes.</h2>
+<p class="subtitle">Descrição da base limpa e por que ela reduz distorções.</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Registros brutos</div><div class="kpi">0</div><p class="note">Antes de remover duplicidade.</p></div>
+<div class="card"><div class="kpi-label">Duplicados removidos</div><div class="kpi">0</div><div class="delta neu">0% dos registros</div><p class="note">Diferença entre bruto e único.</p></div>
+<div class="card"><div class="kpi-label">Pessoas únicas</div><div class="kpi">0</div><p class="note">Base usada para os percentuais limpos.</p></div>
+<div class="card"><div class="kpi-label">Confirmaram depois</div><div class="kpi">0</div><div class="delta neu">0%</div><p class="note">Nota sobre a confirmação.</p></div>
+</div>
+<div class="two-col" style="margin-top:20px">
+<div class="card">
+<h3>Destino após abandonar</h3>
+<div class="chart" id="annualUniqueChart"></div>
+<div class="grid cols-3" style="margin-top:16px">
+<div><div class="kpi-label">Confirmou canal principal</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 pessoas</p></div>
+<div><div class="kpi-label">Foi para alternativo</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 pessoas</p></div>
+<div><div class="kpi-label">Não voltou</div><div class="kpi" style="font-size:34px">0%</div><p class="note">0 pessoas</p></div>
+</div>
+</div>
+<div class="card">
+<h3>Repetição e perda potencial</h3>
+<table class="compact">
+<thead><tr><th>Métrica sem duplicar nomes</th><th class="num">Volume</th><th class="num">%</th></tr></thead>
+<tbody>
+<tr><td>Pessoas com 2+ tentativas</td><td class="num">0</td><td class="num">0%</td></tr>
+<tr><td>2+ tentativas antes de confirmar</td><td class="num">0</td><td class="num">0%</td></tr>
+<tr><td>Total de pessoas recuperadas</td><td class="num">0</td><td class="num">0%</td></tr>
+<tr><td>Bookings potencialmente perdidos</td><td class="num">0</td><td class="num">0%</td></tr>
+<tr><td>PAX dos últimos carrinhos não recuperados</td><td class="num">0</td><td class="num">0 PAX/booking</td></tr>
+<tr><td>Ticket médio dos abandonados não recuperados</td><td class="num">R$ 0</td><td class="num">por último carrinho</td></tr>
+<tr><td>Valor dos últimos carrinhos não recuperados</td><td class="num">R$ 0</td><td class="num">intenção observada</td></tr>
+</tbody>
+</table>
+<div class="callout" style="margin-top:18px;font-size:18px"><strong>Leitura:</strong> síntese da taxa de recuperação limpa e da distribuição entre canais.</div>
+</div>
+</div>
+<div class="footerline"><span>Metodologia: deduplicação por nome normalizado.</span><span>Observação: homônimos podem gerar pequena margem de erro.</span></div>
+</section>
+<section class="slide" data-title="Perda estimada" id="perda-ticket">
+<div class="eyebrow">Quanto estamos deixando na mesa</div>
+<h2 class="section-title">Dimensionamento da oportunidade não recuperada.</h2>
+<p class="subtitle">Descrição da base usada e do que a estimativa representa (não é receita garantida).</p>
+<div class="grid cols-4" style="margin-top:24px">
+<div class="card"><div class="kpi-label">Pessoas não recuperadas</div><div class="kpi">0</div><p class="note">Cada nome entra uma única vez.</p></div>
+<div class="card"><div class="kpi-label">PAX de intenção</div><div class="kpi">0</div><p class="note">Último carrinho observado dessas pessoas.</p></div>
+<div class="card"><div class="kpi-label">PAX / booking perdido</div><div class="kpi">0</div><p class="note">Indica o tamanho médio da perda.</p></div>
+<div class="card"><div class="kpi-label">Ticket médio abandonado</div><div class="kpi">R$ 0</div><p class="note">Valor médio do último carrinho não recuperado.</p></div>
+</div>
+<div class="two-col" style="margin-top:22px">
+<div class="card">
+<h3>Intenção observada vs. ticket médio real</h3>
+<table class="compact">
+<thead><tr><th>Métrica</th><th class="num">Cálculo</th><th class="num">Valor</th></tr></thead>
+<tbody>
+<tr><td>Valor registrado nos últimos carrinhos</td><td class="num">0 x R$ 0</td><td class="num">R$ 0</td></tr>
+<tr><td>Ticket médio pago do período</td><td class="num">bookings confirmados pagos</td><td class="num">R$ 0</td></tr>
+<tr><td>Oportunidade usando ticket médio real</td><td class="num">0 x R$ 0</td><td class="num">R$ 0</td></tr>
+<tr><td>Diferença entre cenário real e carrinho</td><td class="num">R$ 0 - R$ 0</td><td class="num">R$ 0</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Leitura de Growth</h3>
+<div class="insight-strip" style="grid-template-columns:1fr;gap:12px">
+<div class="insight"><strong>R$ 0</strong><span>Intenção explícita vista nos últimos carrinhos dos usuários que não voltaram.</span></div>
+<div class="insight"><strong>R$ 0</strong><span>Estimativa se essas pessoas tivessem convertido no ticket médio pago real.</span></div>
+<div class="insight"><strong>Prioridade: definir</strong><span>Hipótese a testar para recuperar essa demanda.</span></div>
+</div>
+</div>
+</div>
+<div class="callout" style="margin-top:24px"><strong>Resumo:</strong> síntese do tamanho da oportunidade e da prioridade sugerida.</div>
+</section>
+<section class="slide" data-title="Cenários" id="perda">
+<div class="eyebrow">Perda potencial e recuperação</div>
+<h2 class="section-title">Cenário interativo de recuperação.</h2>
+<div class="two-col">
+<div class="card">
+<div class="kpi-label">Usuários sem fechamento no recorte</div><div class="kpi">0 usuários</div>
+<p class="lead" style="font-size:18px">Intenção de compra observada: R$ 0 / 0 PAX. Ajuste a taxa de recuperação para estimar oportunidade anualizada.</p>
+<input class="range" id="recovery" max="60" min="10" oninput="updateScenario()" step="5" type="range" value="30"/>
+<p class="note">Taxa de recuperação: <strong id="recoveryRate">30%</strong></p>
+</div>
+<div class="card"><div class="kpi-label">Potencial anualizado estimado</div><div class="scenario" id="scenarioValue">R$ 0</div><p class="note">Estimativa de tamanho de oportunidade, não previsão garantida de receita.</p></div>
+</div>
+</section>
+<section class="slide" data-title="Fulfilment" id="fulfilment">
+<div class="eyebrow">Carteira de fulfilment</div>
+<h2 class="section-title">Panorama da carteira futura.</h2>
+<div class="grid cols-4">
+<div class="card"><div class="kpi-label">Bookings pagos</div><div class="kpi">0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">PAX pagos</div><div class="kpi">0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">Receita</div><div class="kpi">R$ 0</div><div class="delta neu">0% vs período anterior</div></div>
+<div class="card"><div class="kpi-label">Extras</div><div class="kpi">R$ 0</div><div class="delta neu">0% vs período anterior</div></div>
+</div>
+<div class="callout" style="margin-top:24px">Leitura sobre o que está compensando ou não a carteira futura.</div>
+</section>
+<section class="slide" data-title="Canal Novo" id="gyg">
+<div class="eyebrow">Oportunidade de canal novo</div>
+<h2 class="section-title">Como um canal novo está performando.</h2>
+<div class="grid cols-3">
+<div class="card"><div class="kpi-label">Período anterior</div><div class="kpi">0</div><p class="note">Nota sobre o histórico.</p></div>
+<div class="card"><div class="kpi-label">Bookings período atual</div><div class="kpi">0</div><p class="note">0 PAX / R$ 0 / R$ 0 em extras.</p></div>
+<div class="card"><div class="kpi-label">Fulfilment período atual</div><div class="kpi">0</div><p class="note">0 PAX / R$ 0 / R$ 0 em extras.</p></div>
+</div>
+<div class="callout" style="margin-top:24px">Próximo teste sugerido para esse canal.</div>
+</section>
+<section class="slide" data-title="Ações" id="acoes">
+<div class="eyebrow">Próximas ações</div>
+<h2 class="section-title edit-text">Título curto da recomendação principal.</h2>
+<p class="subtitle edit-text">Descrição do experimento ou iniciativa recomendada.</p>
+<div class="acoes-edit-bar">
+<button class="btn primary" id="acoesEditBtn" type="button">Editar textos</button>
+<button class="btn" id="acoesSaveBtn" type="button" style="display:none">Salvar alterações</button>
+<button class="btn" id="acoesResetBtn" type="button" style="display:none">Restaurar original</button>
+<span class="acoes-edit-status" id="acoesEditStatus"></span>
+</div>
+<p class="note">As alterações ficam salvas apenas neste navegador (não são enviadas ao servidor nem aparecem para outras pessoas que abrirem o link).</p>
+<div class="grid cols-2" style="margin-top:24px">
+<div class="card">
+<h3 class="edit-text">1. Ação um</h3>
+<p class="lead edit-text" style="font-size:18px">Descrição da primeira ação recomendada.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">2. Ação dois</h3>
+<p class="lead edit-text" style="font-size:18px">Descrição da segunda ação recomendada.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">3. Ação três</h3>
+<p class="lead edit-text" style="font-size:18px">Descrição da terceira ação recomendada.</p>
+</div>
+<div class="card">
+<h3 class="edit-text">4. Ação quatro</h3>
+<p class="lead edit-text" style="font-size:18px">Descrição da quarta ação recomendada.</p>
+</div>
+</div>
+<div class="grid cols-2" style="margin-top:20px">
+<div class="card">
+<h3>Experimento sugerido</h3>
+<table class="compact">
+<thead><tr><th>Rota</th><th>O que medir</th><th class="num">Decisão</th></tr></thead>
+<tbody>
+<tr><td class="edit-text">Rota A</td><td class="edit-text">O que observar</td><td class="num edit-text">Critério de decisão</td></tr>
+<tr><td class="edit-text">Rota B</td><td class="edit-text">O que observar</td><td class="num edit-text">Critério de decisão</td></tr>
+<tr><td class="edit-text">Rota C</td><td class="edit-text">O que observar</td><td class="num edit-text">Critério de decisão</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Prioridades de produto</h3>
+<table class="compact">
+<thead><tr><th>Produto</th><th>Papel no canal</th><th class="num">Prioridade</th></tr></thead>
+<tbody>
+<tr><td class="edit-text">Produto 1</td><td class="edit-text">Descrição do papel</td><td class="num edit-text">Alta</td></tr>
+<tr><td class="edit-text">Produto 2</td><td class="edit-text">Descrição do papel</td><td class="num edit-text">Média</td></tr>
+<tr><td class="edit-text">Produto 3</td><td class="edit-text">Descrição do papel</td><td class="num edit-text">Baixa</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout edit-text" style="margin-top:24px">Resumo prático da recomendação final.</div>
+</section>
+</main>
+</div>
+<script>
+const mainEl=document.querySelector('main');
+let sections=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('nav');
+let navLinks=[];
+let obs;
+const NAV_ORDER_KEY='navOrder_v1';
+
+function applyStoredOrder(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(NAV_ORDER_KEY));
+    if(Array.isArray(saved)&&saved.length===sections.length&&saved.every(id=>sections.some(s=>s.id===id))){
+      sections=saved.map(id=>document.getElementById(id));
+    }
+  }catch(e){}
+  sections.forEach(s=>mainEl.appendChild(s));
+}
+function saveOrder(){localStorage.setItem(NAV_ORDER_KEY,JSON.stringify(sections.map(s=>s.id)))}
+function resetNavOrder(){
+  if(!confirm('Restaurar a ordem original do menu?')) return;
+  localStorage.removeItem(NAV_ORDER_KEY);
+  location.reload();
+}
+function getDragAfterElement(container,y){
+  const els=[...container.querySelectorAll('.navlink:not(.dragging)')];
+  return els.reduce((closest,child)=>{
+    const box=child.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+    if(offset<0&&offset>closest.offset) return {offset,element:child};
+    return closest;
+  },{offset:-Infinity}).element;
+}
+function reobserve(){
+  if(obs) obs.disconnect();
+  obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const idx=sections.findIndex(s=>s.id===e.target.id);if(navLinks[idx])navLinks[idx].classList.add('active');}})},{threshold:.55});
+  sections.forEach(s=>obs.observe(s));
+}
+function buildNav(){
+  nav.innerHTML='';
+  navLinks=[];
+  sections.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='navlink';
+    b.draggable=true;
+    b.dataset.sectionId=s.id;
+    b.innerHTML=`<span class="drag-handle">⠿</span><span class="navlink-label">${s.dataset.title}</span>`;
+    b.addEventListener('click',()=>{if(!b.classList.contains('dragging'))s.scrollIntoView({behavior:'smooth'})});
+    b.addEventListener('dragstart',()=>{b.classList.add('dragging')});
+    b.addEventListener('dragend',()=>{
+      b.classList.remove('dragging');
+      const newOrder=[...nav.querySelectorAll('.navlink')].map(x=>x.dataset.sectionId);
+      sections=newOrder.map(id=>document.getElementById(id));
+      sections.forEach(s2=>mainEl.appendChild(s2));
+      saveOrder();
+      reobserve();
+    });
+    nav.appendChild(b);
+    navLinks.push(b);
+  });
+}
+nav.addEventListener('dragover',e=>{
+  e.preventDefault();
+  const draggingEl=nav.querySelector('.navlink.dragging');
+  if(!draggingEl) return;
+  const after=getDragAfterElement(nav,e.clientY);
+  if(after==null) nav.appendChild(draggingEl);
+  else nav.insertBefore(draggingEl,after);
+});
+applyStoredOrder();
+buildNav();
+reobserve();
+function toggleTheme(){document.body.classList.toggle('dark')}
+function brl(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function makeBars(el,data,max){el.innerHTML='';max=max||Math.max(...data.map(d=>d.value),1);data.forEach(d=>{const w=document.createElement('div');w.className='barwrap';w.innerHTML=`<div class="barvalue">${d.display||d.value}</div><div class="bar ${d.cls||''}" style="height:${Math.max(6,d.value/max*78)}%"></div><div class="barlabel">${d.label}</div>`;el.appendChild(w);});}
+const metrics={
+  bookings:{label:'Indicador 1',d:'0%',text:'Descrição da variação do indicador 1 entre os períodos.',data:[{label:'Período A',value:0},{label:'Período B',value:0}]},
+  pax:{label:'Indicador 2',d:'0%',text:'Descrição da variação do indicador 2 entre os períodos.',data:[{label:'Período A',value:0},{label:'Período B',value:0}]},
+  revenue:{label:'Indicador 3',d:'0%',text:'Descrição da variação do indicador 3 entre os períodos.',data:[{label:'Período A',value:0,display:'R$ 0'},{label:'Período B',value:0,display:'R$ 0'}]},
+  extras:{label:'Indicador 4',d:'0%',text:'Descrição da variação do indicador 4 entre os períodos.',data:[{label:'Período A',value:0,display:'R$ 0'},{label:'Período B',value:0,display:'R$ 0'}]}
+};
+const mt=document.getElementById('metricToggle');Object.keys(metrics).forEach((k,i)=>{let b=document.createElement('button');b.textContent=metrics[k].label;b.onclick=()=>showMetric(k);if(i===0)b.className='active';mt.appendChild(b)});
+function showMetric(k){[...mt.children].forEach(x=>x.classList.remove('active'));[...mt.children][Object.keys(metrics).indexOf(k)].classList.add('active');let m=metrics[k];document.getElementById('metricLabel').textContent=m.label;document.getElementById('metricDelta').textContent=m.d;document.getElementById('metricText').textContent=m.text;makeBars(document.getElementById('metricChart'),m.data);}
+showMetric('revenue');
+makeBars(document.getElementById('channelChart'),[{label:'Canal A - Período A',value:0},{label:'Canal A - Período B',value:0},{label:'Canal B - Período A',value:0},{label:'Canal B - Período B',value:0}]);
+makeBars(document.getElementById('pax2025'),[{label:'1 PAX',value:0},{label:'2 PAX',value:0},{label:'3 PAX',value:0},{label:'4+ PAX',value:0}]);
+makeBars(document.getElementById('pax2026'),[{label:'1 PAX',value:0},{label:'2 PAX',value:0},{label:'3 PAX',value:0},{label:'4+ PAX',value:0}]);
+makeBars(document.getElementById('annualChart'),[{label:'Confirmou A',value:0,display:'0%'},{label:'Confirmou B',value:0,display:'0%'},{label:'Sem compra',value:0,display:'0%',cls:'bad'}],1);
+makeBars(document.getElementById('annualUniqueChart'),[{label:'Confirmou A',value:0,display:'0%'},{label:'Confirmou B',value:0,display:'0%'},{label:'Nao voltou',value:0,display:'0%',cls:'bad'}],1);
+function updateScenario(){const rate=+document.getElementById('recovery').value;document.getElementById('recoveryRate').textContent=rate+'%';const base=0;document.getElementById('scenarioValue').textContent=brl(base*rate/100);}
+updateScenario();
+
+const EXT_DATA={"audience":{"2025full":{"total_bookings":0,"total_pax":0,"identified_bookings":0,"identified_pct":0,"avg_days":0,"median_days":0,"buckets":{"1 dia":{"bookings":0,"pax":0},"2 dias":{"bookings":0,"pax":0},"3 dias":{"bookings":0,"pax":0},"4+ dias":{"bookings":0,"pax":0}},"countries":[]},"2025prop":{"total_bookings":0,"total_pax":0,"identified_bookings":0,"identified_pct":0,"avg_days":0,"median_days":0,"buckets":{"1 dia":{"bookings":0,"pax":0},"2 dias":{"bookings":0,"pax":0},"3 dias":{"bookings":0,"pax":0},"4+ dias":{"bookings":0,"pax":0}},"countries":[]},"2026current":{"total_bookings":0,"total_pax":0,"identified_bookings":0,"identified_pct":0,"avg_days":0,"median_days":0,"buckets":{"1 dia":{"bookings":0,"pax":0},"2 dias":{"bookings":0,"pax":0},"3 dias":{"bookings":0,"pax":0},"4+ dias":{"bookings":0,"pax":0}},"countries":[]}},"payments":{"2025full":{"total":0,"methods":[]},"2025prop":{"total":0,"methods":[]},"2026current":{"total":0,"methods":[]},"2026ytd":{"total":0,"methods":[]}}};
+const scopeLabels={'2025full':'Período A completo','2025prop':'Período A mesmo ponto','2026current':'Período B atual'};
+let audienceKey='2026current', leadKey='2026current', leadMetric='bookings', paymentKey='2026current';
+function pct(v){return (Math.round(v*10)/10).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'}
+function daysText(v){return (Math.round(v*10)/10).toLocaleString('pt-BR')+' dias'}
+function setupScope(elId, keys, active, handler){const el=document.getElementById(elId);el.innerHTML='';keys.forEach(k=>{const b=document.createElement('button');b.textContent=scopeLabels[k]||k;if(k===active)b.className='active';b.onclick=()=>{[...el.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');handler(k)};el.appendChild(b)})}
+function renderAudience(k){audienceKey=k;const a=EXT_DATA.audience[k];document.getElementById('audBookings').textContent=a.total_bookings.toLocaleString('pt-BR');document.getElementById('audPax').textContent=a.total_pax.toLocaleString('pt-BR');document.getElementById('audIdent').textContent=pct(a.identified_pct);document.getElementById('audMedian').textContent=daysText(a.median_days);const top=a.countries.filter(x=>x.country!=='Não identificado').slice(0,8);const max=Math.max(...top.map(x=>x.pax),1);document.getElementById('countryBars').innerHTML=top.map(x=>`<div class="hrow"><div class="hlabel" title="${x.country}">${x.country}</div><div class="htrack"><div class="hfill" style="width:${x.pax/max*100}%"></div></div><div class="hval">${x.pax} PAX</div></div>`).join('');document.getElementById('countryTable').innerHTML=a.countries.slice(0,18).map(x=>`<tr><td class="country">${x.country}</td><td class="num">${x.bookings}</td><td class="num">${x.pax}</td><td class="num">${pct(x.share_pax)}</td><td class="num">${daysText(x.avg_days)}</td><td class="num">${pct(x.share_4plus)}</td></tr>`).join('')}
+function renderLead(k){leadKey=k;const a=EXT_DATA.audience[k];const arr=['1 dia','2 dias','3 dias','4+ dias'].map((label,i)=>({label,value:a.buckets[label][leadMetric],cls:i===3?'alt':''}));makeBars(document.getElementById('leadChart'),arr);document.getElementById('leadAvg').textContent=daysText(a.avg_days);document.getElementById('leadMedian').textContent=daysText(a.median_days);const lm=a.total_bookings?a.buckets['1 dia'].bookings/a.total_bookings*100:0;const adv=a.total_bookings?a.buckets['4+ dias'].bookings/a.total_bookings*100:0;document.getElementById('leadLastMinute').textContent=pct(lm);document.getElementById('leadAdvance').textContent=pct(adv);document.getElementById('leadCallout').textContent='Texto de leitura comparando os recortes selecionados.'}
+function getMethod(p,method){return p.methods.find(x=>x.method===method)||{bookings:0,pct:0}}
+function renderPayments(k){paymentKey=k;const p=EXT_DATA.payments[k];document.getElementById('payTotal').textContent=p.total.toLocaleString('pt-BR');document.getElementById('paymentShare').innerHTML=p.methods.map(x=>`<div class="shareseg" title="${x.method}: ${pct(x.pct)}" style="width:${x.pct}%"></div>`).join('');document.getElementById('paymentLegend').innerHTML=p.methods.map(x=>`<div class="legend-row"><span class="dot"></span><span>${x.method}</span><strong>${pct(x.pct)} · ${x.bookings}</strong></div>`).join('');const pp=getMethod(p,'Método 1'),cc=getMethod(p,'Método 2'),tr=getMethod(p,'Método 3');document.getElementById('paypalPct').textContent=pct(pp.pct);document.getElementById('cardPct').textContent=pct(cc.pct);document.getElementById('transferPct').textContent=pct(tr.pct);document.getElementById('paymentInsight').textContent='Distribuição por método principal entre bookings confirmados pagos no recorte selecionado.'}
+setupScope('audienceScope',['2025full','2025prop','2026current'],audienceKey,k=>renderAudience(k));
+setupScope('leadScope',['2025full','2025prop','2026current'],leadKey,k=>renderLead(k));
+scopeLabels['2026ytd']='Período B acumulado';setupScope('paymentScope',['2025full','2025prop','2026current','2026ytd'],paymentKey,k=>renderPayments(k));
+document.querySelectorAll('#leadMetric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#leadMetric button').forEach(x=>x.classList.remove('active'));b.classList.add('active');leadMetric=b.dataset.metric;renderLead(leadKey)});
+renderAudience(audienceKey);renderLead(leadKey);renderPayments(paymentKey);
+document.addEventListener('keydown',e=>{let active=Math.max(0,navLinks.findIndex(l=>l.classList.contains('active')));if(e.key==='ArrowDown'||e.key==='ArrowRight'){sections[Math.min(sections.length-1,active+1)].scrollIntoView({behavior:'smooth'})}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){sections[Math.max(0,active-1)].scrollIntoView({behavior:'smooth'})}});
+
+(function(){
+  const STORAGE_PREFIX='acoesEdit_v1_';
+  const editables=[...document.querySelectorAll('#acoes .edit-text')];
+  editables.forEach((el,i)=>{
+    const key=STORAGE_PREFIX+i;
+    el.dataset.ek=key;
+    const saved=localStorage.getItem(key);
+    if(saved!==null) el.innerHTML=saved;
+  });
+  const editBtn=document.getElementById('acoesEditBtn');
+  const saveBtn=document.getElementById('acoesSaveBtn');
+  const resetBtn=document.getElementById('acoesResetBtn');
+  const status=document.getElementById('acoesEditStatus');
+  let editing=false;
+  function setEditing(on){
+    editing=on;
+    editables.forEach(el=>el.contentEditable=on?'true':'false');
+    editBtn.textContent=on?'Parar edição':'Editar textos';
+    saveBtn.style.display=on?'inline-flex':'none';
+    resetBtn.style.display=on?'inline-flex':'none';
+    if(!on) status.textContent='';
+  }
+  editBtn.onclick=()=>setEditing(!editing);
+  saveBtn.onclick=()=>{
+    editables.forEach(el=>localStorage.setItem(el.dataset.ek,el.innerHTML));
+    status.textContent='Alterações salvas neste navegador.';
+    setTimeout(()=>{status.textContent=''},3000);
+  };
+  resetBtn.onclick=()=>{
+    if(!confirm('Restaurar o texto original da aba Ações? As alterações salvas neste navegador serão apagadas.')) return;
+    editables.forEach(el=>localStorage.removeItem(el.dataset.ek));
+    location.reload();
+  };
+})();
+</script>
+</body>
+</html>
