@@ -1,0 +1,272 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vertical Rio | Comparação de Ciclos 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root{
+    --bg:#0b0f14;
+    --card:#111821;
+    --card2:#151f2b;
+    --text:#f5f7fb;
+    --muted:#93a4b8;
+    --accent:#35d07f;
+    --accent2:#5ba7ff;
+    --warn:#ffcc66;
+    --red:#ff6b6b;
+    --border:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:linear-gradient(180deg,#081018 0%,#0b0f14 100%);
+    color:var(--text);
+  }
+  .wrap{max-width:1280px;margin:auto;padding:28px 20px 50px}
+  .top{
+    display:flex;justify-content:space-between;gap:20px;align-items:flex-end;
+    margin-bottom:24px;flex-wrap:wrap
+  }
+  h1{font-size:32px;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px}
+  .badge{
+    padding:9px 12px;border:1px solid var(--border);background:#101722;
+    border-radius:999px;color:#c9d6e4;font-size:13px
+  }
+  .grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 26px
+  }
+  .card{
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid var(--border);
+    border-radius:18px;padding:18px;
+    box-shadow:0 16px 38px rgba(0,0,0,.16)
+  }
+  .kpi-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .kpi-value{font-size:28px;font-weight:800;margin:8px 0}
+  .delta{font-size:13px;font-weight:700}
+  .up{color:var(--accent)}
+  .down{color:var(--red)}
+  .section{
+    margin-top:18px;background:rgba(17,24,33,.82);border:1px solid var(--border);
+    border-radius:20px;padding:20px
+  }
+  .section-head{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    margin-bottom:14px;flex-wrap:wrap
+  }
+  .section h2{font-size:18px;margin:0}
+  .toggle{display:flex;gap:8px}
+  button{
+    background:#0d141d;color:#c7d3df;border:1px solid var(--border);
+    padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700
+  }
+  button.active{background:var(--accent2);color:white;border-color:transparent}
+  .chart-wrap{height:360px}
+  .insights{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px
+  }
+  .insight{
+    padding:16px;border-radius:16px;background:#0f1620;border:1px solid var(--border)
+  }
+  .insight b{display:block;margin-bottom:8px;font-size:15px}
+  .insight p{margin:0;color:#bdc9d5;line-height:1.55;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+  th,td{padding:12px 10px;border-bottom:1px solid var(--border);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:#aebed0;font-size:12px;text-transform:uppercase}
+  .note{
+    margin-top:18px;color:#91a2b6;font-size:12px;line-height:1.55
+  }
+  @media(max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .insights{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .grid{grid-template-columns:1fr}
+    h1{font-size:26px}
+    .chart-wrap{height:300px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Comparação de Ciclos — 2026</h1>
+      <div class="sub">Vertical Rio | Julho, Agosto e Setembro</div>
+    </div>
+    <div class="badge">Setembro: Bookings disponíveis até 23/09</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="kpi-title">Bookings</div>
+      <div class="kpi-value">257</div>
+      <div class="delta down">-4,1% vs Agosto</div>
+    </div>
+    <div class="card">
+      <div class="kpi-title">Fulfilments</div>
+      <div class="kpi-value">245</div>
+      <div class="delta down">-4,3% vs Agosto</div>
+    </div>
+    <div class="card">
+      <div class="kpi-title">Receita sem FOC</div>
+      <div class="kpi-value">R$ 781,9 mil</div>
+      <div class="delta down">-6,6% vs Agosto</div>
+    </div>
+    <div class="card">
+      <div class="kpi-title">Extras sem FOC</div>
+      <div class="kpi-value">R$ 60,6 mil</div>
+      <div class="delta down">-9,6% vs Agosto</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Bookings e Fulfilments</h2>
+    </div>
+    <div class="chart-wrap"><canvas id="volumeChart"></canvas></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Receita por ciclo</h2>
+      <div class="toggle">
+        <button id="revWithBtn" class="active" onclick="setRevenue('with')">Com FOC</button>
+        <button id="revWithoutBtn" onclick="setRevenue('without')">Sem FOC</button>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>Extras por ciclo</h2>
+      <div class="toggle">
+        <button id="extraWithBtn" class="active" onclick="setExtras('with')">Com FOC</button>
+        <button id="extraWithoutBtn" onclick="setExtras('without')">Sem FOC</button>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="extrasChart"></canvas></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Resumo comparativo</h2></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Indicador</th>
+          <th>Julho</th>
+          <th>Agosto</th>
+          <th>Setembro</th>
+          <th>Ago vs Jul</th>
+          <th>Set vs Ago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Bookings</td><td>216</td><td>268</td><td>257</td><td class="up">+24,1%</td><td class="down">-4,1%</td></tr>
+        <tr><td>Fulfilments</td><td>204</td><td>256</td><td>245</td><td class="up">+25,5%</td><td class="down">-4,3%</td></tr>
+        <tr><td>Receita com FOC</td><td>R$ 707.039</td><td>R$ 927.755</td><td>R$ 828.036</td><td class="up">+31,2%</td><td class="down">-10,7%</td></tr>
+        <tr><td>Receita sem FOC</td><td>R$ 663.745</td><td>R$ 836.776</td><td>R$ 781.921</td><td class="up">+26,1%</td><td class="down">-6,6%</td></tr>
+        <tr><td>Extras com FOC</td><td>R$ 72.570</td><td>R$ 101.580</td><td>R$ 79.380</td><td class="up">+40,0%</td><td class="down">-21,9%</td></tr>
+        <tr><td>Extras sem FOC</td><td>R$ 51.166</td><td>R$ 67.017</td><td>R$ 60.582</td><td class="up">+31,0%</td><td class="down">-9,6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insights">
+    <div class="insight">
+      <b>Agosto foi o pico</b>
+      <p>Foi o melhor ciclo em volume, receita e extras. Bookings cresceram 24,1% sobre julho e a receita com FOC avançou 31,2%.</p>
+    </div>
+    <div class="insight">
+      <b>Setembro perdeu mais receita do que volume</b>
+      <p>Bookings caíram 4,1%, mas a receita sem FOC caiu 6,6%. Isso indica redução de monetização por reserva.</p>
+    </div>
+    <div class="insight">
+      <b>Extras merecem atenção</b>
+      <p>O maior recuo de setembro está nos extras: -21,9% com FOC e -9,6% sem FOC em relação a agosto.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    Ciclo Julho: 26/06 a 25/07 · Ciclo Agosto: 26/07 a 25/08 · Ciclo Setembro: 26/08 a 25/09.
+    O arquivo de Bookings de setembro contém dados até 23/09. Em Extras sem FOC, o valor representa uma estimativa conservadora,
+    pois o FOC está registrado no nível do pedido e não necessariamente do item extra.
+  </div>
+</div>
+
+<script>
+const labels = ['Julho','Agosto','Setembro'];
+const baseOptions = {
+  responsive:true,
+  maintainAspectRatio:false,
+  plugins:{
+    legend:{labels:{color:'#dbe6f2'}},
+    tooltip:{callbacks:{
+      label:(ctx)=>{
+        const v=ctx.raw;
+        if(ctx.dataset.isMoney) return `${ctx.dataset.label}: ${v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`;
+        return `${ctx.dataset.label}: ${v.toLocaleString('pt-BR')}`;
+      }
+    }}
+  },
+  scales:{
+    x:{ticks:{color:'#9eb0c2'},grid:{color:'rgba(255,255,255,.05)'}},
+    y:{ticks:{color:'#9eb0c2'},grid:{color:'rgba(255,255,255,.05)'}}
+  }
+};
+
+new Chart(document.getElementById('volumeChart'),{
+  type:'bar',
+  data:{
+    labels,
+    datasets:[
+      {label:'Bookings',data:[216,268,257],borderWidth:0,borderRadius:8},
+      {label:'Fulfilments',data:[204,256,245],borderWidth:0,borderRadius:8}
+    ]
+  },
+  options:baseOptions
+});
+
+const revenueData = {
+  with:[707039,927755,828036],
+  without:[663745,836776,781921]
+};
+const revenueChart = new Chart(document.getElementById('revenueChart'),{
+  type:'bar',
+  data:{labels,datasets:[{label:'Receita com FOC',data:revenueData.with,borderRadius:8,isMoney:true}]},
+  options:baseOptions
+});
+function setRevenue(mode){
+  revenueChart.data.datasets[0].data = revenueData[mode];
+  revenueChart.data.datasets[0].label = mode==='with'?'Receita com FOC':'Receita sem FOC';
+  revenueChart.update();
+  document.getElementById('revWithBtn').classList.toggle('active',mode==='with');
+  document.getElementById('revWithoutBtn').classList.toggle('active',mode==='without');
+}
+
+const extrasData = {
+  with:[72570,101580,79380],
+  without:[51166,67017,60582]
+};
+const extrasChart = new Chart(document.getElementById('extrasChart'),{
+  type:'bar',
+  data:{labels,datasets:[{label:'Extras com FOC',data:extrasData.with,borderRadius:8,isMoney:true}]},
+  options:baseOptions
+});
+function setExtras(mode){
+  extrasChart.data.datasets[0].data = extrasData[mode];
+  extrasChart.data.datasets[0].label = mode==='with'?'Extras com FOC':'Extras sem FOC';
+  extrasChart.update();
+  document.getElementById('extraWithBtn').classList.toggle('active',mode==='with');
+  document.getElementById('extraWithoutBtn').classList.toggle('active',mode==='without');
+}
+</script>
+</body>
+</html>
